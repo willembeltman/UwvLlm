@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UwvLlm.Api.Core.Dtos;
 using UwvLlm.Infrastructure.Messaging.Interfaces;
-using UwvLlm.Shared.CrudInterfaces;
-using UwvLlm.Shared.Dtos;
-using UwvLlm.Shared.Enums;
-using UwvLlm.Shared.Interfaces;
+using UwvLlm.Infrastructure.Messaging.Messages;
+using UwvLlm.Shared.Public.CrudInterfaces;
+using UwvLlm.Shared.Public.Dtos;
+using UwvLlm.Shared.Public.Enums;
+using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;
 

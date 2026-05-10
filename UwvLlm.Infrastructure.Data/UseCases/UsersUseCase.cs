@@ -6,18 +6,18 @@ namespace UwvLlm.Infrastructure.Data.UseCases;
 
 public class UsersUseCase(
     ApplicationDbContext db,
-    IAuthenticationService<User, Shared.Dtos.State> authenticationService)
-    : gAPI.Core.Interfaces.IUseCase<User, Shared.Dtos.User, Guid>
+    IAuthenticationService<User, UwvLlm.Shared.Public.Dtos.State> authenticationService)
+    : gAPI.Core.Interfaces.IUseCase<User, UwvLlm.Shared.Public.Dtos.User, Guid>
 {
     public async Task<bool> IsAllowedAsync(CancellationToken ct) => authenticationService.State.User != null;
     public async Task<bool> CanListAsync(CancellationToken ct) => authenticationService.State.User != null;
     public async Task<bool> CanCreateAsync(CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanCreateAsync(Shared.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanReadAsync(Shared.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanUpdateAsync(Shared.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanDeleteAsync(Shared.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanCreateAsync(UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanReadAsync(UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanUpdateAsync(UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanDeleteAsync(UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct) => authenticationService.State.User != null;
 
-    public async Task<User?> FindByMatchAsync(Shared.Dtos.User dto, CancellationToken ct) 
+    public async Task<User?> FindByMatchAsync(UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct) 
         => await db.Users // Add your filter query
             .FirstOrDefaultAsync(a => 
                 a.UserName == dto.UserName, ct);
@@ -33,7 +33,7 @@ public class UsersUseCase(
         await db.SaveChangesAsync(ct);
         return true;
     }
-    public async Task<bool> UpdateAsync(User updatedEntity, Shared.Dtos.User dto, CancellationToken ct)
+    public async Task<bool> UpdateAsync(User updatedEntity, UwvLlm.Shared.Public.Dtos.User dto, CancellationToken ct)
     {
         await db.SaveChangesAsync();
         return true;

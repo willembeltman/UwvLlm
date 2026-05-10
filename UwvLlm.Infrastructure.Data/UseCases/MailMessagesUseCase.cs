@@ -6,18 +6,18 @@ namespace UwvLlm.Infrastructure.Data.UseCases;
 
 public class MailMessagesUseCase(
     ApplicationDbContext db,
-    IAuthenticationService<User, Shared.Dtos.State> authenticationService)
-    : gAPI.Core.Interfaces.IUseCase<MailMessage, Shared.Dtos.MailMessage, Guid>
+    IAuthenticationService<User, UwvLlm.Shared.Public.Dtos.State> authenticationService)
+    : gAPI.Core.Interfaces.IUseCase<MailMessage, UwvLlm.Shared.Public.Dtos.MailMessage, Guid>
 {
     public async Task<bool> IsAllowedAsync(CancellationToken ct) => true;
     public async Task<bool> CanListAsync(CancellationToken ct) => true;
     public async Task<bool> CanCreateAsync(CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanCreateAsync(Shared.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanReadAsync(Shared.Dtos.MailMessage dto, CancellationToken ct) => true;
-    public async Task<bool> CanUpdateAsync(Shared.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanDeleteAsync(Shared.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanCreateAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanReadAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) => true;
+    public async Task<bool> CanUpdateAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
+    public async Task<bool> CanDeleteAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) => authenticationService.State.User != null;
 
-    public async Task<MailMessage?> FindByMatchAsync(Shared.Dtos.MailMessage dto, CancellationToken ct) 
+    public async Task<MailMessage?> FindByMatchAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) 
         => null; // If you implement this, also use includes
     public async Task<MailMessage?> FindByIdAsync(Guid id, CancellationToken ct) 
         => await db.MailMessages // Add your filter query
@@ -31,7 +31,7 @@ public class MailMessagesUseCase(
         await db.SaveChangesAsync(ct);
         return true;
     }
-    public async Task<bool> UpdateAsync(MailMessage updatedEntity, Shared.Dtos.MailMessage dto, CancellationToken ct)
+    public async Task<bool> UpdateAsync(MailMessage updatedEntity, UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct)
     {
         await db.SaveChangesAsync();
         return true;

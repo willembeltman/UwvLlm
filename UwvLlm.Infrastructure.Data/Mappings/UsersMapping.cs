@@ -4,12 +4,12 @@ using gAPI.Core.Server.Storage;
 namespace UwvLlm.Infrastructure.Data.Mappings;
 
 public class UsersMapping(
-    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Dtos.User, Guid> useCase, 
+    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User, Guid> useCase, 
     IStorageService storageService) 
-    : gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Dtos.User>
+    : gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User>
 {
     public override UwvLlm.Infrastructure.Data.Entities.User ToEntity(
-        UwvLlm.Shared.Dtos.User dto, 
+        UwvLlm.Shared.Public.Dtos.User dto, 
         UwvLlm.Infrastructure.Data.Entities.User entity)
     {
         entity.Id = dto.Id;
@@ -20,9 +20,9 @@ public class UsersMapping(
         return entity;
     }
 
-    public override async Task<UwvLlm.Shared.Dtos.User> ToDtoAsync(
+    public override async Task<UwvLlm.Shared.Public.Dtos.User> ToDtoAsync(
         UwvLlm.Infrastructure.Data.Entities.User entity, 
-        UwvLlm.Shared.Dtos.User dto,
+        UwvLlm.Shared.Public.Dtos.User dto,
         CancellationToken ct)
     {
         dto.Id = entity.Id;
@@ -35,7 +35,7 @@ public class UsersMapping(
         return dto;
     }
 
-    public override IAsyncEnumerable<UwvLlm.Shared.Dtos.User> ProjectToDtosAsync(
+    public override IAsyncEnumerable<UwvLlm.Shared.Public.Dtos.User> ProjectToDtosAsync(
         IQueryable<UwvLlm.Infrastructure.Data.Entities.User> entities,
         string[]? orderby, 
         int? skip, 
@@ -43,7 +43,7 @@ public class UsersMapping(
         CancellationToken ct)
     {  
         var dtos = entities
-            .Select(entity => new UwvLlm.Shared.Dtos.User()
+            .Select(entity => new UwvLlm.Shared.Public.Dtos.User()
             {
                 Id = entity.Id,
                 UserName = entity.UserName,
@@ -67,7 +67,7 @@ public class UsersMapping(
     }
 
     public override async Task ExtendDto(
-        UwvLlm.Shared.Dtos.User dto,
+        UwvLlm.Shared.Public.Dtos.User dto,
         CancellationToken ct)
     {
         dto.StorageFileUrl = await storageService.GetStorageFileUrlAsync(dto.Id.ToString(), "User", ct);

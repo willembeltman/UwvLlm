@@ -16,7 +16,7 @@ public static class AppStartExtention
 
         using var cts = new CancellationTokenSource();
 
-        var workerTask = workerService.StartAsync(Receipent.LlmProxy, cts.Token);
+        var workerTask = workerService.StartAsync(ServiceBusReceiver.LlmProxy, cts.Token);
         var consoleTask = consoleService.Start(cts.Token);
         await Task.WhenAny(workerTask, consoleTask);
 

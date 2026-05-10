@@ -13,8 +13,8 @@ using UwvLlm.Infrastructure.Data.Mappings;
 using UwvLlm.Infrastructure.Messaging.Interfaces;
 using UwvLlm.Infrastructure.Messaging.Services;
 using UwvLlm.LlmProxy.Core.Handlers;
-using UwvLlm.Shared;
-using UwvLlm.Shared.Dtos;
+using UwvLlm.Shared.Public;
+using UwvLlm.Shared.Public.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +36,7 @@ builder.Services.AddSingleton<IConsoleService, ConsoleService>();
 
 builder.Services.AddSingleton<IRabbitConnectionProvider, RabbitConnectionProvider>();
 builder.Services.AddSingleton<IHandlerRegistry, HandlerRegistry>();
-builder.Services.AddSingleton<IServiceBusReceiver, ServiceBusReceiver>();
+builder.Services.AddSingleton<IServiceBusReceiver, UwvLlm.Infrastructure.Messaging.Services.ServiceBusReceiver>();
 builder.Services.AddSingleton<IServiceBusSender, ServiceBusSender>();
 
 builder.Services.AddTransient<GenerateAutoReplyResponseHandler>();
@@ -58,6 +58,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 var receiver = app.Services.GetRequiredService<IServiceBusReceiver>();
-_ = Task.Run(async () => await receiver.StartAsync(Receipent.Api, CancellationToken.None));
+_ = Task.Run(async () => await receiver.StartAsync(UwvLlm.Api.Core.Enums.ServiceBusReceiver.Api, CancellationToken.None));
 
 app.Run();

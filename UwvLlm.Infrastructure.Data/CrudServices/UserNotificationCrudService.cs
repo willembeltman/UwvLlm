@@ -1,7 +1,7 @@
 ﻿using gAPI.Core.Dtos;
 using gAPI.Core.Enums;
-using UwvLlm.Shared.CrudInterfaces;
-using UwvLlm.Shared.Dtos;
+using UwvLlm.Shared.Public.CrudInterfaces;
+using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 

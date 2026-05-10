@@ -1,8 +1,8 @@
 ﻿using gAPI.Core.Attributes;
 using gAPI.Core.Dtos;
-using UwvLlm.Shared.Dtos;
+using UwvLlm.Shared.Public.Dtos;
 
-namespace UwvLlm.Shared.CrudInterfaces;
+namespace UwvLlm.Shared.Public.CrudInterfaces;
 
 [GenerateApi]
 [IsAuthorized]

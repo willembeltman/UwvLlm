@@ -1,10 +1,10 @@
 ﻿using gAPI.Core.Server;
-using UwvLlm.Api.Core.Dtos;
 using UwvLlm.Api.Core.Enums;
 using UwvLlm.Infrastructure.Messaging.Interfaces;
-using UwvLlm.Shared.CrudInterfaces;
-using UwvLlm.Shared.Dtos;
-using UwvLlm.Shared.Interfaces;
+using UwvLlm.Infrastructure.Messaging.Messages;
+using UwvLlm.Shared.Public.CrudInterfaces;
+using UwvLlm.Shared.Public.Dtos;
+using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.Api.Core.Services;
 
@@ -27,6 +27,6 @@ public class MailApi(
         var autoReplyMessage = new GenerateAutoReplyRequest(
             mailResponse.Response);
 
-        await serviceBusSender.SendAsync(Receipent.LlmProxy, autoReplyMessage, ct);
+        await serviceBusSender.SendAsync(ServiceBusReceiver.LlmProxy, autoReplyMessage, ct);
     }
 }

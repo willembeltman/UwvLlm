@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UwvLlm.Api.Core.Enums;
 using UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
 using UwvLlm.Api.Core.Infrastructure.Llm.Models;
-using UwvLlm.Infrastructure.Llm.Enums;
-using UwvLlm.Api.Core.Dtos;
-using UwvLlm.Api.Core.Enums;
 using UwvLlm.Infrastructure.Data.Entities;
+using UwvLlm.Infrastructure.Llm.Enums;
 using UwvLlm.Infrastructure.Messaging.Interfaces;
+using UwvLlm.Infrastructure.Messaging.Messages;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;
 
@@ -62,6 +62,6 @@ Subject: {dbMailMessage.Subject}
 
         await db.SaveChangesAsync(ct);
 
-        await sender.SendAsync(Receipent.Api, new GenerateAutoReplyResponse(message.Email), ct);
+        await sender.SendAsync(ServiceBusReceiver.Api, new GenerateAutoReplyResponse(message.Email), ct);
     }
 }

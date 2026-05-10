@@ -11,9 +11,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\gAPI\gAPI.Core.ServiceBus\gAPI.Core.ServiceBus.csproj" />
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Data\UwvLlm.Infrastructure.Data.csproj" />
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Llm\UwvLlm.Infrastructure.Llm.csproj" />
-		<ProjectReference Include="..\UwvLlm.Infrastructure.Messaging\UwvLlm.Infrastructure.Messaging.csproj" />
+		<ProjectReference Include="..\UwvLlm.Infrastructure.Messaging\UwvLlm.Shared.Private.csproj" />
 	</ItemGroup>
 
 </Project>

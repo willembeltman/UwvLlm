@@ -6,12 +6,12 @@ var root = EnvironmentPathHelper.GetRoot(Environment.ProcessPath!, "UwvLlm");
 var config = new BackendConfig(
     DbContextType: typeof(ApplicationDbContext),
 
-    Shared_DtosDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared\Dtos"),
-    Shared_DtosNamespace: "UwvLlm.Shared.Dtos",
-    Shared_StateDtosDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared\Dtos"),
-    Shared_StateDtosNamespace: "UwvLlm.Shared.Dtos",
-    Shared_CrudInterfacesDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared\CrudInterfaces"),
-    Shared_CrudInterfacesNamespace: "UwvLlm.Shared.CrudInterfaces",
+    Shared_DtosDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared.Public\Dtos"),
+    Shared_DtosNamespace: "UwvLlm.Shared.Public.Dtos",
+    Shared_StateDtosDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared.Public\Dtos"),
+    Shared_StateDtosNamespace: "UwvLlm.Shared.Public.Dtos",
+    Shared_CrudInterfacesDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Shared.Public\CrudInterfaces"),
+    Shared_CrudInterfacesNamespace: "UwvLlm.Shared.Public.CrudInterfaces",
 
     Core_CrudUseCasesDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Infrastructure.Data\UseCases"),
     Core_CrudUseCasesNamespace: "UwvLlm.Infrastructure.Data.UseCases",
