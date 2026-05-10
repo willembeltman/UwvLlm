@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UwvLlm.Api.Core.Enums;
+﻿using gAPI.Core.ServiceBus.Enums;
+using gAPI.Core.ServiceBus.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
 using UwvLlm.Api.Core.Infrastructure.Llm.Models;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Llm.Enums;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
 using UwvLlm.Infrastructure.Messaging.Messages;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;

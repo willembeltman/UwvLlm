@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using gAPI.Core.ServiceBus.Enums;
+using gAPI.Core.ServiceBus.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using UwvLlm.Api.Core.Enums;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
 
 namespace UwvLlm.LlmProxy.Extensions;
 

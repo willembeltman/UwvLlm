@@ -13,7 +13,7 @@
 	
 	<ItemGroup>
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Data\UwvLlm.Infrastructure.Data.csproj" />
-		<ProjectReference Include="..\UwvLlm.Infrastructure.Messaging\UwvLlm.Shared.Private.csproj" />
+		<ProjectReference Include="..\UwvLlm.Shared.Private\UwvLlm.Shared.Private.csproj" />
 	</ItemGroup>
 
 </Project>

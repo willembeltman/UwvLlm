@@ -1,6 +1,6 @@
 ﻿using gAPI.Core.Server;
-using UwvLlm.Api.Core.Enums;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
+using gAPI.Core.ServiceBus.Enums;
+using gAPI.Core.ServiceBus.Interfaces;
 using UwvLlm.Infrastructure.Messaging.Messages;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;

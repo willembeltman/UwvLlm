@@ -2,16 +2,15 @@ using gAPI.Core.Interfaces;
 using gAPI.Core.Server;
 using gAPI.Core.Server.Extensions;
 using gAPI.Core.Server.Mappings;
+using gAPI.Core.ServiceBus.Interfaces;
+using gAPI.Core.ServiceBus.Services;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using UwvLlm.Api.Core.Enums;
 using UwvLlm.Api.Extensions;
 using UwvLlm.Core.Extensions;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Data.Mappings;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
-using UwvLlm.Infrastructure.Messaging.Services;
 using UwvLlm.LlmProxy.Core.Handlers;
 using UwvLlm.Shared.Public;
 using UwvLlm.Shared.Public.Dtos;
@@ -36,7 +35,7 @@ builder.Services.AddSingleton<IConsoleService, ConsoleService>();
 
 builder.Services.AddSingleton<IRabbitConnectionProvider, RabbitConnectionProvider>();
 builder.Services.AddSingleton<IHandlerRegistry, HandlerRegistry>();
-builder.Services.AddSingleton<IServiceBusReceiver, UwvLlm.Infrastructure.Messaging.Services.ServiceBusReceiver>();
+builder.Services.AddSingleton<IServiceBusReceiver, ServiceBusReceiver>();
 builder.Services.AddSingleton<IServiceBusSender, ServiceBusSender>();
 
 builder.Services.AddTransient<GenerateAutoReplyResponseHandler>();
@@ -58,6 +57,6 @@ using (var scope = app.Services.CreateScope())
 }
 
 var receiver = app.Services.GetRequiredService<IServiceBusReceiver>();
-_ = Task.Run(async () => await receiver.StartAsync(UwvLlm.Api.Core.Enums.ServiceBusReceiver.Api, CancellationToken.None));
+_ = Task.Run(async () => await receiver.StartAsync(gAPI.Core.ServiceBus.Enums.ServiceBusReceiver.Api, CancellationToken.None));
 
 app.Run();

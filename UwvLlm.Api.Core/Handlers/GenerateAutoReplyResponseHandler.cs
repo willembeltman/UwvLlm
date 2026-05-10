@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
+﻿using gAPI.Core.ServiceBus.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using UwvLlm.Infrastructure.Messaging.Messages;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;

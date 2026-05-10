@@ -1,10 +1,10 @@
 ﻿using gAPI.Core.Server.Extensions;
+using gAPI.Core.ServiceBus.Interfaces;
+using gAPI.Core.ServiceBus.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UwvLlm.Api.Core.Infrastructure.Llm.Clients;
 using UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
-using UwvLlm.Infrastructure.Messaging.Interfaces;
-using UwvLlm.Infrastructure.Messaging.Services;
 using UwvLlm.LlmProxy.Core.Handlers;
 using UwvLlm.LlmProxy.Extensions;
 
