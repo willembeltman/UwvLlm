@@ -20,10 +20,10 @@ public static class AppStartExtention
         var consoleTask = consoleService.Start(cts.Token);
         await Task.WhenAny(workerTask, consoleTask);
 
+        cts.Cancel();
+
         if (workerTask.Exception != null)
             throw workerTask.Exception;
-
-        cts.Cancel();
 
         await Task.WhenAll(consoleTask);
     }
