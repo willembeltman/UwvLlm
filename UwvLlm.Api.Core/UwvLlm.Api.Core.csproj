@@ -9,6 +9,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\gAPI\gAPI.AutoSse.Server\gAPI.AutoSse.Server.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 		<ProjectReference Include="..\..\gAPI\gAPI.Core.ServiceBus\gAPI.Core.ServiceBus.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Data\UwvLlm.Infrastructure.Data.csproj" />
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Messaging\UwvLlm.Shared.Private.csproj" />
 	</ItemGroup>
