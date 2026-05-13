@@ -1,8 +1,7 @@
-﻿using gAPI.Core.ServiceBus.Enums;
-using gAPI.Core.ServiceBus.Interfaces;
+﻿using gAPI.Core.ServiceBus.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
-using UwvLlm.Api.Core.Infrastructure.Llm.Models;
+using UwvLlm.Infrastructure.Llm.Interfaces;
+using UwvLlm.Infrastructure.Llm.Models;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Llm.Enums;
 using UwvLlm.Infrastructure.Messaging.Messages;
@@ -62,6 +61,6 @@ Subject: {dbMailMessage.Subject}
 
         await db.SaveChangesAsync(ct);
 
-        await sender.SendAsync(ServiceBusReceiver.Api, new GenerateAutoReplyResponse(message.Email), ct);
+        await sender.SendAsync("Api", new GenerateAutoReplyResponse(message.Email), ct);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UwvLlm.Infrastructure.Llm.Enums;
 
-namespace UwvLlm.Api.Core.Infrastructure.Llm.Models;
+namespace UwvLlm.Infrastructure.Llm.Models;
 
 public record Message(
     Role Role,

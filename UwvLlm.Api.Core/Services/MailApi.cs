@@ -1,5 +1,4 @@
 ﻿using gAPI.Core.Server;
-using gAPI.Core.ServiceBus.Enums;
 using gAPI.Core.ServiceBus.Interfaces;
 using UwvLlm.Infrastructure.Messaging.Messages;
 using UwvLlm.Shared.Public.CrudInterfaces;
@@ -27,6 +26,6 @@ public class MailApi(
         var autoReplyMessage = new GenerateAutoReplyRequest(
             mailResponse.Response);
 
-        await serviceBusSender.SendAsync(ServiceBusReceiver.LlmProxy, autoReplyMessage, ct);
+        await serviceBusSender.SendAsync("LlmProxy", autoReplyMessage, ct);
     }
 }

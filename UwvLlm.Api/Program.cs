@@ -1,9 +1,11 @@
 using gAPI.Core.Interfaces;
+using gAPI.Core.Extensions;
 using gAPI.Core.Server;
 using gAPI.Core.Server.Extensions;
 using gAPI.Core.Server.Mappings;
 using gAPI.Core.ServiceBus.Interfaces;
 using gAPI.Core.ServiceBus.Services;
+using gAPI.Core.ServiceBus.Extensions;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -56,7 +58,4 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-var receiver = app.Services.GetRequiredService<IServiceBusReceiver>();
-_ = Task.Run(async () => await receiver.StartAsync(gAPI.Core.ServiceBus.Enums.ServiceBusReceiver.Api, CancellationToken.None));
-
-app.Run();
+app.RunWithServiceBus(busName: "Api");

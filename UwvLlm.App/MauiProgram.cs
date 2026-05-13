@@ -32,6 +32,13 @@ public static class MauiProgram
         builder.Services.AddTransient<NotificationsPage>();
         builder.Services.AddTransient<RegisterPage>();
 
+        builder.Services.AddScoped<NotificationHubViewModel>();
+        builder.Services.AddScoped<EmailViewModel>();
+        builder.Services.AddScoped<LoginViewModel>();
+        builder.Services.AddScoped<MainPageViewModel>();
+        builder.Services.AddScoped<RegisterViewModel>();
+        builder.Services.AddScoped<NotificationPageViewModel>();
+
         builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
         builder.Services.AddScoped<IDispatcherService, DispatcherService>();
@@ -40,13 +47,6 @@ public static class MauiProgram
         builder.Services.AddScoped<INavigationManager>(sp => sp.GetRequiredService<NavigationService>());
         builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<NotificationPageViewModel>());
         builder.Services.AddScoped<IUiService, UiService>();
-
-        builder.Services.AddScoped<NotificationHubViewModel>();
-        builder.Services.AddScoped<EmailViewModel>();
-        builder.Services.AddScoped<LoginViewModel>();
-        builder.Services.AddScoped<MainPageViewModel>();
-        builder.Services.AddScoped<NotificationPageViewModel>();
-        builder.Services.AddScoped<RegisterViewModel>();
 
         builder.Services.AddAutoApiClient(); 
         builder.Services.AddAutoSseClient();

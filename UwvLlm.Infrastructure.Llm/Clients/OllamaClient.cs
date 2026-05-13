@@ -2,11 +2,11 @@
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
-using UwvLlm.Api.Core.Infrastructure.Llm.Models;
+using UwvLlm.Infrastructure.Llm.Interfaces;
+using UwvLlm.Infrastructure.Llm.Models;
 using UwvLlm.Infrastructure.Llm.Enums;
 
-namespace UwvLlm.Api.Core.Infrastructure.Llm.Clients;
+namespace UwvLlm.Infrastructure.Llm.Clients;
 
 public class OllamaClient(
     Uri? ollamaServerUrl = null)

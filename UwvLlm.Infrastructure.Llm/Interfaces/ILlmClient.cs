@@ -1,6 +1,6 @@
-﻿using UwvLlm.Api.Core.Infrastructure.Llm.Models;
+﻿using UwvLlm.Infrastructure.Llm.Models;
 
-namespace UwvLlm.Api.Core.Infrastructure.Llm.Interfaces;
+namespace UwvLlm.Infrastructure.Llm.Interfaces;
 
 public interface ILlmClient : IDisposable
 {
