@@ -70,7 +70,7 @@ public class UsersMapping(
         UwvLlm.Shared.Public.Dtos.User dto,
         CancellationToken ct)
     {
-        dto.StorageFileUrl = await storageService.GetStorageFileUrlAsync(dto.Id.ToString(), "User", ct);
+        dto.StorageFileUrl = await storageService.GetStorageFileUrlAsync($"User/{dto.Id}", ct);
         dto.CanUpdate = await useCase.CanUpdateAsync(dto, ct);
         dto.CanDelete = await useCase.CanDeleteAsync(dto, ct);
     }

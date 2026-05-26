@@ -33,6 +33,7 @@
     <Project Path="../gAPI/gAPI.Core.Server/gAPI.Core.Server.csproj" />
     <Project Path="../gAPI/gAPI.Core.ServiceBus/gAPI.Core.ServiceBus.csproj" Id="eb79717c-0a48-49dd-a6a5-2dfeba245caf" />
     <Project Path="../gAPI/gAPI.Core/gAPI.Core.csproj" />
+    <Project Path="../gAPI/gAPI.EntityFrameworkDisk/gAPI.EntityFrameworkDisk.csproj" />
     <Project Path="../gAPI/gAPI.Fabric.Server/gAPI.Fabric.Server.csproj" />
     <Project Path="../gAPI/gAPI.Storage.Server/gAPI.Storage.Server.csproj" />
   </Folder>

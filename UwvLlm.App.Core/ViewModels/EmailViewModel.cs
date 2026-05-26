@@ -32,7 +32,7 @@ public partial class EmailViewModel(
         }
 
         Users.Clear();
-        await foreach (var notification in response.Response)
+        foreach (var notification in response.Response)
             Users.Add(notification);
 
         await base.OnAppearingAsync();

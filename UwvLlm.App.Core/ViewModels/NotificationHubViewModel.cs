@@ -43,7 +43,7 @@ public partial class NotificationHubViewModel(
             return;
         }
 
-        await foreach (var notification in response.Response)
+        foreach (var notification in response.Response)
             NotificationList.Add(notification);
     }
 

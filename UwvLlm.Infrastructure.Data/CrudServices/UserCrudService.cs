@@ -138,7 +138,7 @@ public class UserCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = dtos
+            Response = await dtos.ToArrayAsync()
         };
     }
 
