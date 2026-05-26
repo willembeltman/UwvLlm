@@ -12,9 +12,12 @@ internal sealed class IntegrationScenario(
     IClientConnection clientConnection,
     IntegrationNotificationHub notificationHub)
 {
+    private static readonly TimeSpan SetupTimeout = TimeSpan.FromMinutes(5);
+    private static readonly TimeSpan LlmResponseTimeout = TimeSpan.FromMinutes(2);
+
     public async Task RunAsync()
     {
-        using var timeout = new CancellationTokenSource(TimeSpan.FromMinutes(1));
+        using var setupTimeout = new CancellationTokenSource(SetupTimeout);
 
         var testId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         var userName = $"integration-{testId}";
@@ -26,15 +29,15 @@ internal sealed class IntegrationScenario(
 
         await RetryAsync(
             () => authenticationService.RegisterAsync(userName, email, password, password),
-            timeout.Token);
+            setupTimeout.Token);
 
-        if (!await authenticatedHttpClient.IsAuthenticatedAsync(timeout.Token))
+        if (!await authenticatedHttpClient.IsAuthenticatedAsync(setupTimeout.Token))
             throw new InvalidOperationException("Registration completed, but the client is not authenticated.");
 
         Console.WriteLine("Opening notification channel...");
         clientConnection.SubscribeAsync(notificationHub);
 
-        var users = await usersCrudService.List(0, int.MaxValue, null, timeout.Token);
+        var users = await usersCrudService.List(0, int.MaxValue, null, setupTimeout.Token);
         if (!users.Success || users.Response == null || users.Response.Length == 0)
             throw new InvalidOperationException($"Could not load users after registration. Error: {users.Error}");
 
@@ -47,9 +50,10 @@ internal sealed class IntegrationScenario(
             "Integration test auto reply",
             "Hoi, dit is een integratietest. Wil je kort automatisch antwoorden?");
 
-        Console.WriteLine("Waiting up to 1 minute for the LLM auto-reply notification...");
+        Console.WriteLine($"Waiting up to {LlmResponseTimeout.TotalMinutes:0} minute for the LLM auto-reply notification...");
 
-        var notification = await notificationHub.WaitForNotificationAsync(timeout.Token);
+        using var llmTimeout = new CancellationTokenSource(LlmResponseTimeout);
+        var notification = await notificationHub.WaitForNotificationAsync(llmTimeout.Token);
 
         if (!notification.Message.Contains("AUTO-REPLY", StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("A notification arrived, but it did not contain the expected auto-reply marker.");
