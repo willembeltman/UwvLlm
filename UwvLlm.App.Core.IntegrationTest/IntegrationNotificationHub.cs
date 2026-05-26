@@ -1,6 +1,8 @@
 using UwvLlm.Shared.Public.Dtos;
 using UwvLlm.Shared.Public.Interfaces;
 
+namespace UwvLlm.App.Core.IntegrationTest;
+
 internal sealed class IntegrationNotificationHub : INotificationHub
 {
     private readonly TaskCompletionSource<UserNotification> NotificationReceived =

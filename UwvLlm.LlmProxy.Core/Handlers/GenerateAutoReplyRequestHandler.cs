@@ -1,29 +1,59 @@
-﻿using gAPI.Core.ServiceBus.Interfaces;
+﻿using gAPI.Core.Dtos;
+using gAPI.Core.Enums;
+using gAPI.Core.Server;
+using gAPI.Core.ServiceBus.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using UwvLlm.Infrastructure.Llm.Enums;
 using UwvLlm.Infrastructure.Llm.Interfaces;
 using UwvLlm.Infrastructure.Llm.Models;
-using UwvLlm.Infrastructure.Data.Entities;
-using UwvLlm.Infrastructure.Llm.Enums;
-using UwvLlm.Infrastructure.Messaging.Messages;
+using UwvLlm.Shared.Private.Messages;
+using UwvLlm.Shared.Public.CrudInterfaces;
+using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;
 
 public class GenerateAutoReplyRequestHandler(
-    IDbContextFactory<ApplicationDbContext> dbFactory,
+    IMailMessagesCrudService mailMessagesCrudService,
+    IAuthenticationService<Infrastructure.Data.Entities.User, State> authenticationService,
     IServiceBusSender sender,
     ILlmClient llmClient)
     : IHandler<GenerateAutoReplyRequest>
 {
     public async Task Handle(GenerateAutoReplyRequest message, CancellationToken ct)
     {
-        using var db = dbFactory.CreateDbContext();
-        var dbMailMessage = await db.MailMessages
-            .Include("FromUser")
-            .Include("ToUser")
-            .FirstOrDefaultAsync(a => a.Id == message.Email.Id);
-        if (dbMailMessage == null || dbMailMessage.AutoResponse != null)
-            return;
+        var result = await authenticationService.InitializeAsync(
+            "/Handlers/GenerateAutoReplyResponseHandler",
+            message.CookieData,
+            message.SessionData,
+            message.StateData,
+            ct);
 
+        if (result.Forbidden || result.Authenticated == false)
+            throw new Exception("Cannot find session");
+
+        // Get the email
+        var mailMessageResponse = await mailMessagesCrudService.Read(message.MailMessageId, ct);
+        var mailMessage = mailMessageResponse.GaurdIfNull();
+
+        // Generate response
+        mailMessage.AutoResponse = await GetAutoReply(mailMessage, ct);
+
+        // Update the email
+        mailMessageResponse = await mailMessagesCrudService.Update(mailMessage, ct);
+        mailMessage = mailMessageResponse.GaurdIfNull();
+
+        // Signal API to inform user
+        var generateAutoReplyResponse = new GenerateAutoReplyResponse(
+            message.MailMessageId,
+            message.CookieData,
+            message.SessionData,
+            message.StateData);
+        await sender.SendAsync("Api", generateAutoReplyResponse, ct);
+    }
+
+
+    private async Task<string> GetAutoReply(MailMessage mailMessage, CancellationToken ct)
+    {
         // Hardcoded for now
         var model = new Model("gpt-oss:20b");
         if (llmClient.Initialized == false)
@@ -32,35 +62,32 @@ public class GenerateAutoReplyRequestHandler(
         }
 
         var systemPrompt = "Create a reply to this email conversation, use the same language as the user uses.";
-        var mailMessageText = $@"Date: {dbMailMessage.Date}
-From: {dbMailMessage.FromUser.UserName} ({dbMailMessage.FromUser.Email})
-To: {dbMailMessage.ToUser.UserName} ({dbMailMessage.ToUser.Email})
-Subject: {dbMailMessage.Subject}
+        var mailMessageText = $@"Date: {mailMessage.Date}
+From: {mailMessage.FromUserName}
+To: {mailMessage.ToUserName}
+Subject: {mailMessage.Subject}
 
-{dbMailMessage.Content}";
+{mailMessage.Content}";
         var messages = new List<Message>()
         {
-            new Message(Role.System, null, systemPrompt, null, null),
-            new Message(Role.User, null, mailMessageText, null, null)
+            new(Role.System, null, systemPrompt, null, null),
+            new(Role.User, null, mailMessageText, null, null)
         };
 
         var toolName = "reply-email";
         var tool = new Tool(toolName, "reply to the email", [new ToolParameter("Content", "string", "text of the reply")]);
 
-        while (dbMailMessage.AutoResponse == null)
+        var autoResponse = (string?)null;
+        while (autoResponse == null)
         {
             var request = new LlmRequest([.. messages], [tool]);
             var response = await llmClient.ChatAsync(model, request, ct);
             messages.Add(response.Message);
 
-            dbMailMessage.AutoResponse = response.Message.ToolCalls?
+            autoResponse = response.Message.ToolCalls?
                 .FirstOrDefault(a => a.Function.Name == toolName)?
                 .Function.Arguments.Content;
-            message.Email.AutoResponse = dbMailMessage.AutoResponse;
         }
-
-        await db.SaveChangesAsync(ct);
-
-        await sender.SendAsync("Api", new GenerateAutoReplyResponse(message.Email), ct);
+        return autoResponse;
     }
 }

@@ -17,6 +17,7 @@ public interface IServerAuthenticationService
     bool Initialized { get; }
     AuthenticationInitializeResult Result { get; }
 
+    Task<AuthenticationInitializeResult> InitializeAsync(string url, string? cookieData, string? sessionData, string? stateData, CancellationToken ct);
     Task<AuthenticationInitializeResult> InitializeAsync(PathString path, QueryString query, IPAddress? ipAddress, string? cookieData, string? sessionData, string? stateData, CancellationToken ct);
     Task<AuthenticationInitializeResult> ReInitializeAsync(CancellationToken ct);
     Task<AuthenticationInitializeResult> UpdateStateAsync(string? stateData, CancellationToken ct);

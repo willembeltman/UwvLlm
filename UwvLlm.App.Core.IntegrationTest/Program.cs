@@ -1,9 +1,9 @@
 using gAPI.Core.Client;
 using gAPI.Core.Interfaces;
 using gAPI.Generated;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UwvLlm.App.Core.IntegrationTest;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.App.Core.Services;
 using UwvLlm.Shared.Public;

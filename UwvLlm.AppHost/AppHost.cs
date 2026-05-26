@@ -38,7 +38,7 @@ api.WithEnvironment("FABRIC__HOST", "localhost");
 api.WithEnvironment("FABRIC__PORT", "9494");
 
 // Console app that behaves like a client and runs the app integration flow.
-builder.AddProject<Projects.UwvLlm_App_Core_IntergrationTest>("app-integration-test")
+builder.AddProject<Projects.UwvLlm_App_Core_IntegrationTest>("app-integration-test")
     .WithReference(api)
     .WaitFor(api)
     .WaitFor(llmproxy)

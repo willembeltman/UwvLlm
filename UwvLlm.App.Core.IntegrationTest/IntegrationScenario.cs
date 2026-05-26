@@ -4,6 +4,8 @@ using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;
 
+namespace UwvLlm.App.Core.IntegrationTest;
+
 internal sealed class IntegrationScenario(
     IAuthenticationService authenticationService,
     IAuthenticatedHttpClient<State> authenticatedHttpClient,

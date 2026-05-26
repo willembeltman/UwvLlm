@@ -1,6 +1,9 @@
 ﻿using UwvLlm.Shared.Public.Dtos;
 
-namespace UwvLlm.Infrastructure.Messaging.Messages;
+namespace UwvLlm.Shared.Private.Messages;
 
 public record GenerateAutoReplyRequest(
-    MailMessage Email);
+    Guid MailMessageId,
+    string? CookieData,
+    string? SessionData,
+    string? StateData);

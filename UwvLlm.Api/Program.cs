@@ -13,9 +13,9 @@ using UwvLlm.Api.Extensions;
 using UwvLlm.Core.Extensions;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Data.Mappings;
-using UwvLlm.LlmProxy.Core.Handlers;
 using UwvLlm.Shared.Public;
 using UwvLlm.Shared.Public.Dtos;
+using UwvLlm.Api.Core.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 

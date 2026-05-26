@@ -51,7 +51,18 @@ public class AuthenticationService<TUser, TStateDto>(
         => Headers?.CookieData;
     public StringValues SessionData
         => Headers?.SessionData ?? throw new Exception("Initialize the ServerAuthenticationService first please");
-
+    
+    public Task<AuthenticationInitializeResult> InitializeAsync(string url, string? cookieData, string? sessionData, string? stateData, CancellationToken ct)
+    {
+        return InitializeAsync(
+            new Microsoft.AspNetCore.Http.PathString("/Handlers/GenerateAutoReplyResponseHandler"),
+            new Microsoft.AspNetCore.Http.QueryString(),
+            System.Net.IPAddress.Loopback,
+            cookieData,
+            sessionData,
+            stateData,
+            ct);
+    }
     public async Task<AuthenticationInitializeResult> InitializeAsync(PathString path, QueryString query, IPAddress? ipAddress, string? cookieData, string? sessionData, string? stateData, CancellationToken ct)
     {
         if (ipAddress == null)

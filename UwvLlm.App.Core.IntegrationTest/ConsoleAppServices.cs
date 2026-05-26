@@ -1,5 +1,7 @@
 using UwvLlm.App.Core.Interfaces;
 
+namespace UwvLlm.App.Core.IntegrationTest;
+
 internal sealed class ConsoleAppServices : IUiService, IDispatcherService, INavigationService
 {
     private string CurrentPath { get; set; } = "/";

@@ -10,8 +10,7 @@ namespace gAPI.Core.ServiceBus.Services;
 
 public class ServiceBusReceiver(
     IRabbitConnectionProvider provider,
-    //IHandlerRegistry registry,
-    IServiceProvider sp,
+    IServiceScopeFactory scopeFactory,
     IConsoleService console)
     : IServiceBusReceiver
 {
@@ -30,7 +29,7 @@ public class ServiceBusReceiver(
 
         consumer.ReceivedAsync += async (_, e) =>
         {
-            using var scope = sp.CreateScope();
+            await using var scope = scopeFactory.CreateAsyncScope();
 
             var json = Encoding.UTF8.GetString(e.Body.ToArray());
 
