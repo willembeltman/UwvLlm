@@ -8,14 +8,26 @@ using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;
 
-public class GenerateAutoReplyResponseHandler(
-    IDbContextFactory<Infrastructure.Data.Entities.ApplicationDbContext> dbFactory,
-    IUserNotificationsCrudService notificationService,
-    INotificationHubContext notificationHub)
-    : IHandler<GenerateAutoReplyResponse>
+public class GenerateAutoReplyResponseHandler : IHandler<GenerateAutoReplyResponse>
 {
+    private readonly IDbContextFactory<Infrastructure.Data.Entities.ApplicationDbContext> dbFactory;
+    private readonly IUserNotificationsCrudService notificationService;
+    private readonly INotificationHubContext notificationHub;
+
+    public GenerateAutoReplyResponseHandler(
+        IDbContextFactory<Infrastructure.Data.Entities.ApplicationDbContext> dbFactory,
+        IUserNotificationsCrudService notificationService,
+        INotificationHubContext notificationHub)
+    {
+        this.dbFactory = dbFactory;
+        this.notificationService = notificationService;
+        this.notificationHub = notificationHub;
+    }
+
     public async Task Handle(GenerateAutoReplyResponse message, CancellationToken ct)
     {
+
+
         using var db = await dbFactory.CreateDbContextAsync();
         var dbMailMessage = await db.MailMessages.FirstOrDefaultAsync(a => a.Id == message.Email.Id, ct);
         if (dbMailMessage == null)
