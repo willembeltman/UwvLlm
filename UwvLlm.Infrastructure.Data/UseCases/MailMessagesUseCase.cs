@@ -27,8 +27,11 @@ public class MailMessagesUseCase(
 
     public async Task<bool> AddAsync(MailMessage entityToAdd, CancellationToken ct) 
     {
-        if (authenticationService.AuthenticationState.User == null) return false;
-        entityToAdd.FromUser = authenticationService.AuthenticationState.User;
+        if (authenticationService.State.User == null) return false;
+
+        entityToAdd.FromUserId = authenticationService.State.User.Id;
+        entityToAdd.FromUser = null!;
+
         await db.MailMessages.AddAsync(entityToAdd, ct);
         await db.SaveChangesAsync(ct);
         return true;

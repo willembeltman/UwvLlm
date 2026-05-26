@@ -43,6 +43,7 @@
   <Folder Name="/Tests/">
     <Project Path="UwvLlm.Api.Core.Test/UwvLlm.Api.Core.Test.csproj" />
     <Project Path="UwvLlm.App.Core.Test/UwvLlm.App.Core.Test.csproj" Id="c29e61f3-47ae-4277-8b33-ad2900bc06b5" />
+    <Project Path="UwvLlm.App.IntergrationTest/UwvLlm.App.Core.IntergrationTest.csproj" />
     <Project Path="UwvLlm.LlmProxy.Core.Test/UwvLlm.LlmProxy.Core.Test.csproj" Id="7d2fda0a-e3de-4121-ad60-3b200f31ee41" />
   </Folder>
   <Project Path="UwvLlm.AppHost/UwvLlm.AppHost.csproj" Id="222f8302-2a19-436d-b055-9c531cc1b408" />
