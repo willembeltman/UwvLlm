@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\gAPI\gAPI.CodeGen.Backend\gAPI.CodeGen.Backend.csproj" />
+    <ProjectReference Include="..\gAPI\gAPI.CodeGen.Backend\gAPI.CodeGen.Backend.csproj" />
     <ProjectReference Include="..\UwvLlm.Api\UwvLlm.Api.csproj" />
   </ItemGroup>
 
