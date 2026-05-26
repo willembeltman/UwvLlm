@@ -8,7 +8,7 @@ namespace UwvLlm.App.Core.ViewModels;
 public partial class MainPageViewModel(
     IDispatcherService dispatcher,
     IClientConnection clientConnection,
-    IUserNotificationCrudService userNotificationsService,
+    IUserNotificationsCrudService userNotificationsService,
     INavigationService navigationService,
     IUiService uiService) 
     : NotificationHubViewModel(dispatcher, clientConnection, userNotificationsService, navigationService, uiService)

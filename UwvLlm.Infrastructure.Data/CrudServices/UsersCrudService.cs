@@ -7,11 +7,11 @@ using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 
-public class UserCrudService(
+public class UsersCrudService(
     gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, User, Guid> useCase,
     gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, User> mapping,
     IStorageService storageService)
-    : IUserCrudService
+    : IUsersCrudService
 {
     public async Task<BaseResponseT<User>> Create(User dto, CancellationToken ct)
     {
@@ -138,7 +138,7 @@ public class UserCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 

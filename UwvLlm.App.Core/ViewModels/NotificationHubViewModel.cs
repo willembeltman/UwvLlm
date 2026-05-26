@@ -11,7 +11,7 @@ namespace UwvLlm.App.Core.ViewModels;
 public partial class NotificationHubViewModel(
     IDispatcherService dispatcher,
     IClientConnection clientConnection,
-    IUserNotificationCrudService userNotificationsService,
+    IUserNotificationsCrudService userNotificationsService,
     INavigationService navigationService,
     IUiService uiService)
     : BaseViewModel
@@ -21,7 +21,7 @@ public partial class NotificationHubViewModel(
     protected readonly CancellationTokenSource Cts = new();
     protected readonly IDispatcherService Dispatcher = dispatcher;
     protected readonly IClientConnection ClientConnection = clientConnection;
-    protected readonly IUserNotificationCrudService UserNotificationsService = userNotificationsService;
+    protected readonly IUserNotificationsCrudService UserNotificationsService = userNotificationsService;
     protected readonly INavigationService NavigationService = navigationService;
     protected readonly IUiService UiService = uiService;
 

@@ -5,10 +5,10 @@ using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 
-public class MailMessageCrudService(
+public class MailMessagesCrudService(
     gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage, Guid> useCase,
     gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage> mapping)
-    : IMailMessageCrudService
+    : IMailMessagesCrudService
 {
     public async Task<BaseResponseT<MailMessage>> Create(MailMessage dto, CancellationToken ct)
     {
@@ -133,7 +133,7 @@ public class MailMessageCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -161,7 +161,7 @@ public class MailMessageCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -189,7 +189,7 @@ public class MailMessageCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -217,7 +217,7 @@ public class MailMessageCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -245,7 +245,7 @@ public class MailMessageCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 }

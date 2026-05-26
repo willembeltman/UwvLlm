@@ -9,7 +9,7 @@ namespace UwvLlm.Api.Core.Services;
 
 public class MailApi(
     IAuthenticationService<Infrastructure.Data.Entities.User, State> authenticationService,
-    IMailMessageCrudService mailService,
+    IMailMessagesCrudService mailService,
     IServiceBusSender serviceBusSender)
     : IMailApi
 {

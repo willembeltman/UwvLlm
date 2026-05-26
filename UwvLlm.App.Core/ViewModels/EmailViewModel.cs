@@ -9,10 +9,10 @@ namespace UwvLlm.App.Core.ViewModels;
 
 public partial class EmailViewModel(
     IDispatcherService dispatcher,
-    IUserCrudService userService,
+    IUsersCrudService userService,
     IEmailService mailService,
     IClientConnection clientConnection,
-    IUserNotificationCrudService userNotificationService,
+    IUserNotificationsCrudService userNotificationService,
     INavigationService navigationService,
     IUiService uiService) 
     : NotificationHubViewModel(dispatcher, clientConnection, userNotificationService, navigationService, uiService)

@@ -5,8 +5,7 @@ using UwvLlm.Shared.Public.Dtos;
 namespace UwvLlm.Shared.Public.CrudInterfaces;
 
 [GenerateApi]
-[IsAuthorized]
-public interface IUserNotificationCrudService
+public interface IUserNotificationsCrudService
 {
     [IsCreate]
     Task<BaseResponseT<UserNotification>> Create(UserNotification usernotification, CancellationToken ct);

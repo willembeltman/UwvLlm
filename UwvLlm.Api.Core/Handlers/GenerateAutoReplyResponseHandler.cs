@@ -10,7 +10,7 @@ namespace UwvLlm.LlmProxy.Core.Handlers;
 
 public class GenerateAutoReplyResponseHandler(
     IDbContextFactory<Infrastructure.Data.Entities.ApplicationDbContext> dbFactory,
-    IUserNotificationCrudService notificationService,
+    IUserNotificationsCrudService notificationService,
     INotificationHubContext notificationHub)
     : IHandler<GenerateAutoReplyResponse>
 {

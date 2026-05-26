@@ -5,10 +5,10 @@ using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 
-public class UserNotificationCrudService(
+public class UserNotificationsCrudService(
     gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification, long> useCase,
     gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification> mapping)
-    : IUserNotificationCrudService
+    : IUserNotificationsCrudService
 {
     public async Task<BaseResponseT<UserNotification>> Create(UserNotification dto, CancellationToken ct)
     {
@@ -133,7 +133,7 @@ public class UserNotificationCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -161,7 +161,7 @@ public class UserNotificationCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 
@@ -189,7 +189,7 @@ public class UserNotificationCrudService(
             Skip = skip ?? 0,
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
-            Response = await dtos.ToArrayAsync()
+            Response = await dtos.ToArrayAsync(ct)
         };
     }
 }
