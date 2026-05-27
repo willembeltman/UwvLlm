@@ -18,6 +18,7 @@ public class GenerateAutoReplyResponseHandler(
 {
     public async Task Handle(GenerateAutoReplyResponse message, CancellationToken ct)
     {
+        // Check login
         var result = await authenticationService.InitializeAsync(
             "/Handlers/GenerateAutoReplyResponseHandler",
             message.CookieData,
@@ -28,18 +29,26 @@ public class GenerateAutoReplyResponseHandler(
         if (result.Forbidden || result.Authenticated == false)
             throw new Exception("Cannot find session");
 
+        // Get the email with the auto-reply response
         var mailMessageResponse = await mailMessagesCrudService.Read(message.MailMessageId, ct);
-        if (mailMessageResponse.Response == null || mailMessageResponse.Error.HasValue)
-            throw new Exception(Enum.GetName(
-                mailMessageResponse.Error.HasValue
-                ? mailMessageResponse.Error.Value
-                : BaseResponseErrorEnum.ErrorGettingData));
-        var mailMessage = mailMessageResponse.Response;
+        var mailMessage = mailMessageResponse.ThrowIfNull();
 
-        var userNotification = new UserNotification()
+        // Create a new notification record for the user
+        var userNotification = CreateNotification(mailMessage);
+
+        // Create the notification 
+        var notificationResult = await notificationService.Create(userNotification, ct);
+        var notification = notificationResult.ThrowIfNull();
+
+        // And send it to the user
+        await notificationHub.ToAll.OnNotificationReceived(notification);
+    }
+
+    private static UserNotification CreateNotification(MailMessage mailMessage) 
+        => new()
         {
             ExternalType = NotificationType.Mail,
-            ExternalId = mailMessage.Id.ToString(), 
+            ExternalId = mailMessage.Id.ToString(),
             Title = "Message received",
             Message = $@"Subject: {mailMessage.Subject}
 
@@ -54,11 +63,4 @@ public class GenerateAutoReplyResponseHandler(
 Do you want to auto-reply?",
             QuickOptions = ["Yes", "No", "Modify"]
         };
-
-        var createResult = await notificationService.Create(userNotification, ct);
-        if (createResult.Success == false || createResult.Response == null)
-            throw new Exception("Could not make notification");
-
-        await notificationHub.ToAll.OnNotificationReceived(createResult.Response);
-    }
 }

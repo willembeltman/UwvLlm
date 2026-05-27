@@ -16,16 +16,12 @@ public class MailApi(
     public async Task SendMail(MailMessage newMail, CancellationToken ct)
     {
         if (authenticationService.State.User == null)
-            return;
+            throw new Exception("User not logged in");
 
         newMail.FromUserId = authenticationService.State.User.Id;
-        var mailResponse = await mailService.Create(newMail, ct);
-        if (mailResponse.Success == false || mailResponse.Response == null)
-            throw new Exception(Enum.GetName(
-                mailResponse.Error.HasValue 
-                ? mailResponse.Error.Value 
-                : gAPI.Core.Enums.BaseResponseErrorEnum.ErrorItemNotFound));
-        var mailMessage = mailResponse.Response;
+
+        var mailMessageResponse = await mailService.Create(newMail, ct);
+        var mailMessage = mailMessageResponse.ThrowIfNull();
 
         var autoReplyMessage = new GenerateAutoReplyRequest(
             mailMessage.Id,

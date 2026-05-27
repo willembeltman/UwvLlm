@@ -16,14 +16,10 @@ public class BaseResponseT<T> : BaseResponse
 
     public T? Response { get; set; }
 
-    public T GaurdIfNull()
+    public T ThrowIfNull()
     { 
         if (Response == null || Error.HasValue)
-            throw new Exception(Enum.GetName(
-                Error.HasValue
-                ? Error.Value
-                : BaseResponseErrorEnum.ErrorNotSpecified));
+            throw new Exception(Enum.GetName(Error ?? BaseResponseErrorEnum.ErrorNotSpecified));
         return Response;
     }
-
 }

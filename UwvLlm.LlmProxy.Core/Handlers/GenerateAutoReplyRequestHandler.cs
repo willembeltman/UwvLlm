@@ -21,6 +21,7 @@ public class GenerateAutoReplyRequestHandler(
 {
     public async Task Handle(GenerateAutoReplyRequest message, CancellationToken ct)
     {
+        // Check login
         var result = await authenticationService.InitializeAsync(
             "/Handlers/GenerateAutoReplyResponseHandler",
             message.CookieData,
@@ -33,14 +34,14 @@ public class GenerateAutoReplyRequestHandler(
 
         // Get the email
         var mailMessageResponse = await mailMessagesCrudService.Read(message.MailMessageId, ct);
-        var mailMessage = mailMessageResponse.GaurdIfNull();
+        var mailMessage = mailMessageResponse.ThrowIfNull();
 
         // Generate response
         mailMessage.AutoResponse = await GetAutoReply(mailMessage, ct);
 
         // Update the email
         mailMessageResponse = await mailMessagesCrudService.Update(mailMessage, ct);
-        mailMessage = mailMessageResponse.GaurdIfNull();
+        mailMessageResponse.ThrowIfNull();
 
         // Signal API to inform user
         var generateAutoReplyResponse = new GenerateAutoReplyResponse(
