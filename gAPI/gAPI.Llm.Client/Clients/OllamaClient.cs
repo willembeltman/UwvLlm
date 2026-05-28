@@ -100,7 +100,6 @@ public class OllamaClient(
                 ]));
     }
 
-
     private async Task<string> DoCall(string payload, CancellationToken ct)
     {
         var url = new Uri(OllamaServerUrl, "/api/chat");

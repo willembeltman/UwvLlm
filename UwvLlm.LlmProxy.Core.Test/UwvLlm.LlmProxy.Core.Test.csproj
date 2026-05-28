@@ -23,11 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="NUnit.Framework" />
+    <ProjectReference Include="..\UwvLlm.LlmProxy.Core\UwvLlm.LlmProxy.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UwvLlm.Infrastructure.Llm\UwvLlm.Infrastructure.Llm.csproj" />
+    <Using Include="NUnit.Framework" />
   </ItemGroup>
 
 </Project>
