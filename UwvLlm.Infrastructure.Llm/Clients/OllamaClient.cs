@@ -1,4 +1,4 @@
-﻿using System.Data;
+using System.Data;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -58,9 +58,9 @@ public class OllamaClient(
         Initialized = true;
     }
 
-    public async Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default)
+    public async Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default, bool? think = null)
     {
-        string payload = CreateRequestJson(model, apiCall);
+        string payload = CreateRequestJson(model, apiCall, think);
 
         var reponseJson = await DoCall(payload, ct);
 
@@ -172,8 +172,11 @@ public class OllamaClient(
     }}
   }}"));
     }
-    public string CreateRequestJson(Model model, LlmRequest apiCall)
+    public string CreateRequestJson(Model model, LlmRequest apiCall, bool? think = null)
     {
+        var thinkPart = think.HasValue ? $@",
+  ""think"": {think.Value.ToString().ToLower()}" : "";
+
         return $@"{{
   ""model"": ""{model.Name}"",
   ""options"": {{
@@ -181,7 +184,7 @@ public class OllamaClient(
   }},
   ""messages"": {CreateMessagesJson(apiCall.Messages)},
   ""stream"": false,
-  ""tools"": [{CreateToolsJson(apiCall.Tools)}]
+  ""tools"": [{CreateToolsJson(apiCall.Tools)}]{thinkPart}
 }}";
     }
 
