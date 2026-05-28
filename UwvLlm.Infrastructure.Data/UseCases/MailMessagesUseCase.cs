@@ -14,8 +14,7 @@ public class MailMessagesUseCase(
     public async Task<bool> IsAllowedAsync(CancellationToken ct) => CurrentUserId != null;
     public async Task<bool> CanListAsync(CancellationToken ct) => CurrentUserId != null;
     public async Task<bool> CanCreateAsync(CancellationToken ct) => authenticationService.State.User != null;
-    public async Task<bool> CanCreateAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) 
-        => CurrentUserId != null && dto.ToUserId != CurrentUserId;
+    public async Task<bool> CanCreateAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) => true; // All emails will be created by the current user, so no need to check the dto
     public async Task<bool> CanReadAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) 
         => IsCurrentUserParticipant(dto);
     public async Task<bool> CanUpdateAsync(UwvLlm.Shared.Public.Dtos.MailMessage dto, CancellationToken ct) 
@@ -44,7 +43,7 @@ public class MailMessagesUseCase(
     public async Task<bool> AddAsync(MailMessage entityToAdd, CancellationToken ct) 
     {
         var currentUserId = CurrentUserId;
-        if (currentUserId == null || entityToAdd.ToUserId == currentUserId) return false;
+        if (currentUserId == null) return false;
 
         entityToAdd.FromUserId = currentUserId.Value;
         entityToAdd.FromUser = null!;

@@ -112,3 +112,117 @@ Generated CRUD services are part of normal app flow. For example, `MailApi` uses
 - Keep MAUI app view models and app-facing services in `UwvLlm.App.Core`.
 - Keep Ollama/LLM proxy behavior in `UwvLlm.LlmProxy.Core` and `UwvLlm.Infrastructure.Llm`.
 - If a generated file or generated directory looks wrong, first inspect `UwvLlm.BackendGenerator/Program.cs` and the EF model before manually editing generated output.
+
+# Global project structure
+
+## App
+
+    \UwvLlm.App
+        - MAUI app: Frontend
+    \UwvLlm.App\Pages
+        - The XAML pages
+    \UwvLlm.App\Services
+        - App-specific service implementations for frontend services
+
+    \UwvLlm.App.Core
+        - Library: Frontend
+    \UwvLlm.App.Core\Interfaces
+        - Frontend service interfaces
+    \UwvLlm.App.Core\Services
+        - Frontend service implementations
+    \UwvLlm.App.Core\ViewModels
+        - Frontend view models
+
+    \UwvLlm.App.Core.IntegrationTest
+        - Console app: frontend app data flow integration test
+
+    \UwvLlm.App.Core.Test
+        - Unit tests: Frontend
+
+## Api
+
+    \UwvLlm.Api
+        - WebApi: Backend
+    \UwvLlm.Api\Extensions
+        - Startup extensions
+
+    \UwvLlm.Api.Core
+        - Library: Backend
+    \UwvLlm.Api.Core\Handlers
+        - Service bus handlers
+    \UwvLlm.Api.Core\Services
+        - Service implementations for backend services
+
+    \UwvLlm.Api.Core.Test
+        - Unit tests: Backend
+
+## LLM proxy
+
+    \UwvLlm.LlmProxy
+        - Console app: Service bus endpoint LLM proxy
+    \UwvLlm.LlmProxy\Extensions
+        - Startup extensions
+
+    \UwvLlm.LlmProxy.Core
+        - Library: LLM proxy
+    \UwvLlm.LlmProxy.Core\Handlers
+        - Service bus handlers
+
+    \UwvLlm.LlmProxy.Core.Test
+        - Unit tests: LLM proxy
+
+## Shared
+
+    \UwvLlm.Shared.Private
+        - Library: shared interfaces / DTOs for backend projects
+    \UwvLlm.Shared.Private\Messages
+        - Service bus messages
+
+    \UwvLlm.Shared.Public
+        - Library: shared interfaces / DTOs for all projects
+    \UwvLlm.Shared.Public\CrudInterfaces
+        - Public shared interfaces specifically for CRUD services
+    \UwvLlm.Shared.Public\Dtos
+        - Public shared DTOs used in the interfaces
+    \UwvLlm.Shared.Public\Enums
+        - Public shared enums
+    \UwvLlm.Shared.Public\Interfaces
+        - Public shared interfaces
+
+    \UwvLlm.Infrastructure.Data
+        - Library: EF context/entities
+    \UwvLlm.Infrastructure.Data\CrudServices
+        - Public data interfaces (sometimes referred to as repositories)
+    \UwvLlm.Infrastructure.Data\Entities
+        - EF entities / ApplicationDbContext
+    \UwvLlm.Infrastructure.Data\Mappings
+        - Mappings / projections between entities and DTOs
+    \UwvLlm.Infrastructure.Data\Migrations
+        - EF migrations
+    \UwvLlm.Infrastructure.Data\UseCases
+        - Table-specific connector: EF <-permissions/queries-> CRUD/DTOs
+
+    \UwvLlm.Infrastructure.Llm
+        - Library: Ollama communication
+    \UwvLlm.Infrastructure.Llm\Clients
+        - Clients for Ollama and ChatGPT
+    \UwvLlm.Infrastructure.Llm\Enums
+        - Enums specific to LLM communication
+    \UwvLlm.Infrastructure.Llm\Interfaces
+        - Interfaces specific to LLM communication
+    \UwvLlm.Infrastructure.Llm\Models
+        - Models specific to LLM communication
+
+## Tools
+
+    \UwvLlm.BackendGenerator
+        - Console app: gAPI generator, generates backend services (service, mapper, and use case), shared service interfaces, and shared DTOs
+
+    \UwvLlm.Fabric
+        - Console app: gAPI backplane for SSE and WSS
+
+    \UwvLlm.Storage
+        - WebApi: Storage server, physical storage project (one-time install)
+
+    \UwvLlm.AppHost
+        - Microsoft Aspire AppHost

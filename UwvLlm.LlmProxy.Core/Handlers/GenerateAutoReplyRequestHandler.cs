@@ -56,7 +56,8 @@ public class GenerateAutoReplyRequestHandler(
     private async Task<string> GetAutoReply(MailMessage mailMessage, CancellationToken ct)
     {
         // Hardcoded for now
-        var model = new Model("gpt-oss:20b");
+        //var model = new Model("gpt-oss:20b");
+        var model = new Model("gemma4:e2b");
         if (llmClient.Initialized == false)
         {
             await llmClient.InitializeModelAsync(model, ct);
