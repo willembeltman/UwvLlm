@@ -61,6 +61,57 @@ public class Tests
         Assert.That(json, Does.Contain("\"stop\": [\"\\n\", \"User:\"]"));
     }
 
+    [Test]
+    public void TestGeminiRequestJson_WithSystemPromptAndOptions()
+    {
+        using var gemini = new GeminiClient("fake-key");
+        var messages = new[]
+        {
+            new Message(Role.System, null, "You are a teacher", null, null),
+            new Message(Role.User, null, "Hello", null, null)
+        };
+        var request = new LlmRequest(messages, Array.Empty<Tool>());
+        var options = new LlmOptions
+        {
+            Temperature = 0.8,
+            NumPredict = 150,
+            Stop = new[] { "STOP" }
+        };
+
+        var json = gemini.CreateRequestJson(_model, request, options);
+
+        // System prompt should go to system_instruction
+        Assert.That(json, Does.Contain("\"system_instruction\""));
+        Assert.That(json, Does.Contain("\"text\": \"You are a teacher\""));
+
+        // Generation config assertions
+        Assert.That(json, Does.Contain("\"temperature\": 0.8"));
+        Assert.That(json, Does.Contain("\"maxOutputTokens\": 150"));
+        Assert.That(json, Does.Contain("\"stopSequences\": [\"STOP\"]"));
+
+        // contents should NOT contain system message
+        Assert.That(json, Does.Not.Contain("\"role\": \"system\""));
+    }
+
+    [Test]
+    public void TestGeminiRequestJson_WithTools()
+    {
+        using var gemini = new GeminiClient("fake-key");
+        var tools = new[]
+        {
+            new Tool("my-func", "a test function", new[] { new ToolParameter("arg1", "string", "an argument") })
+        };
+        var request = new LlmRequest(_request.Messages, tools);
+
+        var json = gemini.CreateRequestJson(_model, request);
+
+        // Tools structure assertions
+        Assert.That(json, Does.Contain("\"tools\""));
+        Assert.That(json, Does.Contain("\"function_declarations\""));
+        Assert.That(json, Does.Contain("\"name\": \"my-func\""));
+        Assert.That(json, Does.Contain("\"description\": \"a test function\""));
+    }
+
     [TearDown]
     public void TearDown() => _client.Dispose();
 }
