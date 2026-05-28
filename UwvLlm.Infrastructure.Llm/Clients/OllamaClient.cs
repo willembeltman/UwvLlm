@@ -58,9 +58,9 @@ public class OllamaClient(
         Initialized = true;
     }
 
-    public async Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default, bool? think = null)
+    public async Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default, LlmOptions? options = null)
     {
-        string payload = CreateRequestJson(model, apiCall, think);
+        string payload = CreateRequestJson(model, apiCall, options);
 
         var reponseJson = await DoCall(payload, ct);
 
@@ -172,15 +172,49 @@ public class OllamaClient(
     }}
   }}"));
     }
-    public string CreateRequestJson(Model model, LlmRequest apiCall, bool? think = null)
+    public string CreateRequestJson(Model model, LlmRequest apiCall, LlmOptions? options = null)
     {
-        var thinkPart = think.HasValue ? $@",
-  ""think"": {think.Value.ToString().ToLower()}" : "";
+        options ??= new LlmOptions();
+
+        var thinkPart = options.Think.HasValue ? $@",
+  ""think"": {options.Think.Value.ToString().ToLower()}" : "";
+
+        var optionFields = new List<string>();
+
+        int numCtx = options.NumCtx ?? model.MaxTokenSize ?? 8192;
+        optionFields.Add($"\"num_ctx\": {numCtx}");
+
+        if (options.Temperature.HasValue)
+            optionFields.Add($"\"temperature\": {options.Temperature.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+
+        if (options.Seed.HasValue)
+            optionFields.Add($"\"seed\": {options.Seed.Value}");
+
+        if (options.TopK.HasValue)
+            optionFields.Add($"\"top_k\": {options.TopK.Value}");
+
+        if (options.TopP.HasValue)
+            optionFields.Add($"\"top_p\": {options.TopP.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+
+        if (options.NumPredict.HasValue)
+            optionFields.Add($"\"num_predict\": {options.NumPredict.Value}");
+
+        if (options.RepeatPenalty.HasValue)
+            optionFields.Add($"\"repeat_penalty\": {options.RepeatPenalty.Value.ToString(System.Globalization.CultureInfo.InvariantCulture)}");
+
+        if (options.Stop != null && options.Stop.Length > 0)
+        {
+            var stops = string.Join(", ", options.Stop.Select(s => $"\"{JsonEscape(s)}\""));
+            optionFields.Add($"\"stop\": [{stops}]");
+        }
+
+        var optionsJson = string.Join(@",
+    ", optionFields);
 
         return $@"{{
   ""model"": ""{model.Name}"",
   ""options"": {{
-    ""num_ctx"": 8192
+    {optionsJson}
   }},
   ""messages"": {CreateMessagesJson(apiCall.Messages)},
   ""stream"": false,

@@ -8,9 +8,9 @@ public interface ILlmClient : IDisposable
 
     Task<Model[]> GetModels(CancellationToken ct = default);
     Task InitializeModelAsync(Model model, CancellationToken ct = default);
-    Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default, bool? think = null);
+    Task<LlmResponse> ChatAsync(Model model, LlmRequest apiCall, CancellationToken ct = default, LlmOptions? options = null);
 
     string CreateMessagesJson(Message[] messages);
-    string CreateRequestJson(Model model, LlmRequest apiCall, bool? think = null);
+    string CreateRequestJson(Model model, LlmRequest apiCall, LlmOptions? options = null);
     string CreateToolsJson(Tool[] tools);
 }

@@ -22,22 +22,43 @@ public class Tests
     [Test]
     public void TestCreateRequestJson_WithThinkTrue()
     {
-        var json = _client.CreateRequestJson(_model, _request, think: true);
+        var json = _client.CreateRequestJson(_model, _request, new LlmOptions { Think = true });
         Assert.That(json, Does.Contain("\"think\": true"));
     }
 
     [Test]
     public void TestCreateRequestJson_WithThinkFalse()
     {
-        var json = _client.CreateRequestJson(_model, _request, think: false);
+        var json = _client.CreateRequestJson(_model, _request, new LlmOptions { Think = false });
         Assert.That(json, Does.Contain("\"think\": false"));
     }
 
     [Test]
     public void TestCreateRequestJson_WithThinkNull()
     {
-        var json = _client.CreateRequestJson(_model, _request, think: null);
+        var json = _client.CreateRequestJson(_model, _request, new LlmOptions { Think = null });
         Assert.That(json, Does.Not.Contain("\"think\":"));
+    }
+
+    [Test]
+    public void TestCreateRequestJson_WithOptionsObject()
+    {
+        var options = new LlmOptions
+        {
+            Think = false,
+            Temperature = 0.7,
+            NumCtx = 2048,
+            Seed = 42,
+            Stop = new[] { "\n", "User:" }
+        };
+
+        var json = _client.CreateRequestJson(_model, _request, options);
+
+        Assert.That(json, Does.Contain("\"think\": false"));
+        Assert.That(json, Does.Contain("\"temperature\": 0.7"));
+        Assert.That(json, Does.Contain("\"num_ctx\": 2048"));
+        Assert.That(json, Does.Contain("\"seed\": 42"));
+        Assert.That(json, Does.Contain("\"stop\": [\"\\n\", \"User:\"]"));
     }
 
     [TearDown]
