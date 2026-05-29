@@ -12,7 +12,7 @@ public class AutoWssExtensionGenerator : BaseGenerator
         Directory = "";
         Namespace = "gAPI.Generated";
 
-        Name = "AutoWss.ClientExtension";
+        Name = "AddAutoWssExtension";
         FileName = $"{Name}.g.cs";
     }
 
@@ -48,7 +48,7 @@ namespace {Namespace};
 
 public static class {Name}
 {{
-    public static IServiceCollection AddAutoWss.Client(this IServiceCollection services, string apiAddress, string wssAddress)
+    public static IServiceCollection AddAutoWss(this IServiceCollection services, string apiAddress, string wssAddress)
     {{
         // Set up authorization core
         services.AddAuthorizationCore();
