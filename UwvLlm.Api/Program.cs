@@ -1,21 +1,17 @@
-using gAPI.Core.Interfaces;
 using gAPI.Core.Extensions;
+using gAPI.Core.Interfaces;
 using gAPI.Core.Server;
 using gAPI.Core.Server.Extensions;
 using gAPI.Core.Server.Mappings;
-using gAPI.Core.ServiceBus.Interfaces;
-using gAPI.Core.ServiceBus.Services;
 using gAPI.Core.ServiceBus.Extensions;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using UwvLlm.Api.Extensions;
-using UwvLlm.Core.Extensions;
 using UwvLlm.Infrastructure.Data.Entities;
+using UwvLlm.Infrastructure.Data.Extensions;
 using UwvLlm.Infrastructure.Data.Mappings;
 using UwvLlm.Shared.Public;
 using UwvLlm.Shared.Public.Dtos;
-using UwvLlm.Api.Core.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +21,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddAutoApi(serverConfig);
 builder.Services.AddAutoSse(serverConfig);
 
-// In analyzer
+// DIT MOET IN DE ANALYZER
 builder.Services.AddStorage(serverConfig); 
 builder.Services.AddCommenServices(serverConfig); // API Config injection + TimeProvider
 builder.Services.AddDatabase(builder.Configuration);
@@ -33,7 +29,7 @@ builder.Services.AddAuthenticationServices<UwvLlm.Infrastructure.Data.Entities.U
 builder.Services.AddScoped<IStateMapping<UwvLlm.Infrastructure.Data.Entities.User, State>, StateMapping>();
 builder.Services.AddScoped<IStateUserMapping<UwvLlm.Infrastructure.Data.Entities.User, StateUser>, StateUserMapping>();
 builder.Services.AddScoped<IStateParser<State>, StateParser>();
-// In analyzer
+// DIT MOET IN DE ANALYZER
 
 // Extra services
 builder.Services.AddCrudMappings();
@@ -41,7 +37,6 @@ builder.Services.AddCrudUseCases();
 
 // Service Bus
 builder.Services.AddServiceBus();
-builder.Services.AddTransient<GenerateAutoReplyResponseHandler>(); // Service Bus Handler
 
 var app = builder.Build();
 
@@ -51,7 +46,7 @@ app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();
 
-// In analyzer
+// DIT MOET IN DE ANALYZER
 using (var scope = app.Services.CreateScope())
 {
     var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
@@ -59,6 +54,6 @@ using (var scope = app.Services.CreateScope())
 
     db.Database.Migrate();
 }
-// In analyzer
+// DIT MOET IN DE ANALYZER
 
 app.RunWithServiceBus(busName: "Api");

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UwvLlm.Infrastructure.Data.Entities;
 
-namespace UwvLlm.LlmProxy.Extensions;
+namespace UwvLlm.Infrastructure.Data.Extensions;
 
 public static class AddDatabaseExtension
 {

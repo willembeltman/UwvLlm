@@ -16,7 +16,7 @@ public class AuthenticationService<TUser, TStateDto>(
     IAuthenticationStateFactory<TUser, TStateDto> factory,
     IStateParser<TStateDto> stateSerializer,
     IHostEnvironment hostEnvironment,
-    WssSessionCache sessionCache)
+    IEnumerable<WssSessionCache> sessionCaches) // optioneel dus.
     : IAuthenticationService<TUser, TStateDto>
     where TUser : AuthUser
     where TStateDto : AuthStateDto, new()
@@ -51,7 +51,7 @@ public class AuthenticationService<TUser, TStateDto>(
         => Headers?.CookieData;
     public StringValues SessionData
         => Headers?.SessionData ?? throw new Exception("Initialize the ServerAuthenticationService first please");
-    
+
     public Task<AuthenticationInitializeResult> InitializeAsync(string url, string? cookieData, string? sessionData, string? stateData, CancellationToken ct)
     {
         return InitializeAsync(
@@ -126,7 +126,8 @@ public class AuthenticationService<TUser, TStateDto>(
         // Additional forbidden checks can be added here
 
         Initialized = true;
-        sessionCache.AddOrUpdate(headers.SessionId, headers.CookieData);
+        foreach (var sessionCache in sessionCaches)
+            sessionCache.AddOrUpdate(headers.SessionId, headers.CookieData);
 
         Result = new AuthenticationInitializeResult()
         {
@@ -211,7 +212,8 @@ public class AuthenticationService<TUser, TStateDto>(
             return false;
         //throw new Exception("Initialize the ServerAuthenticationService first please");
 
-        sessionCache.Remove(Headers.SessionId);
+        foreach (var sessionCache in sessionCaches)
+            sessionCache.Remove(Headers.SessionId);
         Headers.RemoveCookie();
         await ReInitializeAsync(ct);
 

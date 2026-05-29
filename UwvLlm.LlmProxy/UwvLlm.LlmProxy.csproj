@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UwvLlm.Api\UwvLlm.Api.csproj" />
     <ProjectReference Include="..\UwvLlm.LlmProxy.Core\UwvLlm.LlmProxy.Core.csproj" />
   </ItemGroup>
 
