@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace gAPI.AutoWss.Client.Generators;
 
-public class MinimalClientGenerator : BaseGenerator
+public class MinimalClientGenerator : _BaseGenerator
 {
     private readonly CustomObjectMethod[] CustomMultipartFormDataContentSerializers;
 

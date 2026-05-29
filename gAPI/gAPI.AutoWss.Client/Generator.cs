@@ -116,7 +116,7 @@ public class Generator
         }
     }
 
-    private static void Generate2(SourceProductionContext spc, BaseGenerator generator)
+    private static void Generate2(SourceProductionContext spc, _BaseGenerator generator)
     {
         generator.GenerateCode();
 

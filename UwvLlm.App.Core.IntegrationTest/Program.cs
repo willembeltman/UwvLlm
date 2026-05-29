@@ -26,7 +26,7 @@ builder.Services.AddScoped<ConsoleAppServices>();
 builder.Services.AddScoped<IUiService>(sp => sp.GetRequiredService<ConsoleAppServices>());
 builder.Services.AddScoped<IDispatcherService>(sp => sp.GetRequiredService<ConsoleAppServices>());
 builder.Services.AddScoped<INavigationService>(sp => sp.GetRequiredService<ConsoleAppServices>());
-builder.Services.AddScoped<INavigationManager>(sp => sp.GetRequiredService<ConsoleAppServices>());
+builder.Services.AddScoped<IUriNavigationManager>(sp => sp.GetRequiredService<ConsoleAppServices>());
 builder.Services.AddScoped<IntegrationNotificationHub>();
 builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<IntegrationNotificationHub>());
 builder.Services.AddScoped<IntegrationScenario>();

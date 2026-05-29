@@ -2,7 +2,7 @@
 
 namespace UwvLlm.App.Core.Interfaces;
 
-public interface INavigationService : INavigationManager
+public interface INavigationService : IUriNavigationManager
 {
     Task NavigateToAsync<TPage>();
     Task GotoSendEmailPage();

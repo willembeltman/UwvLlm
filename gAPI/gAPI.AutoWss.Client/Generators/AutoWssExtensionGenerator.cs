@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace gAPI.AutoWss.Client.Generators;
 
-public class AutoWssExtensionGenerator : BaseGenerator
+public class AutoWssExtensionGenerator : _BaseGenerator
 {
     public AutoWssExtensionGenerator(Generator context)
     {

@@ -45,7 +45,7 @@ public static class MauiProgram
 
         builder.Services.AddScoped<NavigationService>();
         builder.Services.AddScoped<INavigationService>(sp => sp.GetRequiredService<NavigationService>());
-        builder.Services.AddScoped<INavigationManager>(sp => sp.GetRequiredService<NavigationService>());
+        builder.Services.AddScoped<IUriNavigationManager>(sp => sp.GetRequiredService<NavigationService>());
         builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<NotificationPageViewModel>());
         builder.Services.AddScoped<IUiService, UiService>();
 

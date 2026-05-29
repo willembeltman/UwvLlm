@@ -11,7 +11,7 @@ namespace gAPI.Core.Client;
 public class AuthenticatedHttpClient<TStateDto>(
     IStateParser<TStateDto> stateSerializer,
     IHttpClientFactory httpClientFactory,
-    INavigationManager navigation)
+    IUriNavigationManager navigation)
     : AuthenticationStateProvider,
       IAuthenticatedHttpClient<TStateDto>
     where TStateDto : AuthStateDto, new()

@@ -19,19 +19,21 @@
   <Folder Name="/gAPI/">
     <Project Path="gAPI/gAPI.AutoApi.Client/gAPI.AutoApi.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoApi.Server/gAPI.AutoApi.Server.csproj" />
-    <Project Path="gAPI/gAPI.AutoAuth.Server/gAPI.AutoAuth.Server.csproj" Id="4d7a0131-ec9e-4059-81a9-6a8b15791ee5" />
     <Project Path="gAPI/gAPI.AutoComponent/gAPI.AutoComponent.csproj" />
     <Project Path="gAPI/gAPI.AutoPage/gAPI.AutoPage.csproj" />
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
     <Project Path="gAPI/gAPI.AutoSse.Client/gAPI.AutoSse.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoSse.Server/gAPI.AutoSse.Server.csproj" />
+    <Project Path="gAPI/gAPI.AutoState.Client/gAPI.AutoState.Client.csproj" Id="61157501-f233-4c83-a8f6-2d4bae29a67b" />
+    <Project Path="gAPI/gAPI.AutoState.Server/gAPI.AutoState.Server.csproj" />
+    <Project Path="gAPI/gAPI.AutoState/gAPI.AutoState.csproj" Id="8b1fc850-27ad-41f2-a4f6-3e434301a2d5" />
     <Project Path="gAPI/gAPI.AutoWss.Client/gAPI.AutoWss.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoWss.Server/gAPI.AutoWss.Server.csproj" />
     <Project Path="gAPI/gAPI.CodeGen.Backend/gAPI.CodeGen.Backend.csproj" />
     <Project Path="gAPI/gAPI.CodeGen.Frontend/gAPI.CodeGen.Frontend.csproj" />
     <Project Path="gAPI/gAPI.Core.Client/gAPI.Core.Client.csproj" />
     <Project Path="gAPI/gAPI.Core.Server/gAPI.Core.Server.csproj" />
-    <Project Path="gAPI/gAPI.Core.ServiceBus/gAPI.Core.ServiceBus.csproj" Id="eb79717c-0a48-49dd-a6a5-2dfeba245caf" />
+    <Project Path="gAPI/gAPI.Core.ServiceBus/gAPI.Core.ServiceBus.csproj" />
     <Project Path="gAPI/gAPI.Core/gAPI.Core.csproj" />
     <Project Path="gAPI/gAPI.EntityFrameworkDisk/gAPI.EntityFrameworkDisk.csproj" />
     <Project Path="gAPI/gAPI.Fabric.Server/gAPI.Fabric.Server.csproj" />

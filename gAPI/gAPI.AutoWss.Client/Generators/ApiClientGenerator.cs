@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace gAPI.AutoWss.Client.Generators;
 
-public class ApiClientGenerator : BaseGenerator
+public class ApiClientGenerator : _BaseGenerator
 {
     public ApiClientGenerator(Generator context, Interface @interface)
     {

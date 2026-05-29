@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace gAPI.AutoWss.Client.Generators;
 
-public class ClientConnectionGenerator : BaseGenerator
+public class ClientConnectionGenerator : _BaseGenerator
 {
     public ClientConnectionGenerator(Generator context)
     {
