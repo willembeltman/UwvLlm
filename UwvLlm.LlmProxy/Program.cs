@@ -33,19 +33,17 @@ builder.Services.AddScoped<IStateUserMapping<UwvLlm.Infrastructure.Data.Entities
 builder.Services.AddScoped<IStateParser<State>, StateParser>();
 
 builder.Services.AddSingleton<WssSessionCache>();
-builder.Services.AddCrudMappings(); // Wordt fysiek gegenereerd
-builder.Services.AddCrudUseCases(); // Wordt fysiek gegenereerd
 //builder.Services.AddAutoApiServices(); // niet toegankelijk, want staat in gAPI.AutoApi.Server, die hem normaal genereerd
 builder.Services.AddScoped<IMailMessagesCrudService, MailMessagesCrudService>();
+
+
+builder.Services.AddCrudMappings(); // Wordt fysiek gegenereerd
+builder.Services.AddCrudUseCases(); // Wordt fysiek gegenereerd
 builder.Services.AddSingleton<IConsoleService, ConsoleService>();
 builder.Services.AddSingleton<ILlmClient, OllamaClient>();
 
-builder.Services.AddSingleton<IRabbitConnectionProvider, RabbitConnectionProvider>();
-builder.Services.AddSingleton<IHandlerRegistry, HandlerRegistry>();
-builder.Services.AddSingleton<IServiceBusReceiver, ServiceBusReceiver>();
-builder.Services.AddSingleton<IServiceBusSender, ServiceBusSender>();
-
-builder.Services.AddTransient<GenerateAutoReplyRequestHandler>();
+builder.Services.AddServiceBus();
+builder.Services.AddTransient<GenerateAutoReplyRequestHandler>(); // Service Bus Handler
 
 var app = builder.Build();
 await app.StartConsoleWithServiceBusAsync();

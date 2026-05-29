@@ -19,6 +19,7 @@
   <Folder Name="/gAPI/">
     <Project Path="gAPI/gAPI.AutoApi.Client/gAPI.AutoApi.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoApi.Server/gAPI.AutoApi.Server.csproj" />
+    <Project Path="gAPI/gAPI.AutoAuth.Server/gAPI.AutoAuth.Server.csproj" Id="4d7a0131-ec9e-4059-81a9-6a8b15791ee5" />
     <Project Path="gAPI/gAPI.AutoComponent/gAPI.AutoComponent.csproj" />
     <Project Path="gAPI/gAPI.AutoPage/gAPI.AutoPage.csproj" />
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
@@ -42,8 +43,8 @@
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="UwvLlm.Api.Core.Test/UwvLlm.Api.Core.Test.csproj" />
-    <Project Path="UwvLlm.App.Core.Test/UwvLlm.App.Core.Test.csproj" Id="c29e61f3-47ae-4277-8b33-ad2900bc06b5" />
     <Project Path="UwvLlm.App.Core.IntegrationTest/UwvLlm.App.Core.IntegrationTest.csproj" />
+    <Project Path="UwvLlm.App.Core.Test/UwvLlm.App.Core.Test.csproj" Id="c29e61f3-47ae-4277-8b33-ad2900bc06b5" />
     <Project Path="UwvLlm.LlmProxy.Core.Test/UwvLlm.LlmProxy.Core.Test.csproj" Id="7d2fda0a-e3de-4121-ad60-3b200f31ee41" />
   </Folder>
   <Project Path="UwvLlm.AppHost/UwvLlm.AppHost.csproj" Id="222f8302-2a19-436d-b055-9c531cc1b408" />

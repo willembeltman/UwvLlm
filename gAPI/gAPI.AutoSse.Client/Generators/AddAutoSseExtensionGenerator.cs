@@ -1,17 +1,17 @@
-﻿using gAPI.AutoSseClient.Models;
+﻿using gAPI.AutoSse.Client.Models;
 
-namespace gAPI.AutoSseClient.Generators;
+namespace gAPI.AutoSse.Client.Generators;
 
-public class AutoSseExtensionGenerator : BaseGenerator
+public class AddAutoSseExtensionGenerator : BaseGenerator
 {
-    public AutoSseExtensionGenerator(Generator context)
+    public AddAutoSseExtensionGenerator(Generator context)
     {
         Context = context;
 
         Directory = "";
         Namespace = "gAPI.Generated";
 
-        Name = "AutoSseClientExtension";
+        Name = "AutoSseExtension";
         FileName = $"{Name}.g.cs";
     }
 
@@ -33,7 +33,7 @@ namespace {Namespace};
 
 public static class {Name}
 {{
-    public static IServiceCollection AddAutoSseClient(this IServiceCollection services)
+    public static IServiceCollection AddAutoSse(this IServiceCollection services)
     {{
         services.AddScoped<{ClientConnection}>();
         services.AddScoped<{IClientConnection}>(sp => sp.GetRequiredService<{ClientConnection}>());

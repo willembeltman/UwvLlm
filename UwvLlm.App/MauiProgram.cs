@@ -42,14 +42,15 @@ public static class MauiProgram
         builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
         builder.Services.AddScoped<IDispatcherService, DispatcherService>();
+
         builder.Services.AddScoped<NavigationService>();
         builder.Services.AddScoped<INavigationService>(sp => sp.GetRequiredService<NavigationService>());
         builder.Services.AddScoped<INavigationManager>(sp => sp.GetRequiredService<NavigationService>());
         builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<NotificationPageViewModel>());
         builder.Services.AddScoped<IUiService, UiService>();
 
-        builder.Services.AddAutoApiClient(); 
-        builder.Services.AddAutoSseClient();
+        builder.Services.AddAutoApi(); 
+        builder.Services.AddAutoSse();
         builder.Services.AddAuthenticationServices<State>(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281");
         builder.Services.AddScoped<IStateParser<State>, StateParser>();
 

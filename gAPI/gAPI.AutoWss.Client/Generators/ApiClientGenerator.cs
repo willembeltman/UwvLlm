@@ -1,10 +1,10 @@
 ﻿using gAPI.AutoSerializer;
-using gAPI.AutoWssClient.Models;
+using gAPI.AutoWss.Client.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWssClient.Generators;
+namespace gAPI.AutoWss.Client.Generators;
 
 public class ApiClientGenerator : BaseGenerator
 {

@@ -1,7 +1,7 @@
-﻿using gAPI.AutoApiClient.Helpers;
+﻿using gAPI.AutoApi.Client.Helpers;
 using Microsoft.CodeAnalysis;
 
-namespace gAPI.AutoApiClient.Models;
+namespace gAPI.AutoApi.Client.Models;
 
 public class SharedReferences
 {

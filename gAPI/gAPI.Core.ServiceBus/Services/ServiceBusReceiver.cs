@@ -9,7 +9,7 @@ using System.Text.Json;
 namespace gAPI.Core.ServiceBus.Services;
 
 public class ServiceBusReceiver(
-    IRabbitConnectionProvider provider,
+    IRabbitServiceBusConnectionProvider provider,
     IServiceScopeFactory scopeFactory,
     IConsoleService console)
     : IServiceBusReceiver
@@ -38,7 +38,7 @@ public class ServiceBusReceiver(
                 var message = JsonSerializer.Deserialize<ServiceBusMessage>(json)
                     ?? throw new Exception("Invalid message");
 
-                var registry = scope.ServiceProvider.GetRequiredService<IHandlerRegistry>();
+                var registry = scope.ServiceProvider.GetRequiredService<IServiceBusHandlerRegistry>();
 
                 await registry.Handle(message, scope.ServiceProvider, ct);
 

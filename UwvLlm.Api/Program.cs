@@ -24,23 +24,24 @@ var serverConfig = builder.Configuration.CreateServerConfig();
 builder.Services.AddOpenApi();
 builder.Services.AddAutoApi(serverConfig);
 builder.Services.AddAutoSse(serverConfig);
-builder.Services.AddStorage(serverConfig);
-builder.Services.AddCommenServices(serverConfig);
+
+// In analyzer
+builder.Services.AddStorage(serverConfig); 
+builder.Services.AddCommenServices(serverConfig); // API Config injection + TimeProvider
 builder.Services.AddDatabase(builder.Configuration);
 builder.Services.AddAuthenticationServices<UwvLlm.Infrastructure.Data.Entities.User, State>();
 builder.Services.AddScoped<IStateMapping<UwvLlm.Infrastructure.Data.Entities.User, State>, StateMapping>();
 builder.Services.AddScoped<IStateUserMapping<UwvLlm.Infrastructure.Data.Entities.User, StateUser>, StateUserMapping>();
 builder.Services.AddScoped<IStateParser<State>, StateParser>();
+// In analyzer
+
+// Extra services
 builder.Services.AddCrudMappings();
 builder.Services.AddCrudUseCases();
-builder.Services.AddSingleton<IConsoleService, ConsoleService>();
 
-builder.Services.AddSingleton<IRabbitConnectionProvider, RabbitConnectionProvider>();
-builder.Services.AddSingleton<IHandlerRegistry, HandlerRegistry>();
-builder.Services.AddSingleton<IServiceBusReceiver, ServiceBusReceiver>();
-builder.Services.AddSingleton<IServiceBusSender, ServiceBusSender>();
-
-builder.Services.AddTransient<GenerateAutoReplyResponseHandler>();
+// Service Bus
+builder.Services.AddServiceBus();
+builder.Services.AddTransient<GenerateAutoReplyResponseHandler>(); // Service Bus Handler
 
 var app = builder.Build();
 
@@ -50,6 +51,7 @@ app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();
 
+// In analyzer
 using (var scope = app.Services.CreateScope())
 {
     var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
@@ -57,5 +59,6 @@ using (var scope = app.Services.CreateScope())
 
     db.Database.Migrate();
 }
+// In analyzer
 
 app.RunWithServiceBus(busName: "Api");

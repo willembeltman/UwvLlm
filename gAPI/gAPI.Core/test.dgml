@@ -20,10 +20,10 @@
     <Node Id="Test3" Category="Analyzer" Label="Test" UseManualLocation="True" />
     <Node Id="Test5" Label="Test" UseManualLocation="True" />
     <Node Id="gAPIAutoApi" Category="Analyzer" Label="gAPI.AutoApi" UseManualLocation="True" />
-    <Node Id="gAPIAutoApiClient" Category="Analyzer" Label="gAPI.AutoApiClient" UseManualLocation="True" />
+    <Node Id="gAPIAutoApi.Client" Category="Analyzer" Label="gAPI.AutoApi.Client" UseManualLocation="True" />
     <Node Id="gAPIAutoComponent" Category="Analyzer" Label="gAPI.AutoComponent" UseManualLocation="True" />
     <Node Id="gAPIAutoWss" Category="Analyzer" Label="gAPI.AutoWss" UseManualLocation="True" />
-    <Node Id="gAPIAutoWssClient" Category="Analyzer" Label="gAPI.AutoWssClient" UseManualLocation="True" />
+    <Node Id="gAPIAutoWss.Client" Category="Analyzer" Label="gAPI.AutoWss.Client" UseManualLocation="True" />
     <Node Id="gAPICodeGenBackend" Category="Generator" Label="gAPI.CodeGen.Backend" UseManualLocation="True" />
     <Node Id="gAPICodeGenFrontend" Category="Generator" Label="gAPI.CodeGen.Frontend" UseManualLocation="True" />
     <Node Id="gAPIStorage" Category="Reference" Label="gAPI.Storage" UseManualLocation="True" />
@@ -50,17 +50,17 @@
     <Link Source="Razor" Target="Shared" />
     <Link Source="Razor" Target="gAPICodeGenFrontend" Label="Codegen" Label/>
     <Link Source="RazorClients" Target="Shared" />
-    <Link Source="RazorClients" Target="gAPIAutoApiClient" Label="Analyzer" Label/>
-    <Link Source="RazorClients" Target="gAPIAutoWssClient" Label="Analyzer" Label/>
+    <Link Source="RazorClients" Target="gAPIAutoApi.Client" Label="Analyzer" Label/>
+    <Link Source="RazorClients" Target="gAPIAutoWss.Client" Label="Analyzer" Label/>
     <Link Source="RazorComponents" Target="RazorClients" />
     <Link Source="RazorComponents" Target="Shared" />
     <Link Source="RazorComponents" Target="gAPIAutoComponent" Label="Analyzer" Label/>
     <Link Source="Shared" Target="gAPICodeGenBackend" Label="Codegen" Label/>
     <Link Source="Storage" Target="gAPIStorageServer" />
     <Link Source="Test5" Target="gAPIAutoApi" />
-    <Link Source="gAPIAutoApiClient" Target="gAPIAutoApi" Label="Rest" Label/>
+    <Link Source="gAPIAutoApi.Client" Target="gAPIAutoApi" Label="Rest" Label/>
     <Link Source="gAPIAutoWss" Target="Test3" />
-    <Link Source="gAPIAutoWss" Target="gAPIAutoWssClient" Label="SignalR" Label/>
+    <Link Source="gAPIAutoWss" Target="gAPIAutoWss.Client" Label="SignalR" Label/>
     <Link Source="gAPIStorage" Target="Storage" Label="Rest" Label/>
     <Link Source="gAPIStorage" Target="Test1" />
   </Links>

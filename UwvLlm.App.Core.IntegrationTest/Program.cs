@@ -15,8 +15,8 @@ var builder = Host.CreateApplicationBuilder(args);
 var apiBackendUrl = builder.Configuration["FrontendConfig:ApiBackendUrl"]
     ?? "https://localhost:7281";
 
-builder.Services.AddAutoApiClient();
-builder.Services.AddAutoSseClient();
+builder.Services.AddAutoApi();
+builder.Services.AddAutoSse();
 builder.Services.AddAuthenticationServices<State>(apiBackendUrl);
 builder.Services.AddScoped<IStateParser<State>, StateParser>();
 

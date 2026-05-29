@@ -1,4 +1,4 @@
-﻿namespace gAPI.AutoWssClient.Generators;
+﻿namespace gAPI.AutoWss.Client.Generators;
 
 public class FormFileGenerator : BaseGenerator
 {

@@ -1,10 +1,10 @@
-﻿using gAPI.AutoApiServer.Helpers;
-using gAPI.AutoApiServer.Models;
+﻿using gAPI.AutoApi.Server.Helpers;
+using gAPI.AutoApi.Server.Models;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Linq;
 
-namespace gAPI.AutoApiServer.Generators;
+namespace gAPI.AutoApi.Server.Generators;
 
 public class MinimalApiGenerator : BaseGenerator
 {
