@@ -1,6 +1,6 @@
-using UwvLlm.Infrastructure.Llm.Clients;
-using UwvLlm.Infrastructure.Llm.Enums;
-using UwvLlm.Infrastructure.Llm.Models;
+using gAPI.Llm.Client.Clients;
+using gAPI.Llm.Client.Enums;
+using gAPI.Llm.Client.Models;
 
 namespace UwvLlm.LlmProxy.Core.Test;
 

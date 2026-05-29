@@ -1,4 +1,4 @@
-namespace UwvLlm.Infrastructure.Llm.Models;
+namespace gAPI.Llm.Client.Models;
 
 /// <summary>
 /// Runtime configuration options for the LLM chat request.

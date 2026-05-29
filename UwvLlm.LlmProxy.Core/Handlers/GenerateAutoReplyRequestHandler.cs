@@ -1,8 +1,8 @@
 ﻿using gAPI.Core.Server;
 using gAPI.Core.ServiceBus.Interfaces;
-using UwvLlm.Infrastructure.Llm.Enums;
-using UwvLlm.Infrastructure.Llm.Interfaces;
-using UwvLlm.Infrastructure.Llm.Models;
+using gAPI.Llm.Client.Enums;
+using gAPI.Llm.Client.Interfaces;
+using gAPI.Llm.Client.Models;
 using UwvLlm.Shared.Private.Messages;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;

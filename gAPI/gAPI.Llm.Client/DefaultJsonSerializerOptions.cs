@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace UwvLlm.Infrastructure.Llm;
+namespace gAPI.Llm.Client;
 
 public static class DefaultJsonSerializerOptions
 {

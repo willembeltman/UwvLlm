@@ -1,11 +1,11 @@
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using UwvLlm.Infrastructure.Llm.Interfaces;
-using UwvLlm.Infrastructure.Llm.Models;
-using UwvLlm.Infrastructure.Llm.Enums;
+using gAPI.Llm.Client.Interfaces;
+using gAPI.Llm.Client.Models;
+using gAPI.Llm.Client.Enums;
 
-namespace UwvLlm.Infrastructure.Llm.Clients;
+namespace gAPI.Llm.Client.Clients;
 
 public class GeminiClient : ILlmClient
 {

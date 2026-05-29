@@ -1,4 +1,4 @@
-﻿namespace UwvLlm.Infrastructure.Llm.Enums;
+﻿namespace gAPI.Llm.Client.Enums;
 
 public enum Role
 {

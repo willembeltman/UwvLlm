@@ -1,6 +1,6 @@
-﻿using UwvLlm.Infrastructure.Llm.Enums;
+﻿using gAPI.Llm.Client.Enums;
 
-namespace UwvLlm.Infrastructure.Llm.Models;
+namespace gAPI.Llm.Client.Models;
 
 public record Message(
     Role Role,

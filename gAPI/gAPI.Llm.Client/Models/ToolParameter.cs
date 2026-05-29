@@ -1,4 +1,4 @@
-﻿namespace UwvLlm.Infrastructure.Llm.Models;
+﻿namespace gAPI.Llm.Client.Models;
 
 public record ToolParameter(
     string Name,

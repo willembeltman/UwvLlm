@@ -1,6 +1,6 @@
-using UwvLlm.Infrastructure.Llm.Models;
+using gAPI.Llm.Client.Models;
 
-namespace UwvLlm.Infrastructure.Llm.Interfaces;
+namespace gAPI.Llm.Client.Interfaces;
 
 public interface ILlmClient : IDisposable
 {
