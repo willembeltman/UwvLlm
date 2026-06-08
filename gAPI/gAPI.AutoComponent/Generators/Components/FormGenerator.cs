@@ -181,18 +181,62 @@ else
     }}";
         }
 
-        if (p.IsDateTime)
+        if (p.IsGuid)
         {
             return $@"
-    @if (HideColumnNames.Contains(""{p.Name}"") == false)
+    @if (!HideColumnNames.Contains(""{p.Name}""))
     {{
         <div class=""mb-3"">
             <label for=""{id}"" class=""form-label"">{p.Name}</label>
-            <InputDate @bind-Value=""{model}.{p.Name}"" bindtype_Value=""{p.TypeSimpleName}""
-                id=""{id}"" class=""form-control"" />
+            <input type=""text"" 
+                   id=""{id}"" 
+                   class=""form-control"" 
+                   value=""@DataSource.Model.{p.Name}.ToString()"" 
+                   bindtype_Value=""{p.TypeSimpleName}""
+                   @onchange=""@((ChangeEventArgs e) => {{ 
+                       if (Guid.TryParse(e.Value?.ToString(), out var parsedGuid)) 
+                       {{ 
+                           DataSource.Model.{p.Name} = parsedGuid; 
+                       }} 
+                   }})"" />
         </div>
     }}";
         }
+
+        if (p.IsDateTime)
+        {
+            return $@"
+@if (!HideColumnNames.Contains(""{p.Name}""))
+{{
+    <div class=""mb-3"">
+        <label for=""{id}"" class=""form-label"">{p.Name}</label>
+        <input type=""date"" 
+               id=""{id}"" 
+               class=""form-control"" 
+               value=""@DataSource.Model.{p.Name}.ToString(""yyyy-MM-dd"")"" 
+               bindtype_Value=""{p.TypeSimpleName}""
+               @onchange=""@((ChangeEventArgs e) => {{ 
+                   if (DateTime.TryParse(e.Value?.ToString(), out var parsedDate)) 
+                   {{ 
+                       DataSource.Model.{p.Name} = parsedDate; 
+                   }} 
+               }})"" />
+    </div>
+}}";
+        }
+
+        //    if (p.IsDateTime)
+        //    {
+        //        return $@"
+        //@if (HideColumnNames.Contains(""{p.Name}"") == false)
+        //{{
+        //    <div class=""mb-3"">
+        //        <label for=""{id}"" class=""form-label"">{p.Name}</label>
+        //        <InputDate @bind-Value=""{model}.{p.Name}"" bindtype_Value=""{p.TypeSimpleName}""
+        //            id=""{id}"" class=""form-control"" />
+        //    </div>
+        //}}";
+        //    }
 
         if (p.IsCheckbox)
         {

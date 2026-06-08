@@ -176,8 +176,12 @@ public static class BuildRenderTree
         foreach (var attr in node.Attributes.Where(a =>
                         !a.Name.StartsWith("bindtype_")))
         {
-            string name = attr.Name;
-            string value = attr.Value ?? "";
+            string name = attr.Name.Trim();
+            string value = (attr.Value ?? "").Trim();
+            if (value.StartsWith("@"))
+            {
+                value = value.Substring(1);
+            }
 
             if ((node.Name == "EditForm" && name == "Model") ||
                 (node.Name == "ErrorView" && name == "Response"))
@@ -219,29 +223,23 @@ public static class BuildRenderTree
                 continue;
             }
 
-            // default
-            if (value.StartsWith("@"))
+            // Als standaard attribute toevoegen dus value nalopen op interpolated strings
+            if (value.Contains("@"))
             {
-                value = value.Substring(1);
+                // vervang @(...) door { ... } in een interpolated string
+                value = Regex.Replace(value, @"@\(.*?\)", match =>
+                {
+                    string inner = match.Value.Substring(2, match.Value.Length - 3); // haal @(...) weg
+                    return $"{{({inner})}}";
+                });
+
+                value = $"$\"{value}\"";
             }
             else
             {
-                if (value.Contains("@"))
-                {
-                    // vervang @(...) door { ... } in een interpolated string
-                    value = Regex.Replace(value, @"@\(.*?\)", match =>
-                    {
-                        string inner = match.Value.Substring(2, match.Value.Length - 3); // haal @(...) weg
-                        return $"{{({inner})}}";
-                    });
-
-                    value = $"$\"{value}\"";
-                }
-                else
-                {
-                    value = $"\"{value}\"";
-                }
+                value = $"\"{value}\"";
             }
+
             sb.AppendLine($"{indent}__builder{builderIndex}.AddAttribute({seqVar}++, \"{name}\", {value});");
         }
     }
