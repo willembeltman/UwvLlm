@@ -1,4 +1,4 @@
-﻿namespace gAPI.AutoState.Server.Models;
+﻿namespace gAPI.AutoState.Server.Models.Entities;
 
 public class EntityKey
 {

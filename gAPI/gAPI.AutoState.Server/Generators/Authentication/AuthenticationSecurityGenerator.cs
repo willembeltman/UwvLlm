@@ -2,9 +2,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationSecurityGenerator : _BaseGenerator
+//public class AuthenticationSecurityGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationSecurityGenerator(
+//    public AuthenticationSecurityGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -12,22 +12,22 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationSecurity";
+//        Name = "AuthenticationSecurity";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public SharedReference IServerAuthenticationService => Context.IServerAuthenticationService;
-//    public SharedReference IServerAuthenticationSecurity => Context.IServerAuthenticationSecurity;
+//    public SharedReference IAuthenticationService => Context.IAuthenticationService;
+//    public SharedReference IAuthenticationSecurity => Context.SharedReferences.IAuthenticationSecurity;
 //    public SharedReference ApplicationDbContext => Context.DbContext;
 //    public SharedReference ServerConfig => Context.SharedReferences.ServerConfig;
 //    public SharedReference Ip => Context.Ip;
 
 //    public override void GenerateCode()
 //    {
-//        Reg(IServerAuthenticationService);
-//        Reg(IServerAuthenticationSecurity);
+//        Reg(IAuthenticationService);
+//        Reg(IAuthenticationSecurity);
 //        Reg(ApplicationDbContext);
 //        Reg(ServerConfig);
 //        Reg(Ip);
@@ -37,15 +37,15 @@
 
 //public class {Name}(
 //    {ApplicationDbContext} db,
-//    {IServerAuthenticationService} authentication,
+//    {IAuthenticationService} authentication,
 //    TimeProvider timeProvider,
 //    {ServerConfig} config) 
-//    : {IServerAuthenticationSecurity}
+//    : {IAuthenticationSecurity}
 //{{
 //    public async Task<bool> BeforeLoginAsync(CancellationToken ct)
 //    {{
 //        if (authentication.State == null || authentication.State.DbIp == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        var now = timeProvider.GetUtcNow();
 //        var lockedOutUntil = authentication.State.DbIp.LoginLockedOutDate;
@@ -58,7 +58,7 @@
 //    public async Task<bool> BeforeChangePasswordAsync(CancellationToken ct)
 //    {{
 //        if (authentication.State == null || authentication.State.DbIp == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        var now = timeProvider.GetUtcNow();
 //        var lockedOutUntil = authentication.State.DbIp.ChangePasswordLockedOutDate;
@@ -147,7 +147,7 @@
 //        CancellationToken ct)
 //    {{
 //        if (ip == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        var now = timeProvider.GetUtcNow();
 
@@ -177,6 +177,6 @@
 //        return true;
 //    }}
 //}}";
-//        
+
 //    }
 //}

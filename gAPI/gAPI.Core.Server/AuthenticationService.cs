@@ -23,7 +23,7 @@ public class AuthenticationService<TUser, TStateDto>(
 {
     private AuthenticationHeaders? Headers;
 
-    public StringValues ReceivedClientStateData { get; private set; }
+    public string? ReceivedClientStateData { get; private set; }
 
     private TStateDto? ReceivedClientState;
     private TStateDto? State;
@@ -49,7 +49,7 @@ public class AuthenticationService<TUser, TStateDto>(
         => Headers?.UpdateCookie ?? throw new Exception("Initialize the ServerAuthenticationService first please");
     string? gAPI.Core.Interfaces.IServerAuthenticationService.CookieData
         => Headers?.CookieData;
-    public StringValues SessionData
+    public string? SessionData
         => Headers?.SessionData ?? throw new Exception("Initialize the ServerAuthenticationService first please");
 
     public Task<AuthenticationInitializeResult> InitializeAsync(string url, string? cookieData, string? sessionData, string? stateData, CancellationToken ct)

@@ -2,9 +2,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationServiceGenerator : _BaseGenerator
+//public class AuthenticationServiceGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationServiceGenerator(
+//    public AuthenticationServiceGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -12,23 +12,23 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationService";
+//        Name = "AuthenticationService";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
 //    public SharedReference ApplicationDbContext => Context.DbContext;
-//    public SharedReference IServerAuthenticationStateFactory => Context.IServerAuthenticationStateFactory;
+//    public IAuthenticationStateFactoryGenerator IAuthenticationStateFactory => Context.IAuthenticationStateFactory;
 //    public SharedReference StateMapping => Context.StateMapping;
-//    public SharedReference IServerAuthenticationService => Context.IServerAuthenticationService;
-//    public SharedReference ServerAuthenticationState => Context.ServerAuthenticationState;
+//    public SharedReference IAuthenticationService => Context.IAuthenticationService;
+//    public SharedReference AuthenticationState => Context.AuthenticationState;
 //    public SharedReference StateUser => Context.State.User;
 //    public SharedReference Token => Context.Token;
 //    public SharedReference State => Context.State;
 //    public SharedReference AuthenticationHeaders => Context.SharedReferences.AuthenticationHeaders;
 //    public SharedReference AuthenticationInitializeResult => Context.SharedReferences.AuthenticationInitializeResult;
-//    public SharedReference GapiIServerAuthenticationService => Context.SharedReferences.GapiIServerAuthenticationService;
+//    public SharedReference GapiIAuthenticationService => Context.SharedReferences.GapiIAuthenticationService;
 //    public SharedReference User => Context.DbContext.UserEntity;
 
 //    public override void GenerateCode()
@@ -40,10 +40,10 @@
 //        Reg("System.Net");
 //        Reg("System.Security.Claims");
 //        Reg(ApplicationDbContext);
-//        Reg(IServerAuthenticationStateFactory);
+//        Reg(IAuthenticationStateFactory);
 //        Reg(StateMapping);
-//        Reg(IServerAuthenticationService);
-//        Reg(ServerAuthenticationState);
+//        Reg(IAuthenticationService);
+//        Reg(AuthenticationState);
 //        Reg(StateUser);
 //        Reg(Token);
 //        Reg(State);
@@ -56,31 +56,31 @@
 
 //public class {Name}(
 //    {ApplicationDbContext} db,
-//    {IServerAuthenticationStateFactory} factory,
+//    {IAuthenticationStateFactory} factory,
 //    IHostEnvironment hostEnvironment)
-//    : {IServerAuthenticationService}
+//    : {IAuthenticationService}
 //{{
 //    private {AuthenticationHeaders}? Headers;
 
 //    private {State}? ReceivedClientState;
-//    private {ServerAuthenticationState}? State;
+//    private {AuthenticationState}? State;
 //    private {AuthenticationInitializeResult}? Result;
 
 //    public bool Initialized {{ get; private set; }}
 
-//    {AuthenticationInitializeResult} {GapiIServerAuthenticationService.FullName}.Result
-//        => Result ?? throw new Exception(""Initialize the ServerAuthenticationService first please"");
-//    {State}? {IServerAuthenticationService}.ClientState
+//    {AuthenticationInitializeResult} {GapiIAuthenticationService.FullName}.Result
+//        => Result ?? throw new Exception(""Initialize the AuthenticationService first please"");
+//    {State}? {IAuthenticationService}.ClientState
 //        => ReceivedClientState;
-//    {ServerAuthenticationState} {IServerAuthenticationService}.State
-//        => State ?? throw new Exception(""Initialize the ServerAuthenticationService first please"");
-//    string {GapiIServerAuthenticationService.FullName}.SessionId
-//        => Headers?.SessionId ?? throw new Exception(""Initialize the ServerAuthenticationService first please"");
-//    string? {GapiIServerAuthenticationService.FullName}.UserId
+//    {AuthenticationState} {IAuthenticationService}.State
+//        => State ?? throw new Exception(""Initialize the AuthenticationService first please"");
+//    string {GapiIAuthenticationService.FullName}.SessionId
+//        => Headers?.SessionId ?? throw new Exception(""Initialize the AuthenticationService first please"");
+//    string? {GapiIAuthenticationService.FullName}.UserId
 //        => State?.DbUser?.Id.ToString();
-//    bool {GapiIServerAuthenticationService.FullName}.UpdateCookie
-//        => Headers?.UpdateCookie ?? throw new Exception(""Initialize the ServerAuthenticationService first please"");
-//    string? {GapiIServerAuthenticationService.FullName}.CookieData
+//    bool {GapiIAuthenticationService.FullName}.UpdateCookie
+//        => Headers?.UpdateCookie ?? throw new Exception(""Initialize the AuthenticationService first please"");
+//    string? {GapiIAuthenticationService.FullName}.CookieData
 //        => Headers?.CookieData;
 
 //    public async Task<{AuthenticationInitializeResult}> InitializeAsync(PathString path, QueryString query, IPAddress? ipAddress, string? cookieData, StringValues sessionData, StringValues stateData, CancellationToken ct)
@@ -121,7 +121,7 @@
 //    public async Task<{AuthenticationInitializeResult}> ReInitializeAsync(CancellationToken ct)
 //    {{
 //        if (State == null || Headers == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        var stateData = await GetStateDataAsync(ct);
 //        return await Make(Headers, stateData, ct);
@@ -151,10 +151,10 @@
 //        return Result;
 //    }}
 
-//    public async Task<{ServerAuthenticationState}> AuthenticateUserAsync({User} dbUser, CancellationToken ct)
+//    public async Task<{AuthenticationState}> AuthenticateUserAsync({User} dbUser, CancellationToken ct)
 //    {{
 //        if (State == null || Headers == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        // Sets cookie data in Headers, and gets new cookie hash
 //        var cookieHash = Headers.CreateNewCookie();
@@ -177,7 +177,7 @@
 //    public async Task<ClaimsPrincipal> GetClaimsPrincipalAsync(CancellationToken ct)
 //    {{
 //        if (State == null || Headers == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 
 //        if (State.User == null)
 //            throw new Exception(""User is not authenticated"");
@@ -196,19 +196,19 @@
 //    public async Task<StringValues> GetStateDataAsync(CancellationToken ct)
 //    {{
 //        if (State == null || Headers == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 //        return State.CreateStateData();
 //    }}
 //    public async Task LogoutAsync(CancellationToken ct)
 //    {{
 //        if (State == null || Headers == null)
-//            throw new Exception(""Initialize the ServerAuthenticationService first please"");
+//            throw new Exception(""Initialize the AuthenticationService first please"");
 //        Headers.RemoveCookie();
 //        await ReInitializeAsync(ct);
 //    }}
 //    public async Task SaveChangesAsync(CancellationToken ct)
 //        => await db.SaveChangesAsync(ct);
 //}}";
-//        
+
 //    }
 //}

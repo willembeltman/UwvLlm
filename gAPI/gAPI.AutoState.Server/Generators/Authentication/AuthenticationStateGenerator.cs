@@ -5,9 +5,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationStateGenerator : _BaseGenerator
+//public class AuthenticationStateGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationStateGenerator(
+//    public AuthenticationStateGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -15,7 +15,7 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationState";
+//        Name = "AuthenticationState";
 //        FileName = $"{Name}.cs";
 //    }
 
@@ -52,6 +52,6 @@
 //    public {User}? DbUser {{ get; }}
 //    public {Ip} DbIp {{ get; }}
 //}}";
-//        
+
 //    }
 //}

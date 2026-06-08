@@ -11,7 +11,7 @@ public interface IServerAuthenticationService
 {
     UserId UserId { get; }
     SessionId SessionId { get; }
-    StringValues SessionData { get; }
+    string? SessionData { get; }
     string? CookieData { get; }
     bool UpdateCookie { get; }
     bool Initialized { get; }

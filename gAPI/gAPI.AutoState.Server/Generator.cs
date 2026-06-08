@@ -5,8 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System.IO;
 using System.Text;
-using gAPI.AutoState.Server.Generators.Extensions;
-using gAPI.AutoState.Server.Generators.Entities;
+using gAPI.AutoState.Server.Models.Interfaces;
 
 namespace gAPI.AutoState.Server;
 
@@ -25,17 +24,17 @@ public class Generator
         CustomSpanSerializers = customSpanSerializers;
         CustomComparers = customComparers;
 
-        Ip = new IpGenerator(this);
-        Route = new RouteGenerator(this);
-        Session = new SessionGenerator(this);
-        Token = new TokenGenerator(this);
-        UserIp = new UserIpGenerator(this); 
-        UserIpSession   = new UserIpSessionGenerator(this);
-        UserIpSessionToken = new UserIpSessionTokenGenerator(this);
-        UserIpSessionTokenRoute = new UserIpSessionTokenRouteGenerator(this);
-        UserIpSessionTokenRouteRequest = new UserIpSessionTokenRouteRequestGenerator(this);
+        //Ip = new IpGenerator(this);
+        //Route = new RouteGenerator(this);
+        //Session = new SessionGenerator(this);
+        //Token = new TokenGenerator(this);
+        //UserIp = new UserIpGenerator(this);
+        //UserIpSession = new UserIpSessionGenerator(this);
+        //UserIpSessionToken = new UserIpSessionTokenGenerator(this);
+        //UserIpSessionTokenRoute = new UserIpSessionTokenRouteGenerator(this);
+        //UserIpSessionTokenRouteRequest = new UserIpSessionTokenRouteRequestGenerator(this);
 
-        AddAutoAuthExtension = new AddAutoAuthExtensionGenerator(this);
+        //AddAutoAuthExtension = new AddAutoAuthExtensionGenerator(this);
     }
 
     public ServiceContext ServiceContext { get; }
@@ -44,24 +43,24 @@ public class Generator
     public CustomObject[] CustomSpanSerializers { get; }
     public CustomObjectMethod[] CustomComparers { get; }
 
-    public IpGenerator Ip { get; }
-    public RouteGenerator Route { get; }
-    public SessionGenerator Session { get; }
-    public TokenGenerator Token { get; }
-    public UserIpGenerator UserIp { get; }
-    public UserIpSessionGenerator UserIpSession { get; }
-    public UserIpSessionTokenGenerator UserIpSessionToken { get; }
-    public UserIpSessionTokenRouteGenerator UserIpSessionTokenRoute { get; }
-    public UserIpSessionTokenRouteRequestGenerator UserIpSessionTokenRouteRequest { get; }
+    //public IpGenerator Ip { get; }
+    //public RouteGenerator Route { get; }
+    //public SessionGenerator Session { get; }
+    //public TokenGenerator Token { get; }
+    //public UserIpGenerator UserIp { get; }
+    //public UserIpSessionGenerator UserIpSession { get; }
+    //public UserIpSessionTokenGenerator UserIpSessionToken { get; }
+    //public UserIpSessionTokenRouteGenerator UserIpSessionTokenRoute { get; }
+    //public UserIpSessionTokenRouteRequestGenerator UserIpSessionTokenRouteRequest { get; }
 
-    public AddAutoAuthExtensionGenerator AddAutoAuthExtension { get; }
-
-
-    public Entity UserEntity { get; }
+    //public AddAutoAuthExtensionGenerator AddAutoAuthExtension { get; }
+    //public IAuthenticationServiceGenerator IAuthenticationService { get; }
+    //public SharedReference DbContext { get; internal set; }
+    //public IAuthenticationStateFactoryGenerator IAuthenticationStateFactory { get; internal set; }
 
     public void Generate(SourceProductionContext spc)
     {
-        GenerateItem(spc, AddAutoAuthExtension);
+        //GenerateItem(spc, AddAutoAuthExtension);
     }
 
     private static void GenerateItem(SourceProductionContext spc, _BaseGenerator generator)

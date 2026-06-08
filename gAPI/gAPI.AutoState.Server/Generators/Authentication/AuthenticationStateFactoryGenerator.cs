@@ -5,9 +5,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationStateFactoryGenerator : _BaseGenerator
+//public class AuthenticationStateFactoryGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationStateFactoryGenerator(
+//    public AuthenticationStateFactoryGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -15,21 +15,21 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationStateFactory";
+//        Name = "AuthenticationStateFactory";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public DbContext ApplicationDbContext => Context.DbContext;
+//    public FoundDbContext ApplicationDbContext => Context.DbContext;
 //    public StateMappingGenerator StateMapping => Context.StateMapping;
 //    public SharedReference ServerConfig => Context.SharedReferences.ServerConfig;
-//    public IServerAuthenticationStateFactoryGenerator IServerAuthenticationStateFactory => Context.IServerAuthenticationStateFactory;
+//    public IAuthenticationStateFactoryGenerator IAuthenticationStateFactory => Context.IAuthenticationStateFactory;
 //    public SharedReference AuthenticationHeaders => Context.SharedReferences.AuthenticationHeaders;
 //    public TokenGenerator Token => Context.Token;
 //    public Entity User => Context.DbContext.UserEntity;
 //    public IpGenerator Ip => Context.Ip;
-//    public ServerAuthenticationStateGenerator ServerAuthenticationState => Context.ServerAuthenticationState;
+//    public AuthenticationStateGenerator AuthenticationState => Context.AuthenticationState;
 //    public StateDtoGenerator StateUser => Context.State.User;
 //    public RequestIdsGenerator RequestIds => Context.RequestIds;
 //    public SessionGenerator Session => Context.Session;
@@ -49,11 +49,11 @@
 //        Reg(ApplicationDbContext);
 //        Reg(StateMapping);
 //        Reg(ServerConfig);
-//        Reg(IServerAuthenticationStateFactory);
+//        Reg(IAuthenticationStateFactory);
 //        Reg(Token);
 //        Reg(User);
 //        Reg(Ip);
-//        Reg(ServerAuthenticationState);
+//        Reg(AuthenticationState);
 //        Reg(StateUser);
 //        Reg(RequestIds);
 //        Reg(Session);
@@ -73,11 +73,11 @@
 //    {ServerConfig} config,
 //    TimeProvider dateTime,
 //    ILoggerFactory loggerFactory) 
-//    : {IServerAuthenticationStateFactory}
+//    : {IAuthenticationStateFactory}
 //{{
 //    private readonly ILogger Logger = loggerFactory.CreateLogger<{Name}>();
 
-//    public async Task<ServerAuthenticationState> CreateAuthenticationStateAsync(
+//    public async Task<AuthenticationState> CreateAuthenticationStateAsync(
 //        {AuthenticationHeaders.FullName} headers,
 //        State? receivedClientState, // <-- IMPORTANT: DO NOT TRUST THIS STATE
 //        CancellationToken ct)
@@ -140,7 +140,7 @@
 
 //        _ = DoTheRest(headers, userId, authenticationTokenId, user, dbUser, dbToken, dbIp, ct);
 
-//        return new {ServerAuthenticationState}(
+//        return new {AuthenticationState}(
 //            user,
 //            dbToken,
 //            dbUser,
@@ -434,6 +434,6 @@
 //        }};
 //    }}
 //}}";
-//        
+
 //    }
 //}

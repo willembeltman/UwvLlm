@@ -3,9 +3,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class IServerAuthenticationServiceGenerator : _BaseGenerator
+//public class IAuthenticationServiceGenerator : _BaseGenerator
 //{
-//    public IServerAuthenticationServiceGenerator(
+//    public IAuthenticationServiceGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -13,37 +13,37 @@
 
 //        Context = context;
 
-//        Name = "IServerAuthenticationService";
+//        Name = "IAuthenticationService";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public Entity User => Context.DbContext.UserEntity;
-//    public SharedReference ServerAuthenticationState => Context.ServerAuthenticationState;
-//    public SharedReference GapiIServerAuthenticationService => Context.SharedReferences.GapiIServerAuthenticationService;
+//    public Entity User => Context.UserEntity;
+//    public SharedReference AuthenticationState => Context.AuthenticationState;
+//    public SharedReference GapiIAuthenticationService => Context.SharedReferences.IServerAuthenticationService;
 //    public SharedReference State => Context.State;
 
 //    public override void GenerateCode()
 //    {
 //        Reg(User);
 //        Reg(State);
-//        Reg(ServerAuthenticationState);
+//        Reg(AuthenticationState);
 
 //        Code = $@"{GetNamespacesCode()}
 //namespace {Namespace};
 
-//public interface {Name} : {GapiIServerAuthenticationService.FullName}
+//public interface {Name} : {GapiIAuthenticationService.FullName}
 //{{
 //    {State}? ClientState {{ get; }}
-//    {ServerAuthenticationState} State {{ get; }}
+//    {AuthenticationState} State {{ get; }}
 //    bool Initialized {{ get; }}
 
-//    Task<{ServerAuthenticationState}> AuthenticateUserAsync({User} dbUser, CancellationToken ct);
+//    Task<{AuthenticationState}> AuthenticateUserAsync({User} dbUser, CancellationToken ct);
 //    Task LogoutAsync(CancellationToken ct);
 //    Task SaveChangesAsync(CancellationToken ct);
 //}}";
 
-//        
+
 //    }
 //}

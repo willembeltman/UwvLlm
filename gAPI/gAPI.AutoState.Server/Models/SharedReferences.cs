@@ -99,12 +99,5 @@ public class SharedReferences
     // Optional
     public SharedReference? AutoWssExtension { get; }
     public SharedReference? WssHub { get; }
-
-    public SharedReference? UserEntity { get; }
-    public SharedReference? StateUserDto { get; }
-    public SharedReference? StateUserMapper { get; }
-
-    public SharedReference? AuthenticationState { get; }
-    public SharedReference? StateDto { get; }
-    public SharedReference? StateMapper { get; }
+    public SharedReference IStorageService { get; internal set; }
 }

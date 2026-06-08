@@ -1,6 +1,7 @@
 ﻿using gAPI.AutoSerializer;
 using gAPI.AutoState.Server.Helpers;
 using gAPI.AutoState.Server.Models;
+using gAPI.AutoState.Server.Models.Interfaces;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System;

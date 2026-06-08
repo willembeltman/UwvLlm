@@ -1,8 +1,8 @@
 ﻿//namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationHandlerGenerator : _BaseGenerator
+//public class AuthenticationHandlerGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationHandlerGenerator(
+//    public AuthenticationHandlerGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -10,13 +10,13 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationHandler";
+//        Name = "AuthenticationHandler";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public IServerAuthenticationServiceGenerator IServerAuthenticationService => Context.IServerAuthenticationService;
+//    public IAuthenticationServiceGenerator IAuthenticationService => Context.IAuthenticationService;
 
 //    public override void GenerateCode()
 //    {
@@ -31,13 +31,13 @@
 //public class {Name}
 //    : AuthenticationHandler<AuthenticationSchemeOptions>
 //{{
-//    private readonly {IServerAuthenticationService} Authentication;
+//    private readonly {IAuthenticationService} Authentication;
 
-//    public ServerAuthenticationHandler(
+//    public AuthenticationHandler(
 //        IOptionsMonitor<AuthenticationSchemeOptions> options,
 //        ILoggerFactory logger,
 //        UrlEncoder encoder,
-//        {IServerAuthenticationService} auth)
+//        {IAuthenticationService} auth)
 //        : base(options, logger, encoder)
 //    {{
 //        Authentication = auth;
@@ -60,6 +60,6 @@
 //            new AuthenticationTicket(principal, ""gAPI""));
 //    }}
 //}}";
-//        
+
 //    }
 //}

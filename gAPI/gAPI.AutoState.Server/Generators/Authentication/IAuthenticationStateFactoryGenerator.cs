@@ -2,9 +2,9 @@
 
 //namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class IServerAuthenticationStateFactoryGenerator : _BaseGenerator
+//public class IAuthenticationStateFactoryGenerator : _BaseGenerator
 //{
-//    public IServerAuthenticationStateFactoryGenerator(
+//    public IAuthenticationStateFactoryGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -12,19 +12,19 @@
 
 //        Context = context;
 
-//        Name = "IServerAuthenticationStateFactory";
+//        Name = "IAuthenticationStateFactory";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public SharedReference ServerAuthenticationState => Context.ServerAuthenticationState;
+//    public SharedReference AuthenticationState => Context.AuthenticationState;
 //    public SharedReference AuthenticationHeaders => Context.SharedReferences.AuthenticationHeaders;
 //    public SharedReference State => Context.State;
 
 //    public override void GenerateCode()
 //    {
-//        Reg(ServerAuthenticationState);
+//        Reg(AuthenticationState);
 //        Reg(AuthenticationHeaders);
 //        Reg(State);
 
@@ -33,8 +33,8 @@
 
 //public interface {Name}
 //{{
-//    Task<{ServerAuthenticationState}> CreateAuthenticationStateAsync({AuthenticationHeaders} headers, {State}? stateData, CancellationToken ct);
+//    Task<{AuthenticationState}> CreateAuthenticationStateAsync({AuthenticationHeaders} headers, {State}? stateData, CancellationToken ct);
 //}}";
-//        
+
 //    }
 //}

@@ -1,8 +1,8 @@
 ﻿//namespace gAPI.AutoState.Server.Generators.Authentication;
 
-//public class ServerAuthenticationMiddlewareGenerator : _BaseGenerator
+//public class AuthenticationMiddlewareGenerator : _BaseGenerator
 //{
-//    public ServerAuthenticationMiddlewareGenerator(
+//    public AuthenticationMiddlewareGenerator(
 //        Generator context)
 //    {
 //        Directory = "";
@@ -10,20 +10,20 @@
 
 //        Context = context;
 
-//        Name = "ServerAuthenticationMiddleware";
+//        Name = "AuthenticationMiddleware";
 //        FileName = $"{Name}.cs";
 //    }
 
 //    public Generator Context { get; }
 
-//    public IServerAuthenticationServiceGenerator IServerAuthenticationService => Context.IServerAuthenticationService;
+//    public IAuthenticationServiceGenerator IAuthenticationService => Context.IAuthenticationService;
 
 //    public override void GenerateCode()
 //    {
 //        Reg("Microsoft.AspNetCore.Http");
 //        Reg("Microsoft.Extensions.Hosting");
 //        Reg("System.Net");
-//        Reg(IServerAuthenticationService);
+//        Reg(IAuthenticationService);
 
 //        Code = $@"{GetNamespacesCode()}
 //namespace {Namespace};
@@ -36,7 +36,7 @@
 
 //    public async Task Invoke(
 //        HttpContext ___httpContext,
-//        {IServerAuthenticationService} authentication,
+//        {IAuthenticationService} authentication,
 //        IHostEnvironment hostEnvironment)
 //    {{
 //        IPAddress? ___forwardedIp = ___httpContext.Connection.RemoteIpAddress;
@@ -111,6 +111,6 @@
 //        await _next(___httpContext);
 //    }}
 //}}";
-//        
+
 //    }
 //}

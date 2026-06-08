@@ -1,4 +1,5 @@
 ﻿using gAPI.AutoState.Server.Models;
+using gAPI.AutoState.Server.Models.Interfaces;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
