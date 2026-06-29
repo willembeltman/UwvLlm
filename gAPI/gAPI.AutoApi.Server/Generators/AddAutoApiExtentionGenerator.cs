@@ -35,6 +35,8 @@ public class AddAutoApiExtensionGenerator : BaseGenerator
         Reg("Microsoft.AspNetCore.Mvc");
         Reg("System.Reflection");
         Reg("System.Globalization");
+        Reg("Microsoft.Extensions.DependencyInjection");
+        Reg("Microsoft.Extensions.Logging");
         Reg(AddAutoApiServices);
         Reg(ServerConfig);
         Reg(FabricClient);

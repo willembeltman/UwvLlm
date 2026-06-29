@@ -27,7 +27,7 @@ public partial class EmailViewModel(
         var response = await userService.List(skip: 0, take: int.MaxValue, null, CancellationToken.None);
         if (response.Success == false || response.Response == null)
         {
-            await UiService.ShowAlert("Cannot load users", "There is a problem while loading the users", "OK");
+            await UiService.ShowAlertAsync("Cannot load users", "There is a problem while loading the users", "OK");
             return;
         }
 

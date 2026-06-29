@@ -33,7 +33,7 @@ internal sealed class IntegrationScenario(
             () => authenticationService.RegisterAsync(userName, email, password, password),
             setupTimeout.Token);
 
-        if (!await authenticatedHttpClient.IsAuthenticatedAsync(setupTimeout.Token))
+        if (await authenticatedHttpClient.IsAuthenticatedAsync(setupTimeout.Token) != true)
             throw new InvalidOperationException("Registration completed, but the client is not authenticated.");
 
         Console.WriteLine("Opening notification channel...");

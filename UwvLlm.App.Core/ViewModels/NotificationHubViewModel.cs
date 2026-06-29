@@ -39,7 +39,7 @@ public partial class NotificationHubViewModel(
         var response = await UserNotificationsService.List(0, int.MaxValue, null, Cts.Token);
         if (response.Success == false || response.Response == null)
         {
-            await UiService.ShowAlert("Cannot load users", "There is a problem while loading the users", "OK");
+            await UiService.ShowAlertAsync("Cannot load users", "There is a problem while loading the users", "OK");
             return;
         }
 

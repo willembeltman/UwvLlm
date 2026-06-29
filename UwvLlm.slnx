@@ -50,4 +50,5 @@
     <Project Path="UwvLlm.LlmProxy.Core.Test/UwvLlm.LlmProxy.Core.Test.csproj" Id="7d2fda0a-e3de-4121-ad60-3b200f31ee41" />
   </Folder>
   <Project Path="UwvLlm.AppHost/UwvLlm.AppHost.csproj" Id="222f8302-2a19-436d-b055-9c531cc1b408" />
+  <Project Path="UwvLlm.AppHostLocalSql/UwvLlm.AppHostLocalSql.csproj" Id="ad5f6447-c1a9-4010-9f17-1d66168db00d" />
 </Solution>

@@ -6,7 +6,7 @@ internal sealed class ConsoleAppServices : IUiService, IDispatcherService, INavi
 {
     private string CurrentPath { get; set; } = "/";
 
-    public Task ShowAlert(string title, string message, string cancel)
+    public Task ShowAlertAsync(string title, string message, string cancel)
     {
         Console.WriteLine($"{title}: {message}");
         return Task.CompletedTask;

@@ -2,5 +2,5 @@
 
 public interface IUiService
 {
-    Task ShowAlert(string title, string message, string cancel);
+    Task ShowAlertAsync(string title, string message, string cancel);
 }

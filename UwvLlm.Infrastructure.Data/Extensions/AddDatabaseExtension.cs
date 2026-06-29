@@ -13,7 +13,7 @@ public static class AddDatabaseExtension
     IConfiguration configuration,
     bool useMemoryDatabase = false)
     {
-        var connectionString = configuration.GetConnectionString("uwvllm-db");
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         // ✅ Factory voor ApplicationDbContext
         services.AddDbContextFactory<ApplicationDbContext>(options =>

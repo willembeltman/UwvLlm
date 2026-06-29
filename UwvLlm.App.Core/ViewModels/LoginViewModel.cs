@@ -4,6 +4,7 @@ using UwvLlm.App.Core.Interfaces;
 namespace UwvLlm.App.Core.ViewModels;
 
 public partial class LoginViewModel(
+    IUiService iUiService,
     INavigationService navigationService,
     IAuthenticationService authenticationService)
     : BaseViewModel
@@ -13,7 +14,11 @@ public partial class LoginViewModel(
 
     public async Task OnAppearingAsync()
     {
-        if (await authenticationService.IsAuthenticatedAsync())
+        var isAuthenticated = await authenticationService.IsAuthenticatedAsync();
+        if (isAuthenticated == null)
+            await iUiService.ShowAlertAsync("Cannot contact server", "Cannot contact server", "Cancel");
+
+        if (isAuthenticated == true)
             await navigationService.GotoMainPageAsync();
     }
 

@@ -14,17 +14,17 @@ public class EmailService(
     {
         if (toUserId == null)
         {
-            await uiService.ShowAlert("Fout", "to verplicht", "OK");
+            await uiService.ShowAlertAsync("Fout", "to verplicht", "OK");
             return;
         }
         if (string.IsNullOrWhiteSpace(subject))
         {
-            await uiService.ShowAlert("Fout", "subject verplicht", "OK");
+            await uiService.ShowAlertAsync("Fout", "subject verplicht", "OK");
             return;
         }
         if (string.IsNullOrWhiteSpace(body))
         {
-            await uiService.ShowAlert("Fout", "body verplicht", "OK");
+            await uiService.ShowAlertAsync("Fout", "body verplicht", "OK");
             return;
         }
 
@@ -36,7 +36,7 @@ public class EmailService(
         };
         await mailApi.SendMail(mail, CancellationToken.None);
 
-        await uiService.ShowAlert("OK", $"Mail verstuurd naar {toUserId}", "OK");
+        await uiService.ShowAlertAsync("OK", $"Mail verstuurd naar {toUserId}", "OK");
         await navigationService.GotoMainPageAsync();
     }
 }

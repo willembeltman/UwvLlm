@@ -77,13 +77,13 @@ public class ApplicationDbContext(DbContextOptions options) : AuthenticationDbCo
 
             // FromUser relatie (BELANGRIJK: dubbele relatie naar User)
             entity.HasOne(m => m.FromUser)
-                  .WithMany()
+                  .WithMany(m => m.FromMailMessages)
                   .HasForeignKey(m => m.FromUserId)
                   .OnDelete(DeleteBehavior.Restrict); // voorkomt cascade loop
 
             // ToUser relatie
             entity.HasOne(m => m.ToUser)
-                  .WithMany()
+                  .WithMany(m => m.ToMailMessages)
                   .HasForeignKey(m => m.ToUserId)
                   .OnDelete(DeleteBehavior.Restrict);
         });

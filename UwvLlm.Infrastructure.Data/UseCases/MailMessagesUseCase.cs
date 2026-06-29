@@ -58,12 +58,13 @@ public class MailMessagesUseCase(
         var fromUserId = entry.Property(a => a.FromUserId).OriginalValue;
         var toUserId = entry.Property(a => a.ToUserId).OriginalValue;
 
-        if (CurrentUserId != fromUserId && CurrentUserId != toUserId) return false;
+        // Todo system inbouwen
+        //if (CurrentUserId != fromUserId && CurrentUserId != toUserId) return false;
 
         updatedEntity.FromUserId = fromUserId;
         updatedEntity.ToUserId = toUserId;
-        updatedEntity.FromUser = null!;
-        updatedEntity.ToUser = null!;
+        //updatedEntity.FromUser = null!;
+        //updatedEntity.ToUser = null!;
 
         await db.SaveChangesAsync(ct);
         return true;

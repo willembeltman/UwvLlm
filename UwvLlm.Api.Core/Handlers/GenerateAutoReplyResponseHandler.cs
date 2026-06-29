@@ -46,6 +46,7 @@ public class GenerateAutoReplyResponseHandler(
     private static UserNotification CreateNotification(MailMessage mailMessage) 
         => new()
         {
+            UserId = mailMessage.ToUserId,
             ExternalType = NotificationType.Mail,
             ExternalId = mailMessage.Id.ToString(),
             Title = "Message received",

@@ -14,7 +14,6 @@ using UwvLlm.Shared.Public;
 using UwvLlm.Shared.Public.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var serverConfig = builder.Configuration.CreateServerConfig();
 
 builder.Services.AddOpenApi();
@@ -46,14 +45,14 @@ app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();
 
-// DIT MOET IN DE ANALYZER
-using (var scope = app.Services.CreateScope())
-{
-    var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
-    var db = factory.CreateDbContext();
+//// DIT MOET IN DE ANALYZER
+//using (var scope = app.Services.CreateScope())
+//{
+//    var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
+//    var db = factory.CreateDbContext();
 
-    db.Database.Migrate();
-}
-// DIT MOET IN DE ANALYZER
+//    db.Database.Migrate();
+//}
+//// DIT MOET IN DE ANALYZER
 
 app.RunWithServiceBus(busName: "Api");
