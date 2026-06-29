@@ -55,6 +55,7 @@ public static class BuildRenderTree
         {
             case "InputSelect":
             case "NavLink":
+            case "InputDate":
             case "InputNumber":
                 hasNormalChildContext = true;
                 break;
@@ -224,6 +225,7 @@ public static class BuildRenderTree
             }
 
             // Als standaard attribute toevoegen dus value nalopen op interpolated strings
+            value = (attr.Value ?? "").Trim();
             if (value.Contains("@"))
             {
                 // vervang @(...) door { ... } in een interpolated string
