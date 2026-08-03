@@ -37,11 +37,11 @@ MAUI App (SSE)  <--(gAPI SSE)--- Web API <--(RabbitMQ Bus)-- LLM Proxy <--------
 ## 🚦 Project Status & Progress
 
 The core end-to-end backend pipeline was successfully designed and built within the 24-hour time constraint.
-[x] MAUI Frontend & MVVM: User registration, authentication, and message dispatching are fully functional.
-[x] gAPI Client-to-Server: Automated API generation handles all frontend-to-backend REST communication flawlessly.
-[x] Service Bus Isolation: Web API strictly handshakes with RabbitMQ; LlmProxy processes AI tasks asynchronously.
-[x] Ollama Integration: The local LLM generates context-aware replies and stores them back into the DB via the generated CRUD infrastructure.
-[ ] Real-time gAPI SSE Callback: In Progress. The backend triggers the response handler, but the real-time gAPI Server-Sent Events (SSE) plumbing inside the .NET MAUI client is currently being ironed out.
+- [x] MAUI Frontend & MVVM: User registration, authentication, and message dispatching are fully functional.
+- [x] gAPI Client-to-Server: Automated API generation handles all frontend-to-backend REST communication flawlessly.
+- [x] Service Bus Isolation: Web API strictly handshakes with RabbitMQ; LlmProxy processes AI tasks asynchronously.
+- [x] Ollama Integration: The local LLM generates context-aware replies and stores them back into the DB via the generated CRUD infrastructure.
+- [ ] Real-time gAPI SSE Callback: In Progress. The backend triggers the response handler, but the real-time gAPI Server-Sent Events (SSE) plumbing inside the .NET MAUI client is currently being ironed out.
 
 ---
 
