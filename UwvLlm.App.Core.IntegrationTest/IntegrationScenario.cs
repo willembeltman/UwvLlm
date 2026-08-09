@@ -1,4 +1,5 @@
 using gAPI.Core.Client;
+using gAPI.Core.Client.Interfaces;
 using gAPI.Core.Interfaces;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.CrudInterfaces;
@@ -11,7 +12,7 @@ internal sealed class IntegrationScenario(
     IAuthenticatedHttpClient<State> authenticatedHttpClient,
     IUsersCrudService usersCrudService,
     IEmailService emailService,
-    IClientConnection clientConnection,
+    ISseClientConnection clientConnection,
     IntegrationNotificationHub notificationHub)
 {
     private static readonly TimeSpan SetupTimeout = TimeSpan.FromMinutes(5);

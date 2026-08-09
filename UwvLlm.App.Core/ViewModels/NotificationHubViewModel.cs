@@ -1,10 +1,10 @@
-﻿using gAPI.Core.Interfaces;
+﻿using CommunityToolkit.Mvvm.Input;
+using gAPI.Generated;
 using System.Collections.ObjectModel;
 using UwvLlm.App.Core.Interfaces;
+using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;
 using UwvLlm.Shared.Public.Interfaces;
-using CommunityToolkit.Mvvm.Input;
-using UwvLlm.Shared.Public.CrudInterfaces;
 
 namespace UwvLlm.App.Core.ViewModels;
 

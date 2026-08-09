@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using gAPI.Core.Interfaces;
+using gAPI.Generated;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.CrudInterfaces;
 

@@ -24,9 +24,6 @@
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
     <Project Path="gAPI/gAPI.AutoSse.Client/gAPI.AutoSse.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoSse.Server/gAPI.AutoSse.Server.csproj" />
-    <Project Path="gAPI/gAPI.AutoState.Client/gAPI.AutoState.Client.csproj" Id="61157501-f233-4c83-a8f6-2d4bae29a67b" />
-    <Project Path="gAPI/gAPI.AutoState.Server/gAPI.AutoState.Server.csproj" />
-    <Project Path="gAPI/gAPI.AutoState/gAPI.AutoState.csproj" Id="8b1fc850-27ad-41f2-a4f6-3e434301a2d5" />
     <Project Path="gAPI/gAPI.AutoWss.Client/gAPI.AutoWss.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoWss.Server/gAPI.AutoWss.Server.csproj" />
     <Project Path="gAPI/gAPI.CodeGen.Backend/gAPI.CodeGen.Backend.csproj" />
