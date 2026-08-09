@@ -1,4 +1,4 @@
-﻿namespace gAPI.AutoApi.Client.Generators;
+﻿namespace gAPI.AutoApiClient.Generators;
 
 public class AutoApiClientExtensionGenerator : BaseGenerator
 {
@@ -35,7 +35,7 @@ namespace {Namespace};
 
 public static class {Name}
 {{
-    public static void AddAutoApi(this IServiceCollection services)
+    public static void AddAutoApiClient(this IServiceCollection services)
     {{{propertiesCode}
     }}
 }}";

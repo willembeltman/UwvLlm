@@ -1,4 +1,4 @@
-﻿namespace gAPI.AutoWss.Client.Helpers;
+﻿namespace gAPI.AutoWssClient.Helpers;
 
 public static class ServiceNameHelper
 {

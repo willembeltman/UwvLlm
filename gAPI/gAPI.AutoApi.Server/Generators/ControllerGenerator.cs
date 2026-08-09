@@ -1,9 +1,9 @@
-﻿using gAPI.AutoApi.Server.Helpers;
-using gAPI.AutoApi.Server.Models;
+﻿using gAPI.AutoApiServer.Helpers;
+using gAPI.AutoApiServer.Models;
 using System;
 using System.Linq;
 
-namespace gAPI.AutoApi.Server.Generators;
+namespace gAPI.AutoApiServer.Generators;
 
 public class ControllerGenerator : BaseGenerator
 {

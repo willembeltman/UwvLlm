@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Linq;
 
-namespace gAPI.AutoSse.Client.Models;
+namespace gAPI.AutoSseClient.Models;
 
 public class TypeHelperProperty
 {

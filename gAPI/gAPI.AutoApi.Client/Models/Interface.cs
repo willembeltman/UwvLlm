@@ -1,9 +1,9 @@
-﻿using gAPI.AutoApi.Client.Helpers;
+﻿using gAPI.AutoApiClient.Helpers;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoApi.Client.Models;
+namespace gAPI.AutoApiClient.Models;
 
 public class Interface
 {

@@ -1,9 +1,9 @@
-﻿using gAPI.AutoSse.Client.Models;
+﻿using gAPI.AutoSseClient.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoSse.Client.Generators;
+namespace gAPI.AutoSseClient.Generators;
 
 
 public abstract class BaseGenerator : SharedReference

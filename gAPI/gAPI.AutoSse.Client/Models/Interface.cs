@@ -1,9 +1,9 @@
-﻿using gAPI.AutoSse.Client.Helpers;
+﻿using gAPI.AutoSseClient.Helpers;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoSse.Client.Models;
+namespace gAPI.AutoSseClient.Models;
 
 public class Interface
 {

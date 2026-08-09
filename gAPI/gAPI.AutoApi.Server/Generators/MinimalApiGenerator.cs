@@ -1,10 +1,10 @@
-﻿using gAPI.AutoApi.Server.Helpers;
-using gAPI.AutoApi.Server.Models;
+﻿using gAPI.AutoApiServer.Helpers;
+using gAPI.AutoApiServer.Models;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Linq;
 
-namespace gAPI.AutoApi.Server.Generators;
+namespace gAPI.AutoApiServer.Generators;
 
 public class MinimalApiGenerator : BaseGenerator
 {
@@ -46,10 +46,6 @@ public class MinimalApiGenerator : BaseGenerator
         Reg("Microsoft.AspNetCore.Mvc");
         Reg("Microsoft.Extensions.Primitives");
         Reg("Microsoft.AspNetCore.Mvc.ModelBinding");
-        Reg("Microsoft.AspNetCore.Routing");
-        Reg("Microsoft.AspNetCore.Http");
-        Reg("Microsoft.Extensions.Hosting");
-        Reg("Microsoft.AspNetCore.Builder");
         Reg("System.Net");
 
         Code = @$"{GetNamespacesCode()}

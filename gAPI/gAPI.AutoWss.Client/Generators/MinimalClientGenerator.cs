@@ -1,12 +1,12 @@
 ﻿using gAPI.AutoSerializer;
-using gAPI.AutoWss.Client.Models;
+using gAPI.AutoWssClient.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Client.Generators;
+namespace gAPI.AutoWssClient.Generators;
 
-public class MinimalClientGenerator : _BaseGenerator
+public class MinimalClientGenerator : BaseGenerator
 {
     private readonly CustomObjectMethod[] CustomMultipartFormDataContentSerializers;
 

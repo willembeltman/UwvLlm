@@ -1,10 +1,10 @@
-﻿using gAPI.AutoWss.Server.Models;
+﻿using gAPI.AutoWssServer.Models;
 using Microsoft.CodeAnalysis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Server.Helpers;
+namespace gAPI.AutoWssServer.Helpers;
 
 public static class SharedReferenceFinder
 {

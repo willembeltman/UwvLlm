@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace gAPI.AutoWss.Server.Generators;
+namespace gAPI.AutoWssServer.Generators;
 
 public class IClientContext_Generator : _BaseGenerator
 {

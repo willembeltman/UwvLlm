@@ -9,8 +9,9 @@ using System.Text.Json;
 namespace gAPI.Core.ServiceBus.Services;
 
 public class ServiceBusReceiver(
-    IRabbitServiceBusConnectionProvider provider,
-    IServiceScopeFactory scopeFactory,
+    IRabbitConnectionProvider provider,
+    //IHandlerRegistry registry,
+    IServiceProvider sp,
     IConsoleService console)
     : IServiceBusReceiver
 {
@@ -29,7 +30,7 @@ public class ServiceBusReceiver(
 
         consumer.ReceivedAsync += async (_, e) =>
         {
-            await using var scope = scopeFactory.CreateAsyncScope();
+            using var scope = sp.CreateScope();
 
             var json = Encoding.UTF8.GetString(e.Body.ToArray());
 
@@ -38,7 +39,7 @@ public class ServiceBusReceiver(
                 var message = JsonSerializer.Deserialize<ServiceBusMessage>(json)
                     ?? throw new Exception("Invalid message");
 
-                var registry = scope.ServiceProvider.GetRequiredService<IServiceBusHandlerRegistry>();
+                var registry = scope.ServiceProvider.GetRequiredService<IHandlerRegistry>();
 
                 await registry.Handle(message, scope.ServiceProvider, ct);
 

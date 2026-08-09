@@ -1,9 +1,9 @@
-﻿using gAPI.AutoWss.Client.Models;
+﻿using gAPI.AutoWssClient.Models;
 using System.Linq;
 
-namespace gAPI.AutoWss.Client.Generators;
+namespace gAPI.AutoWssClient.Generators;
 
-public class IClientConnectionGenerator : _BaseGenerator
+public class IClientConnectionGenerator : BaseGenerator
 {
     public IClientConnectionGenerator(
         Generator context)

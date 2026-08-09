@@ -1,11 +1,11 @@
 ﻿using gAPI.AutoSerializer;
-using gAPI.AutoWss.Server.Helpers;
-using gAPI.AutoWss.Server.Models;
+using gAPI.AutoWssServer.Helpers;
+using gAPI.AutoWssServer.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Server.Generators;
+namespace gAPI.AutoWssServer.Generators;
 
 public class WssHub_Generator : _BaseGenerator
 {

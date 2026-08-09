@@ -1,14 +1,14 @@
 ﻿using gAPI.AutoSerializer;
 using gAPI.AutoSerializer.Generators;
-using gAPI.AutoWss.Server.Generators;
-using gAPI.AutoWss.Server.Models;
+using gAPI.AutoWssServer.Generators;
+using gAPI.AutoWssServer.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace gAPI.AutoWss.Server;
+namespace gAPI.AutoWssServer;
 
 public class Generator
 {

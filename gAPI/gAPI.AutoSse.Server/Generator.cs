@@ -1,12 +1,12 @@
-﻿using gAPI.AutoSse.Server.Generators;
-using gAPI.AutoSse.Server.Models;
+﻿using gAPI.AutoSseServer.Generators;
+using gAPI.AutoSseServer.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace gAPI.AutoSse.Server;
+namespace gAPI.AutoSseServer;
 
 public class Generator
 {

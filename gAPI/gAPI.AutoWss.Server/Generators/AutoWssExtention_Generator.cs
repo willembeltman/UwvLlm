@@ -1,7 +1,7 @@
-﻿using gAPI.AutoWss.Server.Models;
+﻿using gAPI.AutoWssServer.Models;
 using System.Linq;
 
-namespace gAPI.AutoWss.Server.Generators;
+namespace gAPI.AutoWssServer.Generators;
 
 public class AutoWssExtensionGenerator : _BaseGenerator
 {

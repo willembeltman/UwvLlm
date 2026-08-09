@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Linq;
 
-namespace gAPI.AutoWss.Server.Models;
+namespace gAPI.AutoWssServer.Models;
 
 public class InterfaceMethodArgument
 {

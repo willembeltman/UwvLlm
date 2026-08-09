@@ -1,6 +1,6 @@
-﻿using gAPI.AutoWss.Server.Models;
+﻿using gAPI.AutoWssServer.Models;
 
-namespace gAPI.AutoWss.Server.Generators;
+namespace gAPI.AutoWssServer.Generators;
 
 public class IClientServiceContext_Generator : _BaseGenerator
 {

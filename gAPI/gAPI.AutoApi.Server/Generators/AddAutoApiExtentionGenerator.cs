@@ -1,8 +1,8 @@
 ﻿
-using gAPI.AutoApi.Server.Models;
+using gAPI.AutoApiServer.Models;
 using System.Linq;
 
-namespace gAPI.AutoApi.Server.Generators;
+namespace gAPI.AutoApiServer.Generators;
 
 public class AddAutoApiExtensionGenerator : BaseGenerator
 {
@@ -35,8 +35,6 @@ public class AddAutoApiExtensionGenerator : BaseGenerator
         Reg("Microsoft.AspNetCore.Mvc");
         Reg("System.Reflection");
         Reg("System.Globalization");
-        Reg("Microsoft.Extensions.DependencyInjection");
-        Reg("Microsoft.Extensions.Logging");
         Reg(AddAutoApiServices);
         Reg(ServerConfig);
         Reg(FabricClient);

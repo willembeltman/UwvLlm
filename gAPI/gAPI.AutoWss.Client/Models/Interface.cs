@@ -1,9 +1,9 @@
-﻿using gAPI.AutoWss.Client.Helpers;
+﻿using gAPI.AutoWssClient.Helpers;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Client.Models;
+namespace gAPI.AutoWssClient.Models;
 
 public class Interface
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Linq;
 
-namespace gAPI.AutoApi.Client.Models;
+namespace gAPI.AutoApiClient.Models;
 
 public class SharedReference
 {

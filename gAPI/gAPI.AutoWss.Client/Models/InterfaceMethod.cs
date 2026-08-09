@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace gAPI.AutoWss.Client.Models;
+namespace gAPI.AutoWssClient.Models;
 
 public class InterfaceMethod
 {

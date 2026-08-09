@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoApi.Client.Models;
+namespace gAPI.AutoApiClient.Models;
 
 public class TypeHelper : SharedReference
 {

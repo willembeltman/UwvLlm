@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace gAPI.AutoSse.Server.Models;
+namespace gAPI.AutoSseServer.Models;
 
 public class InterfaceMethod
 {

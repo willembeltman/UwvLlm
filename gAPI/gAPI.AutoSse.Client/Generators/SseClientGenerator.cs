@@ -1,7 +1,7 @@
-﻿//using gAPI.AutoSse.Client.Models;
+﻿//using gAPI.AutoSseClient.Models;
 //using System.Linq;
 
-//namespace gAPI.AutoSse.Client.Generators;
+//namespace gAPI.AutoSseClient.Generators;
 
 //public class SseClientGenerator : BaseGenerator
 //{

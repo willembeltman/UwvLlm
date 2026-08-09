@@ -1,9 +1,9 @@
-﻿using gAPI.AutoWss.Server.Helpers;
+﻿using gAPI.AutoWssServer.Helpers;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Server.Models;
+namespace gAPI.AutoWssServer.Models;
 
 public class ServiceContext
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Linq;
 
-namespace gAPI.AutoApi.Server.Models;
+namespace gAPI.AutoApiServer.Models;
 
 public class TypeHelper : SharedReference
 {

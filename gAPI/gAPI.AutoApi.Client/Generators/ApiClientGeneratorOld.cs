@@ -1,8 +1,8 @@
-﻿using gAPI.AutoApi.Client.Models;
+﻿using gAPI.AutoApiClient.Models;
 using System;
 using System.Linq;
 
-namespace gAPI.AutoApi.Client.Generators;
+namespace gAPI.AutoApiClient.Generators;
 
 public class ApiClientGeneratorOld : BaseGenerator
 {

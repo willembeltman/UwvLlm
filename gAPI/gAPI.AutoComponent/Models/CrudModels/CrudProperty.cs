@@ -6,10 +6,16 @@ using System.Linq;
 namespace gAPI.AutoComponent.Models.CrudModels;
 
 
-public class CrudProperty(CrudType parentType, TypeHelperProperty dtoProperty) : ICrudProperty
+public class CrudProperty : ICrudProperty
 {
-    public CrudType CrudType { get; } = parentType;
-    public TypeHelperProperty DtoProperty { get; } = dtoProperty;
+    public CrudProperty(CrudType parentType, TypeHelperProperty dtoProperty)
+    {
+        CrudType = parentType;
+        DtoProperty = dtoProperty;
+    }
+
+    public CrudType CrudType { get; }
+    public TypeHelperProperty DtoProperty { get; }
     public string Name => DtoProperty.Name;
     public bool IsReadOnly => DtoProperty.IsReadOnly;
     public bool IsForeignName => DtoProperty.IsForeignName;
@@ -22,7 +28,6 @@ public class CrudProperty(CrudType parentType, TypeHelperProperty dtoProperty) :
     public ITypeDigger TypeDigger => DtoProperty.TypeDigger;
     public bool IsNumber => TypeDigger.Type.IsNumber;
     public bool IsDateTime => TypeDigger.Type.IsDateTime;
-    public bool IsGuid => TypeDigger.Type.IsGuid;
     public bool IsCheckbox => TypeDigger.Type.IsCheckbox;
     public bool IsEnum => TypeDigger.Type.IsEnum;
     public string TypeSimpleName => PropertyType.Name;

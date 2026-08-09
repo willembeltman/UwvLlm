@@ -1,4 +1,4 @@
-﻿namespace gAPI.AutoApi.Server.Helpers;
+﻿namespace gAPI.AutoApiServer.Helpers;
 
 public static class ServiceNameHelper
 {

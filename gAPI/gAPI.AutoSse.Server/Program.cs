@@ -1,12 +1,12 @@
-﻿using gAPI.AutoSse.Server.Helpers;
-using gAPI.AutoSse.Server.Models;
+﻿using gAPI.AutoSseServer.Helpers;
+using gAPI.AutoSseServer.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Linq;
 using System.Text;
 
-namespace gAPI.AutoSse.Server;
+namespace gAPI.AutoSseServer;
 
 [Generator]
 public class Program : IIncrementalGenerator

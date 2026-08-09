@@ -1,9 +1,9 @@
-﻿using gAPI.AutoApi.Server.Models;
+﻿using gAPI.AutoApiServer.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoApi.Server.Generators;
+namespace gAPI.AutoApiServer.Generators;
 
 public abstract class BaseGenerator : SharedReference
 {

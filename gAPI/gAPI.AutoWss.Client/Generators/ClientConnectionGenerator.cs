@@ -1,13 +1,13 @@
 ﻿using gAPI.AutoSerializer;
-using gAPI.AutoWss.Client.Helpers;
-using gAPI.AutoWss.Client.Models;
+using gAPI.AutoWssClient.Helpers;
+using gAPI.AutoWssClient.Models;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace gAPI.AutoWss.Client.Generators;
+namespace gAPI.AutoWssClient.Generators;
 
-public class ClientConnectionGenerator : _BaseGenerator
+public class ClientConnectionGenerator : BaseGenerator
 {
     public ClientConnectionGenerator(Generator context)
     {

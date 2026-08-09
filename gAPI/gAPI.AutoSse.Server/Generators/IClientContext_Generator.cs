@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace gAPI.AutoSse.Server.Generators;
+namespace gAPI.AutoSseServer.Generators;
 
 public class IClientContext_Generator : BaseGenerator
 {

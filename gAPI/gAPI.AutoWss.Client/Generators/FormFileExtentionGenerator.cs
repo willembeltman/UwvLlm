@@ -1,6 +1,6 @@
-﻿namespace gAPI.AutoWss.Client.Generators;
+﻿namespace gAPI.AutoWssClient.Generators;
 
-public class FormFileExtensionGenerator : _BaseGenerator
+public class FormFileExtensionGenerator : BaseGenerator
 {
     public FormFileExtensionGenerator(Generator context)
     {
