@@ -1,4 +1,4 @@
-﻿using gAPI.Core.Client;
+﻿using gAPI.Core.Client.Interfaces;
 using gAPI.Core.Interfaces;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.Dtos;

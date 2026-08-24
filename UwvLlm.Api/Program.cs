@@ -1,6 +1,5 @@
-using gAPI.Core.Extensions;
 using gAPI.Core.Interfaces;
-using gAPI.Core.Server;
+using gAPI.Core.Server.Authentication;
 using gAPI.Core.Server.Extensions;
 using gAPI.Core.Server.Mappings;
 using gAPI.Core.ServiceBus.Extensions;

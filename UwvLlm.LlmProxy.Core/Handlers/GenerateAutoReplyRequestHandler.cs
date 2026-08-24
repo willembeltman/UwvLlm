@@ -1,4 +1,4 @@
-﻿using gAPI.Core.Server;
+﻿using gAPI.Core.Server.Interfaces;
 using gAPI.Core.ServiceBus.Interfaces;
 using gAPI.Llm.Client.Enums;
 using gAPI.Llm.Client.Interfaces;

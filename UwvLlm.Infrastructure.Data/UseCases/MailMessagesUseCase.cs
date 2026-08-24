@@ -1,4 +1,4 @@
-﻿using gAPI.Core.Server;
+﻿using gAPI.Core.Server.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using UwvLlm.Infrastructure.Data.Entities;
 

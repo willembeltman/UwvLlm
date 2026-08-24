@@ -1,4 +1,4 @@
-﻿using gAPI.Core.Client;
+﻿using gAPI.Core.Client.Interfaces;
 
 namespace UwvLlm.App.Core.Interfaces;
 

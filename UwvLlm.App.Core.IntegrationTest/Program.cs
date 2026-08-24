@@ -1,4 +1,5 @@
-using gAPI.Core.Client;
+using gAPI.Core.Client.Authentication;
+using gAPI.Core.Client.Interfaces;
 using gAPI.Core.Interfaces;
 using gAPI.Generated;
 using Microsoft.Extensions.DependencyInjection;
