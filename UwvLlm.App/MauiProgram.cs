@@ -50,8 +50,7 @@ public static class MauiProgram
         builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<NotificationPageViewModel>());
         builder.Services.AddScoped<IUiService, UiService>();
 
-        builder.Services.AddAutoApi(); 
-        builder.Services.AddAutoSse();
+        builder.Services.AddAutoApiSseClient(); 
         builder.Services.AddAuthenticationServices<State>(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281");
         builder.Services.AddScoped<IStateParser<State>, StateParser>();
 

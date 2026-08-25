@@ -16,8 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 var serverConfig = builder.Configuration.CreateServerConfig();
 
 builder.Services.AddOpenApi();
-builder.Services.AddAutoApi(serverConfig);
-builder.Services.AddAutoSse(serverConfig);
+builder.Services.AddAutoApiSseServer(serverConfig);
 
 // DIT MOET IN DE ANALYZER
 builder.Services.AddStorage(serverConfig); 
@@ -38,8 +37,7 @@ builder.Services.AddServiceBus();
 
 var app = builder.Build();
 
-app.MapAutoApi<AuthenticationMiddleware<UwvLlm.Infrastructure.Data.Entities.User, State>>();
-app.MapAutoSse();
+app.MapAutoApiSseServer<AuthenticationMiddleware<UwvLlm.Infrastructure.Data.Entities.User, State>>();
 app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();

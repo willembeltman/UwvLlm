@@ -19,6 +19,8 @@
   <Folder Name="/gAPI/">
     <Project Path="gAPI/gAPI.AutoApi.Client/gAPI.AutoApi.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoApi.Server/gAPI.AutoApi.Server.csproj" />
+    <Project Path="gAPI/gAPI.AutoApiSse.Client/gAPI.AutoApiSse.Client.csproj" />
+    <Project Path="gAPI/gAPI.AutoApiSse.Server/gAPI.AutoApiSse.Server.csproj" />
     <Project Path="gAPI/gAPI.AutoComponent/gAPI.AutoComponent.csproj" />
     <Project Path="gAPI/gAPI.AutoPage/gAPI.AutoPage.csproj" />
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
