@@ -20,7 +20,9 @@ public class GenerateAutoReplyRequestHandler(
     {
         // Check login
         var result = await authenticationService.InitializeAsync(
-            "/Handlers/GenerateAutoReplyResponseHandler",
+            new Microsoft.AspNetCore.Http.PathString("/Handlers/GenerateAutoReplyResponseHandler"),
+            new Microsoft.AspNetCore.Http.QueryString(),
+            System.Net.IPAddress.Loopback,
             message.CookieData,
             message.SessionData,
             message.StateData,

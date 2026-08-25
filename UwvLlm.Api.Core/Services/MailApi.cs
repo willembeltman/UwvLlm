@@ -25,9 +25,9 @@ public class MailApi(
 
         var autoReplyMessage = new GenerateAutoReplyRequest(
             mailMessage.Id,
-            authenticationService.CookieData,
-            authenticationService.SessionData,
-            await authenticationService.GetStateDataAsync(ct));
+            authenticationService.GetCookieData(),
+            authenticationService.SessionId.ToStringValues(),
+            authenticationService.GetStateData());
 
         await serviceBusSender.SendAsync("LlmProxy", autoReplyMessage, ct);
     }
