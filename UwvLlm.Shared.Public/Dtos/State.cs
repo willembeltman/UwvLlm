@@ -7,4 +7,5 @@ namespace UwvLlm.Shared.Public.Dtos;
 [IsStateDto]
 public class State : AuthStateDto
 {
+    public List<string> roles { get; set; } = new List<string>();
 }
