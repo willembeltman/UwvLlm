@@ -17,15 +17,11 @@
     <Project Path="UwvLlm.Shared.Public/UwvLlm.Shared.Public.csproj" Id="2f380807-1cec-4eb5-bc9e-f2382a973d5c" />
   </Folder>
   <Folder Name="/gAPI/">
-    <Project Path="gAPI/gAPI.AutoApi.Client/gAPI.AutoApi.Client.csproj" />
-    <Project Path="gAPI/gAPI.AutoApi.Server/gAPI.AutoApi.Server.csproj" />
     <Project Path="gAPI/gAPI.AutoApiSse.Client/gAPI.AutoApiSse.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoApiSse.Server/gAPI.AutoApiSse.Server.csproj" />
     <Project Path="gAPI/gAPI.AutoComponent/gAPI.AutoComponent.csproj" />
     <Project Path="gAPI/gAPI.AutoPage/gAPI.AutoPage.csproj" />
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
-    <Project Path="gAPI/gAPI.AutoSse.Client/gAPI.AutoSse.Client.csproj" />
-    <Project Path="gAPI/gAPI.AutoSse.Server/gAPI.AutoSse.Server.csproj" />
     <Project Path="gAPI/gAPI.AutoWss.Client/gAPI.AutoWss.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoWss.Server/gAPI.AutoWss.Server.csproj" />
     <Project Path="gAPI/gAPI.CodeGen.Backend/gAPI.CodeGen.Backend.csproj" />
