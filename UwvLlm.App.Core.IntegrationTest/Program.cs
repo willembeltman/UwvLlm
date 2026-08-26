@@ -1,14 +1,10 @@
-using gAPI.Core.Client.Authentication;
 using gAPI.Core.Client.Interfaces;
-using gAPI.Core.Interfaces;
 using gAPI.Generated;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UwvLlm.App.Core.IntegrationTest;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.App.Core.Services;
-using UwvLlm.Shared.Public;
-using UwvLlm.Shared.Public.Dtos;
 using UwvLlm.Shared.Public.Interfaces;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -16,9 +12,7 @@ var builder = Host.CreateApplicationBuilder(args);
 var apiBackendUrl = builder.Configuration["FrontendConfig:ApiBackendUrl"]
     ?? "https://localhost:7281";
 
-builder.Services.AddAutoApiSseClient();
-builder.Services.AddAuthenticationServices<State>(apiBackendUrl);
-builder.Services.AddScoped<IStateParser<State>, StateParser>();
+builder.Services.AddAutoApiSseClient(apiBackendUrl);
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();

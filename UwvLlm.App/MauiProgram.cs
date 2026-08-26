@@ -1,5 +1,4 @@
-﻿using gAPI.Core.Client.Authentication;
-using gAPI.Core.Client.Interfaces;
+﻿using gAPI.Core.Client.Interfaces;
 using gAPI.Core.Interfaces;
 using gAPI.Generated;
 using Microsoft.Extensions.Logging;
@@ -27,6 +26,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Services.AddAutoApiSseClient(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281"); 
+        
+
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<EmailPage>();
         builder.Services.AddTransient<MainPage>();
@@ -49,10 +51,6 @@ public static class MauiProgram
         builder.Services.AddScoped<IUriNavigationManager>(sp => sp.GetRequiredService<NavigationService>());
         builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<NotificationPageViewModel>());
         builder.Services.AddScoped<IUiService, UiService>();
-
-        builder.Services.AddAutoApiSseClient(); 
-        builder.Services.AddAuthenticationServices<State>(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281");
-        builder.Services.AddScoped<IStateParser<State>, StateParser>();
 
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));

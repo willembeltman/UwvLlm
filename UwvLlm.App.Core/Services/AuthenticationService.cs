@@ -1,14 +1,13 @@
-﻿using gAPI.Core.Client.Interfaces;
-using gAPI.Core.Interfaces;
+﻿using gAPI.Core.Interfaces;
+using gAPI.Generated;
 using UwvLlm.App.Core.Interfaces;
-using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.App.Core.Services;
 
 public class AuthenticationService(
     IUiService uiService,
     IAccountService accountService,
-    IAuthenticatedHttpClient<State> httpClient,
+    IAuthenticatedHttpClient httpClient,
     INavigationService navigationService) 
     : IAuthenticationService
 {

@@ -1,15 +1,13 @@
-using gAPI.Core.Client;
 using gAPI.Core.Client.Interfaces;
-using gAPI.Core.Interfaces;
+using gAPI.Generated;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.CrudInterfaces;
-using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.App.Core.IntegrationTest;
 
 internal sealed class IntegrationScenario(
     IAuthenticationService authenticationService,
-    IAuthenticatedHttpClient<State> authenticatedHttpClient,
+    IAuthenticatedHttpClient authenticatedHttpClient,
     IUsersCrudService usersCrudService,
     IEmailService emailService,
     ISseClientConnection clientConnection,
