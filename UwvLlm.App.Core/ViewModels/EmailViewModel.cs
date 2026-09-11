@@ -9,7 +9,7 @@ namespace UwvLlm.App.Core.ViewModels;
 
 public partial class EmailViewModel(
     IDispatcherService dispatcher,
-    IUsersCrudService userService,
+    //IUsersCrudService userService,
     IEmailService mailService,
     IClientConnection clientConnection,
     IUserNotificationsCrudService userNotificationService,
@@ -24,16 +24,16 @@ public partial class EmailViewModel(
 
     public override async Task OnAppearingAsync()
     {
-        var response = await userService.List(skip: 0, take: int.MaxValue, null, CancellationToken.None);
-        if (response.Success == false || response.Response == null)
-        {
-            await UiService.ShowAlertAsync("Cannot load users", "There is a problem while loading the users", "OK");
-            return;
-        }
+        //var response = await userService.List(skip: 0, take: int.MaxValue, null, CancellationToken.None);
+        //if (response.Success == false || response.Response == null)
+        //{
+        //    await UiService.ShowAlertAsync("Cannot load users", "There is a problem while loading the users", "OK");
+        //    return;
+        //}
 
-        Users.Clear();
-        foreach (var notification in response.Response)
-            Users.Add(notification);
+        //Users.Clear();
+        //foreach (var notification in response.Response)
+        //    Users.Add(notification);
 
         await base.OnAppearingAsync();
     }

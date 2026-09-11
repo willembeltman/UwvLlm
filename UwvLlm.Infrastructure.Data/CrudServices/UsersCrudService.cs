@@ -1,7 +1,5 @@
 ﻿using gAPI.Core.Dtos;
 using gAPI.Core.Enums;
-using gAPI.Core.Server.Storage;
-using Microsoft.AspNetCore.Http;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;
 
@@ -9,8 +7,7 @@ namespace UwvLlm.Infrastructure.Data.CrudServices;
 
 public class UsersCrudService(
     gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, User, Guid> useCase,
-    gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, User> mapping,
-    IStorageService storageService)
+    gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, User> mapping)
     : IUsersCrudService
 {
     public async Task<BaseResponseT<User>> Create(User dto, CancellationToken ct)
@@ -104,8 +101,6 @@ public class UsersCrudService(
         if (!await useCase.CanDeleteAsync(dto, ct))
             return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorNotAuthorized };
 
-        await storageService.DeleteStorageFileAsync(entity, ct);
-
         if (!await useCase.RemoveAsync(entity, ct))
             return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorUpdatingState };
 
@@ -139,67 +134,6 @@ public class UsersCrudService(
             Take = take ?? 0,
             CanCreate = await useCase.CanCreateAsync(ct),
             Response = await dtos.ToArrayAsync(ct)
-        };
-    }
-
-    public async Task<BaseResponseT<User>> FileUpdate(Guid userId, IFormFile? file, CancellationToken ct)
-    {
-        if (!await useCase.IsAllowedAsync(ct))
-            return new BaseResponseT<User>() { Error = BaseResponseErrorEnum.ErrorNotAuthorized };
-        
-        var entity = await useCase.FindByIdAsync(userId, ct);
-        if (entity == null)
-            return new BaseResponseT<User>() { Error = BaseResponseErrorEnum.ErrorItemNotFound };
-
-        var dto = await mapping.ToDtoAsync(entity, new User(), ct);
-
-        if (!await useCase.CanUpdateAsync(dto, ct))
-            return new BaseResponseT<User>() { Error = BaseResponseErrorEnum.ErrorNotAuthorized };
-
-        if (file != null)
-        {
-            using var storageFileStream = file.OpenReadStream();
-            await storageService.SaveStorageFileAsync(entity, file.FileName, file.ContentType, storageFileStream, ct);
-        }
-
-        dto = await mapping.ToDtoAsync(entity, new User(), ct);
-
-        if (!await useCase.UpdateAsync(entity, dto, ct))
-            return new BaseResponseT<User>() { Error = BaseResponseErrorEnum.ErrorUpdatingState };
-
-        return new BaseResponseT<User>() 
-        { 
-            Success = true,
-            Response = dto
-        };
-    }
-
-    public async Task<BaseResponseT<bool>> FileDelete(Guid userId, CancellationToken ct)
-    {
-        if (!await useCase.IsAllowedAsync(ct))
-            return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorNotAuthorized };
-
-        var entity = await useCase.FindByIdAsync(userId, ct);
-
-        if (entity == null)
-            return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorItemNotFound };
-
-        var dto = await mapping.ToDtoAsync(entity, new User(), ct);
-
-        if (!await useCase.CanDeleteAsync(dto, ct))
-            return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorNotAuthorized };
-
-        await storageService.DeleteStorageFileAsync(entity, ct);
-
-        dto = await mapping.ToDtoAsync(entity, new User(), ct);
-
-        if (!await useCase.UpdateAsync(entity, dto, ct))
-            return new BaseResponseT<bool>() { Error = BaseResponseErrorEnum.ErrorUpdatingState };
-
-        return new BaseResponseT<bool>() 
-        { 
-            Success = true,
-            Response = true 
         };
     }
 }

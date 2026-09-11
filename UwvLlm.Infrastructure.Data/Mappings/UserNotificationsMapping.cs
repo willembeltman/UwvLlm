@@ -16,7 +16,6 @@ public class UserNotificationsMapping(
         entity.ExternalId = dto.ExternalId;
         entity.Title = dto.Title;
         entity.Message = dto.Message;
-        entity.QuickOptions = dto.QuickOptions;
 
         return entity;
     }
@@ -32,10 +31,10 @@ public class UserNotificationsMapping(
         dto.ExternalId = entity.ExternalId;
         dto.Title = entity.Title;
         dto.Message = entity.Message;
-        dto.QuickOptions = entity.QuickOptions;
-
+        
         dto.UserName = 
-            ("" + (entity?.User?.UserName ?? default) + "");
+            ("" + (entity?.User?.UserName ?? default) + "") + " " + 
+                (" (" + (entity?.User?.Email ?? default) + ")");
 
         await ExtendDto(dto, ct);
 
@@ -60,7 +59,8 @@ public class UserNotificationsMapping(
                 Message = entity.Message,
 #nullable disable
                 UserName = 
-                    ("" + entity.User.UserName + ""),
+                    ("" + entity.User.UserName + "") + " " + 
+                        (" (" + entity.User.Email + ")"),
 #nullable enable
             })
             .ApplyOrderBy(orderby);

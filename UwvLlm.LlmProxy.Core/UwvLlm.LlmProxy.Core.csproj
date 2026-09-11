@@ -11,6 +11,7 @@
 		<ProjectReference Include="..\gAPI\gAPI.Llm.Client\gAPI.Llm.Client.csproj" />
 		<ProjectReference Include="..\UwvLlm.Infrastructure.Data\UwvLlm.Infrastructure.Data.csproj" />
 		<ProjectReference Include="..\UwvLlm.Shared.Private\UwvLlm.Shared.Private.csproj" />
+		<ProjectReference Include="..\gAPI\gAPI.AutoAuth.Server\gAPI.AutoAuth.Server.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
 </Project>

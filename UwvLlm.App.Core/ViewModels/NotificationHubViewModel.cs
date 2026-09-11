@@ -51,12 +51,14 @@ public partial class NotificationHubViewModel(
         => ClientConnection.UnsubscribeAsync(this);
 
     public virtual async Task OnNotificationReceived(UserNotification notification)
-        => Dispatcher.Invoke(() =>
-        {
-            NotificationList.Add(notification);
-            NotificationCount = NotificationList.Count;
-            HasNotifications = NotificationList.Count > 0;
-        });
+    {
+        Dispatcher.Invoke(() =>
+            {
+                NotificationList.Add(notification);
+                NotificationCount = NotificationList.Count;
+                HasNotifications = NotificationList.Count > 0;
+            });
+    }
 
     [RelayCommand]
     public async Task OpenNotifications()

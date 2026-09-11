@@ -12,7 +12,8 @@ var builder = Host.CreateApplicationBuilder(args);
 var apiBackendUrl = builder.Configuration["FrontendConfig:ApiBackendUrl"]
     ?? "https://localhost:7281";
 
-builder.Services.AddAutoApiSseClient(apiBackendUrl);
+builder.Services.AddAutoApiClient(apiBackendUrl);
+builder.Services.AddAutoAuthClient(apiBackendUrl);
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();

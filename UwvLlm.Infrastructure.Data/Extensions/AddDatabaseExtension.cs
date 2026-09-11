@@ -9,9 +9,9 @@ namespace UwvLlm.Infrastructure.Data.Extensions;
 public static class AddDatabaseExtension
 {
     public static IServiceCollection AddDatabase(
-    this IServiceCollection services,
-    IConfiguration configuration,
-    bool useMemoryDatabase = false)
+        this IServiceCollection services,
+        IConfiguration configuration,
+        bool useMemoryDatabase = false)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 

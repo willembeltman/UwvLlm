@@ -1,11 +1,9 @@
 ﻿using gAPI.Core.Server.Extensions;
-using gAPI.Core.Server.Storage;
 
 namespace UwvLlm.Infrastructure.Data.Mappings;
 
 public class UsersMapping(
-    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User, Guid> useCase, 
-    IStorageService storageService) 
+    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User, Guid> useCase) 
     : gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User>
 {
     public override UwvLlm.Infrastructure.Data.Entities.User ToEntity(
@@ -70,7 +68,6 @@ public class UsersMapping(
         UwvLlm.Shared.Public.Dtos.User dto,
         CancellationToken ct)
     {
-        dto.StorageFileUrl = await storageService.GetStorageFileUrlAsync($"User/{dto.Id}", ct);
         dto.CanUpdate = await useCase.CanUpdateAsync(dto, ct);
         dto.CanDelete = await useCase.CanDeleteAsync(dto, ct);
     }

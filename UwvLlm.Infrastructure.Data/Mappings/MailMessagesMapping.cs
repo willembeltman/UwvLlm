@@ -35,10 +35,12 @@ public class MailMessagesMapping(
         dto.AutoResponse = entity.AutoResponse;
         
         dto.FromUserName = 
-            ("" + (entity?.FromUser?.UserName ?? default) + "");
+            ("" + (entity?.FromUser?.UserName ?? default) + "") + " " + 
+                (" (" + (entity?.FromUser?.Email ?? default) + ")");
 
         dto.ToUserName = 
-            ("" + (entity?.ToUser?.UserName ?? default) + "");
+            ("" + (entity?.ToUser?.UserName ?? default) + "") + " " + 
+                (" (" + (entity?.ToUser?.Email ?? default) + ")");
 
         await ExtendDto(dto, ct);
 
@@ -64,9 +66,11 @@ public class MailMessagesMapping(
                 AutoResponse = entity.AutoResponse,
 #nullable disable
                 FromUserName = 
-                    ("" + entity.FromUser.UserName + ""),
+                    ("" + entity.FromUser.UserName + "") + " " + 
+                        (" (" + entity.FromUser.Email + ")"),
                 ToUserName = 
-                    ("" + entity.ToUser.UserName + ""),
+                    ("" + entity.ToUser.UserName + "") + " " + 
+                        (" (" + entity.ToUser.Email + ")"),
 #nullable enable
             })
             .ApplyOrderBy(orderby);

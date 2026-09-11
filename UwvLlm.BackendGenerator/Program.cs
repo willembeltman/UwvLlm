@@ -20,8 +20,8 @@ var config = new BackendConfig(
     Core_CrudMappingsDirectory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Infrastructure.Data\Mappings"),
     Core_CrudMappingsNamespace: "UwvLlm.Infrastructure.Data.Mappings",
 
-    Extensions_Directory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Api\Extensions"),
-    Extensions_Namespace: "UwvLlm.Api.Extensions"
+    Extensions_Directory: EnvironmentPathHelper.GetDirectory(root, @"UwvLlm.Infrastructure.Data\Extensions"),
+    Extensions_Namespace: "UwvLlm.Infrastructure.Data.Extensions"
     );
 
 var generator = new gAPI.CodeGen.Backend.BackendGenerator(config);

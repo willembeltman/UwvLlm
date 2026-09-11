@@ -2,6 +2,7 @@ using gAPI.Core.Client.Interfaces;
 using gAPI.Generated;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.Shared.Public.CrudInterfaces;
+using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.App.Core.IntegrationTest;
 
@@ -10,7 +11,7 @@ internal sealed class IntegrationScenario(
     IAuthenticatedHttpClient authenticatedHttpClient,
     IUsersCrudService usersCrudService,
     IEmailService emailService,
-    ISseClientConnection clientConnection,
+    IClientConnection clientConnection,
     IntegrationNotificationHub notificationHub)
 {
     private static readonly TimeSpan SetupTimeout = TimeSpan.FromMinutes(5);
@@ -34,6 +35,8 @@ internal sealed class IntegrationScenario(
 
         if (await authenticatedHttpClient.IsAuthenticatedAsync(setupTimeout.Token) != true)
             throw new InvalidOperationException("Registration completed, but the client is not authenticated.");
+
+        await Task.Delay(5000);
 
         Console.WriteLine("Opening notification channel...");
         clientConnection.SubscribeAsync(notificationHub);

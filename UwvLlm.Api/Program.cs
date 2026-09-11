@@ -1,32 +1,18 @@
-using gAPI.Core.Interfaces;
-using gAPI.Core.Server.Authentication;
 using gAPI.Core.Server.Extensions;
-using gAPI.Core.Server.Mappings;
 using gAPI.Core.ServiceBus.Extensions;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Data.Extensions;
-using UwvLlm.Infrastructure.Data.Mappings;
-using UwvLlm.Shared.Public;
-using UwvLlm.Shared.Public.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 var serverConfig = builder.Configuration.CreateServerConfig();
 
+builder.Services.AddAutoApiServer(serverConfig);
+builder.Services.AddAutoAuthServer(serverConfig);
+builder.Services.AddStorage(serverConfig);
 builder.Services.AddOpenApi();
-builder.Services.AddAutoApiSseServer(serverConfig);
-
-// DIT MOET IN DE ANALYZER
-builder.Services.AddStorage(serverConfig); 
-builder.Services.AddCommenServices(serverConfig); // API Config injection + TimeProvider
-builder.Services.AddDatabase(builder.Configuration);
-builder.Services.AddAuthenticationServices<UwvLlm.Infrastructure.Data.Entities.User, State>();
-builder.Services.AddScoped<IStateMapping<UwvLlm.Infrastructure.Data.Entities.User, State>, StateMapping>();
-builder.Services.AddScoped<IStateUserMapping<UwvLlm.Infrastructure.Data.Entities.User, StateUser>, StateUserMapping>();
-builder.Services.AddScoped<IStateParser<State>, StateParser>();
-// DIT MOET IN DE ANALYZER
 
 // Extra services
 builder.Services.AddCrudMappings();
@@ -37,7 +23,8 @@ builder.Services.AddServiceBus();
 
 var app = builder.Build();
 
-app.MapAutoApiSseServer<AuthenticationMiddleware<UwvLlm.Infrastructure.Data.Entities.User, State>>();
+app.MapAutoApiServer();
+app.MapAutoAuthServer();
 app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();

@@ -26,7 +26,7 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        builder.Services.AddAutoApiSseClient(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281"); 
+        builder.Services.AddAutoApiClient(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281"); 
         
 
         builder.Services.AddTransient<LoginPage>();

@@ -1,4 +1,5 @@
 ﻿using gAPI.Core.Attributes;
+using gAPI.Core.Enums;
 using gAPI.Core.Interfaces;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,7 @@ namespace UwvLlm.Shared.Public.Dtos;
 [IsAuthorized]
 [IsUser]
 [IsEntryPoint]
-public class User : ICrudEntity, IStorageFileDto
+public class User : ICrudEntity
 {
     [Key]
     public Guid Id { get; set; }
@@ -15,6 +16,7 @@ public class User : ICrudEntity, IStorageFileDto
     [StringLength(128, MinimumLength = 0)]
     [Required(AllowEmptyStrings = false)]
     public string UserName { get; set; } = string.Empty;
+    [IsName(" (", FormattingOption.ToString, ")")]
     [StringLength(255, MinimumLength = 0)]
     [Required(AllowEmptyStrings = false)]
     public string Email { get; set; } = string.Empty;
@@ -22,11 +24,8 @@ public class User : ICrudEntity, IStorageFileDto
     [StringLength(32, MinimumLength = 0)]
     public string PhoneNumber { get; set; } = string.Empty;
     [IsReadOnly]
-    [IsStorageFileUrlProperty]
-    public string? StorageFileUrl { get; set; }
-    [IsReadOnly]
     public bool CanUpdate { get; set; }
     [IsReadOnly]
     public bool CanDelete { get; set; }
-    public override string ToString() => $"{UserName}";
+    public override string ToString() => $"{UserName} {Email}";
 }
