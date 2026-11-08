@@ -7,7 +7,7 @@ namespace UwvLlm.Infrastructure.Data.UseCases;
 public class MailMessagesUseCase(
     ApplicationDbContext db,
     IAuthenticationService<User, UwvLlm.Shared.Public.Dtos.State> authenticationService)
-    : gAPI.Core.Interfaces.IUseCase<MailMessage, UwvLlm.Shared.Public.Dtos.MailMessage, Guid>
+    : gAPI.Core.Server.Interfaces.IUseCase<MailMessage, UwvLlm.Shared.Public.Dtos.MailMessage, Guid>
 {
     private Guid? CurrentUserId => authenticationService.State.User?.Id;
 

@@ -1,3 +1,3 @@
 ﻿using gAPI.Fabric.Server;
 
-await FabricProgram.StartAsync();
+await FabricProgram.StartAsync("UwvLlm Fabric");

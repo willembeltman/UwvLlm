@@ -7,7 +7,7 @@ namespace UwvLlm.Infrastructure.Data.UseCases;
 public class UsersUseCase(
     ApplicationDbContext db,
     IAuthenticationService<User, UwvLlm.Shared.Public.Dtos.State> authenticationService)
-    : gAPI.Core.Interfaces.IUseCase<User, UwvLlm.Shared.Public.Dtos.User, Guid>
+    : gAPI.Core.Server.Interfaces.IUseCase<User, UwvLlm.Shared.Public.Dtos.User, Guid>
 {
     private Guid? CurrentUserId => authenticationService.State.User?.Id;
 

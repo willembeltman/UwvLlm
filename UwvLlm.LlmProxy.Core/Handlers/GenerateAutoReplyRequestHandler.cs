@@ -1,94 +1,69 @@
-﻿using gAPI.Core.Server.Interfaces;
-using gAPI.Core.ServiceBus.Interfaces;
-using gAPI.Llm.Client.Enums;
-using gAPI.Llm.Client.Interfaces;
-using gAPI.Llm.Client.Models;
-using UwvLlm.Shared.Private.Messages;
-using UwvLlm.Shared.Public.CrudInterfaces;
+﻿using Microsoft.Extensions.AI;
+using System.Text.Json;
 using UwvLlm.Shared.Public.Dtos;
 
 namespace UwvLlm.LlmProxy.Core.Handlers;
 
 public class GenerateAutoReplyRequestHandler(
-    IMailMessagesCrudService mailMessagesCrudService,
-    IAuthenticationService<Infrastructure.Data.Entities.User, State> authenticationService,
-    IServiceBusSender sender,
-    ILlmClient llmClient)
-    : IHandler<GenerateAutoReplyRequest>
+    IChatClient chatClient)
+    : IGenerateAutoReplyRequestHandler
 {
-    public async Task Handle(GenerateAutoReplyRequest message, CancellationToken ct)
+    public async Task<MailMessage> Handle(MailMessage message, CancellationToken ct)
     {
-        // Check login
-        var result = await authenticationService.InitializeAsync(
-            new Microsoft.AspNetCore.Http.PathString("/Handlers/GenerateAutoReplyResponseHandler"),
-            new Microsoft.AspNetCore.Http.QueryString(),
-            System.Net.IPAddress.Loopback,
-            message.CookieData,
-            message.SessionData,
-            message.StateData,
-            ct);
-
-        if (result.Forbidden || result.Authenticated == false)
-            throw new Exception("Cannot find session");
-
-        // Get the email
-        var mailMessageResponse = await mailMessagesCrudService.Read(message.MailMessageId, ct);
-        var mailMessage = mailMessageResponse.ThrowIfNull();
-
-        // Generate response
-        mailMessage.AutoResponse = await GetAutoReply(mailMessage, ct);
-
-        // Update the email
-        mailMessageResponse = await mailMessagesCrudService.Update(mailMessage, ct);
-        mailMessageResponse.ThrowIfNull();
-
-        // Signal API to inform user
-        var generateAutoReplyResponse = new GenerateAutoReplyResponse(
-            message.MailMessageId,
-            message.CookieData,
-            message.SessionData,
-            message.StateData);
-        await sender.SendAsync("Api", generateAutoReplyResponse, ct);
+        message.AutoResponse = await GetAutoReply(message, ct);
+        return message;
     }
-
 
     private async Task<string> GetAutoReply(MailMessage mailMessage, CancellationToken ct)
     {
-        // Hardcoded for now
-        var model = new Model("gpt-oss:20b");
-        //var model = new Model("gemma4:e2b");
-        if (llmClient.Initialized == false)
+        var systemPrompt = """
+        Create a reply to this email conversation. Use the same language as the user uses.
+        You MUST respond strictly with a valid JSON object matching this schema:
         {
-            await llmClient.InitializeModelAsync(model, ct);
+            "Content": "text of the reply"
         }
+        Do not include markdown formatting like ```json or any other text outside the JSON object.
+        """;
 
-        var systemPrompt = "Create a reply to this email conversation, use the same language as the user uses.";
         var mailMessageText = $@"Date: {mailMessage.Date}
 From: {mailMessage.FromUserName}
 To: {mailMessage.ToUserName}
 Subject: {mailMessage.Subject}
 
 {mailMessage.Content}";
-        var messages = new List<Message>()
+
+        var messages = new List<ChatMessage>
         {
-            new(Role.System, null, systemPrompt, null, null),
-            new(Role.User, null, mailMessageText, null, null)
+            new(ChatRole.System, systemPrompt),
+            new(ChatRole.User, mailMessageText)
         };
 
-        var toolName = "reply-email";
-        var tool = new Tool(toolName, "reply to the email", [new ToolParameter("Content", "string", "text of the reply")]);
-
-        var autoResponse = (string?)null;
-        while (autoResponse == null)
+        var options = new ChatOptions
         {
-            var request = new LlmRequest([.. messages], [tool]);
-            var response = await llmClient.ChatAsync(model, request, ct);
-            messages.Add(response.Message);
+            ModelId = "gpt-oss:20b",
+            ResponseFormat = ChatResponseFormat.Json
+        };
 
-            autoResponse = response.Message.ToolCalls?
-                .FirstOrDefault(a => a.Function.Name == toolName)?
-                .Function.Arguments.Content;
+        // Gecorrigeerde aanroep: GetResponseAsync in plaats van CompleteAsync
+        ChatResponse response = await chatClient.GetResponseAsync(messages, options, ct);
+
+        // Schoon de response op mocht het model stiekem toch markdown backticks meesturen
+        var cleanText = response.Messages.Last().Text?.Trim();
+        if (cleanText != null && cleanText.StartsWith("```"))
+        {
+            cleanText = cleanText.Replace("```json", "").Replace("```", "").Trim();
         }
-        return autoResponse;
+
+        // Parse de JSON-output om de 'Content' waarde op te halen
+        if (!string.IsNullOrEmpty(cleanText))
+        {
+            using var doc = JsonDocument.Parse(cleanText);
+            if (doc.RootElement.TryGetProperty("Content", out var contentProperty))
+            {
+                return contentProperty.GetString() ?? string.Empty;
+            }
+        }
+
+        throw new Exception($"Failed to generate auto reply. Raw response was: {cleanText}");
     }
 }

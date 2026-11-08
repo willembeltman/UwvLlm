@@ -1,6 +1,8 @@
-﻿using gAPI.Core.Client.Interfaces;
+﻿using gAPI.Core.Client.Config;
+using gAPI.Core.Client.Interfaces;
 using gAPI.Core.Interfaces;
 using gAPI.Generated;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using UwvLlm.App.Core.Interfaces;
 using UwvLlm.App.Core.Services;
@@ -26,8 +28,27 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        builder.Services.AddAutoApiClient(builder.Configuration["FrontendConfig:ApiBackendUrl"] ?? "https://localhost:7281"); 
-        
+#if DEBUG
+        using var stream = FileSystem
+            .OpenAppPackageFileAsync("appsettings.Development.json")
+            .GetAwaiter()
+            .GetResult();
+        if (stream != null)
+            builder.Configuration.AddJsonStream(stream);
+#else
+        using var stream = FileSystem
+            .OpenAppPackageFileAsync("appsettings.json")
+            .GetAwaiter()
+            .GetResult();
+        if (stream != null)
+            builder.Configuration.AddJsonStream(stream);
+#endif
+
+        var apiUrl = builder.Configuration["ApiBackendUrl"] ?? "";
+        var wssUrl = builder.Configuration["WssBackendUrl"] ?? "";
+
+        var clientConfig = new ClientConfig(apiUrl, wssUrl);
+
 
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<EmailPage>();

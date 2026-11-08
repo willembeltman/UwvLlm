@@ -1,4 +1,4 @@
-﻿using gAPI.Core.Interfaces;
+﻿using gAPI.Core.Server.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using UwvLlm.Infrastructure.Data.Mappings;
 using UwvLlm.Infrastructure.Data.UseCases;

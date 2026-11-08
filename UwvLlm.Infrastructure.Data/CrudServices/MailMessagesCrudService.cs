@@ -6,8 +6,8 @@ using UwvLlm.Shared.Public.Dtos;
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 
 public class MailMessagesCrudService(
-    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage, Guid> useCase,
-    gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage> mapping)
+    gAPI.Core.Server.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage, Guid> useCase,
+    gAPI.Core.Server.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.MailMessage, MailMessage> mapping)
     : IMailMessagesCrudService
 {
     public async Task<BaseResponseT<MailMessage>> Create(MailMessage dto, CancellationToken ct)

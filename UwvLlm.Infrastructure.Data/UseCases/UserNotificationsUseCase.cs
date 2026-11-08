@@ -7,7 +7,7 @@ namespace UwvLlm.Infrastructure.Data.UseCases;
 public class UserNotificationsUseCase(
     ApplicationDbContext db,
     IAuthenticationService<User, UwvLlm.Shared.Public.Dtos.State> authenticationService)
-    : gAPI.Core.Interfaces.IUseCase<UserNotification, UwvLlm.Shared.Public.Dtos.UserNotification, long>
+    : gAPI.Core.Server.Interfaces.IUseCase<UserNotification, UwvLlm.Shared.Public.Dtos.UserNotification, long>
 {
     private Guid? CurrentUserId => authenticationService.State.User?.Id;
 

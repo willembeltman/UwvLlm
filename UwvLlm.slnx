@@ -16,11 +16,12 @@
     <Project Path="UwvLlm.Shared.Private/UwvLlm.Shared.Private.csproj" Id="7b5e2458-b601-4c3f-b2d9-51a2af04c542" />
     <Project Path="UwvLlm.Shared.Public/UwvLlm.Shared.Public.csproj" Id="2f380807-1cec-4eb5-bc9e-f2382a973d5c" />
   </Folder>
-  <Folder Name="/gAPI/">
+  <Folder Name="/gApi/">
     <Project Path="gAPI/gAPI.AutoApi.Client/gAPI.AutoApi.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoApi.Server/gAPI.AutoApi.Server.csproj" />
     <Project Path="gAPI/gAPI.AutoAuth.Client/gAPI.AutoAuth.Client.csproj" />
     <Project Path="gAPI/gAPI.AutoAuth.Server/gAPI.AutoAuth.Server.csproj" />
+    <Project Path="gAPI/gAPI.AutoBus/gAPI.AutoBus.csproj" />
     <Project Path="gAPI/gAPI.AutoComponent/gAPI.AutoComponent.csproj" />
     <Project Path="gAPI/gAPI.AutoPage/gAPI.AutoPage.csproj" />
     <Project Path="gAPI/gAPI.AutoSerializer/gAPI.AutoSerializer.csproj" />
@@ -30,11 +31,14 @@
     <Project Path="gAPI/gAPI.CodeGen.Frontend/gAPI.CodeGen.Frontend.csproj" />
     <Project Path="gAPI/gAPI.Core.Client/gAPI.Core.Client.csproj" />
     <Project Path="gAPI/gAPI.Core.Server/gAPI.Core.Server.csproj" />
-    <Project Path="gAPI/gAPI.Core.ServiceBus/gAPI.Core.ServiceBus.csproj" />
+    <Project Path="gAPI/gAPI.Core.ServiceBus.AzureServiceBus/gAPI.Core.ServiceBus.AzureServiceBus.csproj" />
+    <Project Path="gAPI/gAPI.Core.ServiceBus.Fabric/gAPI.Core.ServiceBus.Fabric.csproj" />
+    <Project Path="gAPI/gAPI.Core.ServiceBus.RabbitMQ/gAPI.Core.ServiceBus.RabbitMQ.csproj" />
     <Project Path="gAPI/gAPI.Core/gAPI.Core.csproj" />
-    <Project Path="gAPI/gAPI.EntityFrameworkDisk/gAPI.EntityFrameworkDisk.csproj" />
+    <Project Path="gAPI/gAPI.EntityFrameworkDisk/gAPI.EntityFrameworkDisk.csproj" Id="029210cf-d7d2-4357-9b15-b40d069194be" />
     <Project Path="gAPI/gAPI.Fabric.Server/gAPI.Fabric.Server.csproj" />
-    <Project Path="gAPI/gAPI.Llm.Client/gAPI.Llm.Client.csproj" />
+    <Project Path="gAPI/gAPI.Storage.Client/gAPI.Storage.Client.csproj" />
+    <Project Path="gAPI/gAPI.Storage.Core/gAPI.Storage.Core.csproj" />
     <Project Path="gAPI/gAPI.Storage.Server/gAPI.Storage.Server.csproj" />
   </Folder>
   <Folder Name="/Generators/">

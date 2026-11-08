@@ -7,5 +7,5 @@ namespace UwvLlm.Shared.Public.Interfaces;
 [IsAuthorized]
 public interface INotificationHub
 {
-    Task OnNotificationReceived(UserNotification notification);
+    void OnNotificationReceived(UserNotification notification);
 }

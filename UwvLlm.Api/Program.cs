@@ -1,25 +1,25 @@
 using gAPI.Core.Server.Extensions;
-using gAPI.Core.ServiceBus.Extensions;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using UwvLlm.Infrastructure.Data.Entities;
 using UwvLlm.Infrastructure.Data.Extensions;
+using gAPI.Storage.Client.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-var serverConfig = builder.Configuration.CreateServerConfig();
 
+var serverConfig = builder.Configuration.CreateServerConfig();
 builder.Services.AddAutoApiServer(serverConfig);
 builder.Services.AddAutoAuthServer(serverConfig);
-builder.Services.AddStorage(serverConfig);
+
+var storageConfig = builder.Configuration.CreateStorageConfig();
+builder.Services.AddStorage(storageConfig);
+
 builder.Services.AddOpenApi();
 
 // Extra services
 builder.Services.AddCrudMappings();
 builder.Services.AddCrudUseCases();
-
-// Service Bus
-builder.Services.AddServiceBus();
 
 var app = builder.Build();
 
@@ -39,4 +39,4 @@ using (var scope = app.Services.CreateScope())
 }
 // DIT MOET IN DE ANALYZER
 
-app.RunWithServiceBus(busName: "Api");
+await app.RunAsync();

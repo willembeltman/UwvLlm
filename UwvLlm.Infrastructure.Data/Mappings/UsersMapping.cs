@@ -3,8 +3,8 @@
 namespace UwvLlm.Infrastructure.Data.Mappings;
 
 public class UsersMapping(
-    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User, Guid> useCase) 
-    : gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User>
+    gAPI.Core.Server.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User, Guid> useCase) 
+    : gAPI.Core.Server.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.User, UwvLlm.Shared.Public.Dtos.User>
 {
     public override UwvLlm.Infrastructure.Data.Entities.User ToEntity(
         UwvLlm.Shared.Public.Dtos.User dto, 

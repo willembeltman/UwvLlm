@@ -6,7 +6,7 @@ namespace UwvLlm.App.Core.Services;
 
 public class AuthenticationService(
     IUiService uiService,
-    IAccountService accountService,
+    IAccountServiceApi accountService,
     IAuthenticatedHttpClient httpClient,
     INavigationService navigationService) 
     : IAuthenticationService

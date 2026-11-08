@@ -9,11 +9,9 @@ using UwvLlm.Shared.Public.Interfaces;
 
 var builder = Host.CreateApplicationBuilder(args);
 
-var apiBackendUrl = builder.Configuration["FrontendConfig:ApiBackendUrl"]
-    ?? "https://localhost:7281";
-
-builder.Services.AddAutoApiClient(apiBackendUrl);
-builder.Services.AddAutoAuthClient(apiBackendUrl);
+//var serverConfig = builder.Configuration.CreateServerConfig();
+//builder.Services.AddAutoApiServer(serverConfig);
+//builder.Services.AddAutoAuthServer(serverConfig);
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -22,6 +20,7 @@ builder.Services.AddScoped<IUiService>(sp => sp.GetRequiredService<ConsoleAppSer
 builder.Services.AddScoped<IDispatcherService>(sp => sp.GetRequiredService<ConsoleAppServices>());
 builder.Services.AddScoped<INavigationService>(sp => sp.GetRequiredService<ConsoleAppServices>());
 builder.Services.AddScoped<IUriNavigationManager>(sp => sp.GetRequiredService<ConsoleAppServices>());
+
 builder.Services.AddScoped<IntegrationNotificationHub>();
 builder.Services.AddScoped<INotificationHub>(sp => sp.GetRequiredService<IntegrationNotificationHub>());
 builder.Services.AddScoped<IntegrationScenario>();

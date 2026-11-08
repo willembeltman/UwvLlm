@@ -33,7 +33,7 @@ public partial class NotificationHubViewModel(
 
     public virtual async Task OnAppearingAsync()
     {
-        ClientConnection.SubscribeAsync(this);
+        await ClientConnection.SubscribeAsync(this);
 
         NotificationList.Clear();
         var response = await UserNotificationsService.List(0, int.MaxValue, null, Cts.Token);
@@ -47,10 +47,10 @@ public partial class NotificationHubViewModel(
             NotificationList.Add(notification);
     }
 
-    public virtual async Task OnDisappearingAsync()
+    public virtual Task OnDisappearingAsync()
         => ClientConnection.UnsubscribeAsync(this);
 
-    public virtual async Task OnNotificationReceived(UserNotification notification)
+    public virtual void OnNotificationReceived(UserNotification notification)
     {
         Dispatcher.Invoke(() =>
             {

@@ -1,16 +1,17 @@
-﻿using gAPI.Core.Server.Interfaces;
-using gAPI.Core.ServiceBus.Interfaces;
-using UwvLlm.Shared.Private.Messages;
+﻿using gAPI.Generated;
 using UwvLlm.Shared.Public.CrudInterfaces;
 using UwvLlm.Shared.Public.Dtos;
+using UwvLlm.Shared.Public.Enums;
 using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.Api.Core.Services;
 
 public class MailApi(
-    IAuthenticationService<Infrastructure.Data.Entities.User, State> authenticationService,
+    IAuthenticationService authenticationService,
     IMailMessagesCrudService mailService,
-    IServiceBusSender serviceBusSender)
+    IGenerateAutoReplyRequestHandlerContext generateAutoReply,
+    IUserNotificationsCrudService notificationService,
+    INotificationHubContext notificationHub)
     : IMailApi
 {
     public async Task SendMail(MailMessage newMail, CancellationToken ct)
@@ -23,12 +24,36 @@ public class MailApi(
         var mailMessageResponse = await mailService.Create(newMail, ct);
         var mailMessage = mailMessageResponse.ThrowIfNull();
 
-        var autoReplyMessage = new GenerateAutoReplyRequest(
-            mailMessage.Id,
-            authenticationService.GetCookieData(),
-            authenticationService.SessionId.ToStringValues(),
-            authenticationService.GetStateData());
+        mailMessage = await generateAutoReply.ToAny().Handle(mailMessage, ct);
 
-        await serviceBusSender.SendAsync("LlmProxy", autoReplyMessage, ct);
+        // Create a new notification record for the user
+        var userNotification = CreateNotification(mailMessage);
+
+        // Create the notification 
+        var notificationResult = await notificationService.Create(userNotification, ct);
+        var notification = notificationResult.ThrowIfNull();
+
+        // And send it to the user
+        notificationHub.ToAll().OnNotificationReceived(notification);
     }
+    private static UserNotification CreateNotification(MailMessage mailMessage)
+        => new()
+        {
+            UserId = mailMessage.ToUserId,
+            ExternalType = NotificationType.Mail,
+            ExternalId = mailMessage.Id.ToString(),
+            Title = "Message received",
+            Message = $@"Subject: {mailMessage.Subject}
+
+{mailMessage.Content}
+
+==========================
+        AUTO-REPLY
+==========================
+
+{mailMessage.AutoResponse}
+
+Do you want to auto-reply?",
+            QuickOptions = ["Yes", "No", "Modify"]
+        };
 }

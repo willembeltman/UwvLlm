@@ -6,8 +6,8 @@ using UwvLlm.Shared.Public.Dtos;
 namespace UwvLlm.Infrastructure.Data.CrudServices;
 
 public class UserNotificationsCrudService(
-    gAPI.Core.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification, long> useCase,
-    gAPI.Core.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification> mapping)
+    gAPI.Core.Server.Interfaces.IUseCase<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification, long> useCase,
+    gAPI.Core.Server.Interfaces.Mapping<UwvLlm.Infrastructure.Data.Entities.UserNotification, UserNotification> mapping)
     : IUserNotificationsCrudService
 {
     public async Task<BaseResponseT<UserNotification>> Create(UserNotification dto, CancellationToken ct)
