@@ -1,4 +1,3 @@
-using gAPI.Core.Server.Extensions;
 using gAPI.Generated;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -8,16 +7,12 @@ using gAPI.Storage.Client.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var serverConfig = builder.Configuration.CreateServerConfig();
-builder.Services.AddAutoApiServer(serverConfig);
-builder.Services.AddAutoAuthServer(serverConfig);
-
-var storageConfig = builder.Configuration.CreateStorageConfig();
-builder.Services.AddStorage(storageConfig);
+builder.Services.AddAutoApiServer(builder.Configuration);
+builder.Services.AddAutoAuthServer(builder.Configuration);
+builder.Services.AddAutoBus(builder.Configuration);
+builder.Services.AddStorage(builder.Configuration);
 
 builder.Services.AddOpenApi();
-
-// Extra services
 builder.Services.AddCrudMappings();
 builder.Services.AddCrudUseCases();
 
@@ -25,18 +20,20 @@ var app = builder.Build();
 
 app.MapAutoApiServer();
 app.MapAutoAuthServer();
-app.UseHttpsRedirection();
 app.MapOpenApi();
 app.MapScalarApiReference();
+app.UseHttpsRedirection();
 
-// DIT MOET IN DE ANALYZER
-using (var scope = app.Services.CreateScope())
+var val = builder.Configuration["CreateDatabase"];
+if ((val ?? "").ToString().Equals("true", StringComparison.CurrentCultureIgnoreCase))
 {
-    var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
-    var db = factory.CreateDbContext();
+    using (var scope = app.Services.CreateScope())
+    {
+        var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>();
+        var db = factory.CreateDbContext();
 
-    db.Database.Migrate();
+        db.Database.Migrate();
+    }
 }
-// DIT MOET IN DE ANALYZER
 
 await app.RunAsync();

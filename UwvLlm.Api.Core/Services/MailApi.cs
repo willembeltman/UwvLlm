@@ -9,9 +9,9 @@ namespace UwvLlm.Api.Core.Services;
 public class MailApi(
     IAuthenticationService authenticationService,
     IMailMessagesCrudService mailService,
-    IGenerateAutoReplyRequestHandlerContext generateAutoReply,
     IUserNotificationsCrudService notificationService,
-    INotificationHubContext notificationHub)
+    IBusContext busContext,
+    IClientContext clientContext)
     : IMailApi
 {
     public async Task SendMail(MailMessage newMail, CancellationToken ct)
@@ -19,22 +19,31 @@ public class MailApi(
         if (authenticationService.State.User == null)
             throw new Exception("User not logged in");
 
+        // Set current user
         newMail.FromUserId = authenticationService.State.User.Id;
 
+        // Create new email in db
         var mailMessageResponse = await mailService.Create(newMail, ct);
         var mailMessage = mailMessageResponse.ThrowIfNull();
 
-        mailMessage = await generateAutoReply.ToAny().Handle(mailMessage, ct);
+        // Get autoresponse
+        mailMessage.AutoResponse = await busContext.AutoReplyGeneratorBus
+            .ToAny(timeOut: TimeSpan.FromMinutes(5))
+            .GetAutoReply(mailMessage, ct);
 
-        // Create a new notification record for the user
+        // Save autoresponse
+        mailMessageResponse = await mailService.Update(mailMessage, ct);
+        mailMessage = mailMessageResponse.ThrowIfNull();
+
+        // Create new notification dto for the user
         var userNotification = CreateNotification(mailMessage);
 
-        // Create the notification 
+        // Create new notification in db
         var notificationResult = await notificationService.Create(userNotification, ct);
         var notification = notificationResult.ThrowIfNull();
 
-        // And send it to the user
-        notificationHub.ToAll().OnNotificationReceived(notification);
+        // Send notification to the user
+        clientContext.NotificationHub.ToAll().OnNotificationReceived(notification);
     }
     private static UserNotification CreateNotification(MailMessage mailMessage)
         => new()

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UwvLlm.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class FixTableNames : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,6 +59,21 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tokens",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TokenHash = table.Column<string>(type: "nvarchar(280)", maxLength: 280, nullable: false),
+                    Date = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tokens", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -72,6 +87,25 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserIps",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IpId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserIps", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserIps_Ips_IpId",
+                        column: x => x.IpId,
+                        principalTable: "Ips",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -104,30 +138,6 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserIps",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IpId = table.Column<long>(type: "bigint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserIps", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserIps_Ips_IpId",
-                        column: x => x.IpId,
-                        principalTable: "Ips",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_UserIps_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserNotifications",
                 columns: table => new
                 {
@@ -145,27 +155,6 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     table.PrimaryKey("PK_UserNotifications", x => x.Id);
                     table.ForeignKey(
                         name: "FK_UserNotifications_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserTokens",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TokenHash = table.Column<string>(type: "nvarchar(280)", maxLength: 280, nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserTokens", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserTokens_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -209,14 +198,14 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 {
                     table.PrimaryKey("PK_UserIpSessionTokens", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_UserIpSessionTokens_Tokens_TokenId",
+                        column: x => x.TokenId,
+                        principalTable: "Tokens",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_UserIpSessionTokens_UserIpSessions_UserIpSessionId",
                         column: x => x.UserIpSessionId,
                         principalTable: "UserIpSessions",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_UserIpSessionTokens_UserTokens_TokenId",
-                        column: x => x.TokenId,
-                        principalTable: "UserTokens",
                         principalColumn: "Id");
                 });
 
@@ -278,6 +267,11 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 column: "ToUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tokens_UserId",
+                table: "Tokens",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserIps_IpId",
                 table: "UserIps",
                 column: "IpId");
@@ -326,11 +320,6 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 name: "IX_UserNotifications_UserId",
                 table: "UserNotifications",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserTokens_UserId",
-                table: "UserTokens",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -349,16 +338,19 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                 name: "UserIpSessionTokenRoutes");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Routes");
 
             migrationBuilder.DropTable(
                 name: "UserIpSessionTokens");
 
             migrationBuilder.DropTable(
-                name: "UserIpSessions");
+                name: "Tokens");
 
             migrationBuilder.DropTable(
-                name: "UserTokens");
+                name: "UserIpSessions");
 
             migrationBuilder.DropTable(
                 name: "Sessions");
@@ -368,9 +360,6 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ips");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

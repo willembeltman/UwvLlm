@@ -10,7 +10,7 @@ public class EmailService(
     INavigationService navigationService) 
     : IEmailService
 {
-    public async Task Send(Guid? toUserId, string? subject, string? body)
+    public async Task Send(Guid? toUserId, string? subject, string? body, CancellationToken ct)
     {
         if (toUserId == null)
         {
@@ -34,7 +34,7 @@ public class EmailService(
             Subject = subject,
             Content = body
         };
-        await mailApi.SendMail(mail, CancellationToken.None);
+        mailApi.SendMail(mail, ct);
 
         await uiService.ShowAlertAsync("OK", $"Mail verstuurd naar {toUserId}", "OK");
         await navigationService.GotoMainPageAsync();

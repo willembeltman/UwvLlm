@@ -39,7 +39,7 @@ internal sealed class IntegrationScenario(
         await Task.Delay(5000);
 
         Console.WriteLine("Opening notification channel...");
-        clientConnection.SubscribeAsync(notificationHub);
+        await clientConnection.SubscribeAsync(notificationHub);
 
         var users = await usersCrudService.List(0, int.MaxValue, null, setupTimeout.Token);
         if (!users.Success || users.Response == null || users.Response.Length == 0)
@@ -52,7 +52,8 @@ internal sealed class IntegrationScenario(
         await emailService.Send(
             recipient.Id,
             "Integration test auto reply",
-            "Hoi, dit is een integratietest. Wil je kort automatisch antwoorden?");
+            "Hoi, dit is een integratietest. Wil je kort automatisch antwoorden?",
+            CancellationToken.None);
 
         Console.WriteLine($"Waiting up to {LlmResponseTimeout.TotalMinutes:0} minute for the LLM auto-reply notification...");
 

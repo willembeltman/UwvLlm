@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace UwvLlm.Infrastructure.Data.Entities;
 
-public class ApplicationDbContext(DbContextOptions options) : AuthenticationDbContext<User>(options)
+public class ApplicationDbContext(
+    DbContextOptions options) 
+    : AuthenticationDbContext<User>(options)
 {
     public virtual DbSet<MailMessage> MailMessages { get; set; }
     public virtual DbSet<UserNotification> UserNotifications { get; set; }

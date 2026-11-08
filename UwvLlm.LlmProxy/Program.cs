@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using gAPI.Generated;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OllamaSharp;
 using System.Globalization;
-using gAPI.Generated;
+using UwvLlm.LlmProxy.Core.Services;
 
 var invariantCulture = CultureInfo.InvariantCulture;
 CultureInfo.DefaultThreadCurrentCulture = invariantCulture;
@@ -22,6 +23,7 @@ builder.Services.AddChatClient(new OllamaApiClient(
     new Uri("http://localhost:11434"),
     "gpt-oss:20b"
 ));
+builder.Services.AddHostedService<AutoReplyGeneratorBus>();
 
 var app = builder.Build();
-await app.StartAsync();
+await app.RunAsync();

@@ -1,20 +1,37 @@
-﻿using Microsoft.Extensions.AI;
+﻿using gAPI.Generated;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Hosting;
 using System.Text.Json;
+using UwvLlm.Shared.Private.Interfaces;
 using UwvLlm.Shared.Public.Dtos;
 
-namespace UwvLlm.LlmProxy.Core.Handlers;
+namespace UwvLlm.LlmProxy.Core.Services;
 
-public class GenerateAutoReplyRequestHandler(
+public class AutoReplyGeneratorBus(
+    IBusConnection busConnection,
     IChatClient chatClient)
-    : IGenerateAutoReplyRequestHandler
+    : IAutoReplyGeneratorBus
+    , IHostedService
 {
-    public async Task<MailMessage> Handle(MailMessage message, CancellationToken ct)
+    private CancellationTokenSource? Cts;
+    async Task IHostedService.StartAsync(CancellationToken ct)
     {
-        message.AutoResponse = await GetAutoReply(message, ct);
-        return message;
+        if (Cts != null)
+            return;
+        Cts = new CancellationTokenSource();
+        ct = Cts.Token;
+        await busConnection.SubscribeAsync(this, ct);
     }
-
-    private async Task<string> GetAutoReply(MailMessage mailMessage, CancellationToken ct)
+    async Task IHostedService.StopAsync(CancellationToken ct)
+    {
+        if (Cts == null)
+            return;
+        await busConnection.UnsubscribeAsync(this, ct);
+        Cts.Cancel();
+        Cts.Dispose();
+        Cts = null;
+    }
+    public async Task<string> GetAutoReply(MailMessage mailMessage, CancellationToken ct)
     {
         var systemPrompt = """
         Create a reply to this email conversation. Use the same language as the user uses.

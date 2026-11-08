@@ -1,6 +1,4 @@
-﻿using gAPI.Core.Client.Config;
-using gAPI.Core.Client.Interfaces;
-using gAPI.Core.Interfaces;
+﻿using gAPI.Core.Client.Interfaces;
 using gAPI.Generated;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -9,8 +7,6 @@ using UwvLlm.App.Core.Services;
 using UwvLlm.App.Core.ViewModels;
 using UwvLlm.App.Pages;
 using UwvLlm.App.Services;
-using UwvLlm.Shared.Public;
-using UwvLlm.Shared.Public.Dtos;
 using UwvLlm.Shared.Public.Interfaces;
 
 namespace UwvLlm.App;
@@ -44,11 +40,8 @@ public static class MauiProgram
             builder.Configuration.AddJsonStream(stream);
 #endif
 
-        var apiUrl = builder.Configuration["ApiBackendUrl"] ?? "";
-        var wssUrl = builder.Configuration["WssBackendUrl"] ?? "";
-
-        var clientConfig = new ClientConfig(apiUrl, wssUrl);
-
+        builder.Services.AddAutoApiClient(builder.Configuration);
+        builder.Services.AddAutoAuthClient(builder.Configuration);
 
         builder.Services.AddTransient<LoginPage>();
         builder.Services.AddTransient<EmailPage>();

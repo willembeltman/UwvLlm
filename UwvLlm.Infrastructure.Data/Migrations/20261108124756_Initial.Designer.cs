@@ -12,15 +12,15 @@ using UwvLlm.Infrastructure.Data.Entities;
 namespace UwvLlm.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260506071606_FixTableNames")]
-    partial class FixTableNames
+    [Migration("20261108124756_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.7")
+                .HasAnnotation("ProductVersion", "10.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -131,7 +131,7 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.ToTable("UserNotifications");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Ip<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Ip", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,10 +170,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Ips", (string)null);
+                    b.ToTable("Ips");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Route<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Route", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,10 +186,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Routes", (string)null);
+                    b.ToTable("Routes");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Session<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Session", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,10 +204,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sessions", (string)null);
+                    b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,10 +227,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserIps", (string)null);
+                    b.ToTable("UserIps");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -250,10 +250,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserIpId");
 
-                    b.ToTable("UserIpSessions", (string)null);
+                    b.ToTable("UserIpSessions");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,10 +273,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserIpSessionId");
 
-                    b.ToTable("UserIpSessionTokens", (string)null);
+                    b.ToTable("UserIpSessionTokens");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -296,10 +296,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserIpSessionTokenId");
 
-                    b.ToTable("UserIpSessionTokenRoutes", (string)null);
+                    b.ToTable("UserIpSessionTokenRoutes");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRouteRequest<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRouteRequest", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,10 +329,10 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserIpSessionTokenRouteId");
 
-                    b.ToTable("UserIpSessionTokenRouteRequests", (string)null);
+                    b.ToTable("UserIpSessionTokenRouteRequests");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserToken", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -340,8 +340,8 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("Date")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("TokenHash")
                         .IsRequired()
@@ -355,19 +355,19 @@ namespace UwvLlm.Infrastructure.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserTokens", (string)null);
+                    b.ToTable("Tokens");
                 });
 
             modelBuilder.Entity("UwvLlm.Infrastructure.Data.Entities.MailMessage", b =>
                 {
                     b.HasOne("UwvLlm.Infrastructure.Data.Entities.User", "FromUser")
-                        .WithMany()
+                        .WithMany("FromMailMessages")
                         .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("UwvLlm.Infrastructure.Data.Entities.User", "ToUser")
-                        .WithMany()
+                        .WithMany("ToMailMessages")
                         .HasForeignKey("ToUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -388,32 +388,26 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp", b =>
                 {
-                    b.HasOne("gAPI.Core.Server.Entities.Ip<UwvLlm.Infrastructure.Data.Entities.User>", "Ip")
+                    b.HasOne("gAPI.Core.Server.Entities.Ip", "Ip")
                         .WithMany("UserIps")
                         .HasForeignKey("IpId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("UwvLlm.Infrastructure.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Ip");
-
-                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession", b =>
                 {
-                    b.HasOne("gAPI.Core.Server.Entities.Session<UwvLlm.Infrastructure.Data.Entities.User>", "Session")
+                    b.HasOne("gAPI.Core.Server.Entities.Session", "Session")
                         .WithMany("UserIpSessions")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("gAPI.Core.Server.Entities.UserIp<UwvLlm.Infrastructure.Data.Entities.User>", "UserIp")
+                    b.HasOne("gAPI.Core.Server.Entities.UserIp", "UserIp")
                         .WithMany("UserIpSessions")
                         .HasForeignKey("UserIpId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -424,14 +418,14 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.Navigation("UserIp");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken", b =>
                 {
-                    b.HasOne("gAPI.Core.Server.Entities.UserToken<UwvLlm.Infrastructure.Data.Entities.User>", "Token")
+                    b.HasOne("gAPI.Core.Server.Entities.UserToken", "Token")
                         .WithMany("UserIpSessionTokens")
                         .HasForeignKey("TokenId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("gAPI.Core.Server.Entities.UserIpSession<UwvLlm.Infrastructure.Data.Entities.User>", "UserIpSession")
+                    b.HasOne("gAPI.Core.Server.Entities.UserIpSession", "UserIpSession")
                         .WithMany("UserIpSessionTokens")
                         .HasForeignKey("UserIpSessionId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -442,15 +436,15 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.Navigation("UserIpSession");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute", b =>
                 {
-                    b.HasOne("gAPI.Core.Server.Entities.Route<UwvLlm.Infrastructure.Data.Entities.User>", "Route")
+                    b.HasOne("gAPI.Core.Server.Entities.Route", "Route")
                         .WithMany("UserIpSessionTokenRoutes")
                         .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("gAPI.Core.Server.Entities.UserIpSessionToken<UwvLlm.Infrastructure.Data.Entities.User>", "UserIpSessionToken")
+                    b.HasOne("gAPI.Core.Server.Entities.UserIpSessionToken", "UserIpSessionToken")
                         .WithMany("UserIpSessionTokenRoutes")
                         .HasForeignKey("UserIpSessionTokenId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -461,9 +455,9 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.Navigation("UserIpSessionToken");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRouteRequest<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRouteRequest", b =>
                 {
-                    b.HasOne("gAPI.Core.Server.Entities.UserIpSessionTokenRoute<UwvLlm.Infrastructure.Data.Entities.User>", "UserIpSessionTokenRoute")
+                    b.HasOne("gAPI.Core.Server.Entities.UserIpSessionTokenRoute", "UserIpSessionTokenRoute")
                         .WithMany("UserIpSessionTokenRouteRequests")
                         .HasForeignKey("UserIpSessionTokenRouteId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -472,58 +466,51 @@ namespace UwvLlm.Infrastructure.Data.Migrations
                     b.Navigation("UserIpSessionTokenRoute");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
-                {
-                    b.HasOne("UwvLlm.Infrastructure.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("UwvLlm.Infrastructure.Data.Entities.User", b =>
                 {
+                    b.Navigation("FromMailMessages");
+
                     b.Navigation("Notifications");
+
+                    b.Navigation("ToMailMessages");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Ip<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Ip", b =>
                 {
                     b.Navigation("UserIps");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Route<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Route", b =>
                 {
                     b.Navigation("UserIpSessionTokenRoutes");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.Session<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.Session", b =>
                 {
                     b.Navigation("UserIpSessions");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIp", b =>
                 {
                     b.Navigation("UserIpSessions");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSession", b =>
                 {
                     b.Navigation("UserIpSessionTokens");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionToken", b =>
                 {
                     b.Navigation("UserIpSessionTokenRoutes");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserIpSessionTokenRoute", b =>
                 {
                     b.Navigation("UserIpSessionTokenRouteRequests");
                 });
 
-            modelBuilder.Entity("gAPI.Core.Server.Entities.UserToken<UwvLlm.Infrastructure.Data.Entities.User>", b =>
+            modelBuilder.Entity("gAPI.Core.Server.Entities.UserToken", b =>
                 {
                     b.Navigation("UserIpSessionTokens");
                 });

@@ -2,5 +2,5 @@
 
 public interface IEmailService
 {
-    Task Send(Guid? toUserId, string? subject, string? body);
+    Task Send(Guid? toUserId, string? subject, string? body, CancellationToken ct);
 }

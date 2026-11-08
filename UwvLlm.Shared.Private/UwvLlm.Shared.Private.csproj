@@ -14,7 +14,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\UwvLlm.Shared.Public\UwvLlm.Shared.Public.csproj" />
 		
-		<ProjectReference Include="..\gAPI\gAPI.Core.ServiceBus.Fabric\gAPI.Core.ServiceBus.Fabric.csproj" />
+		<ProjectReference Include="..\gAPI\gAPI.Core.ServiceBus.RabbitMQ\gAPI.Core.ServiceBus.RabbitMQ.csproj" />
 		<ProjectReference Include="..\gAPI\gAPI.AutoBus\gAPI.AutoBus.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
 
